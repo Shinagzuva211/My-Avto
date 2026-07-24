@@ -193,7 +193,7 @@ header.scrolled {
 }
 
 .background {
-  background: url('bmw.png') no-repeat;
+  background: url('/public/bmw.png') no-repeat;
   background-size: cover;
   height: 135vh;
 }
