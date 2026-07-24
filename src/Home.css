@@ -1,0 +1,710 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.cars-container {
+  display: flex;
+  gap: 30px;
+}
+
+.car-card {
+  width: 300px;
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  transition: transform linear .2s, box-shadow linear .2s;
+  box-shadow: 0 5px 15px #00000026;
+  height: 410px;
+}
+
+.car-image {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.car-info {
+  padding: 15px;
+}
+
+.car-year {
+  margin-bottom: 10px;
+}
+
+.car-name {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.car-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 20px #00000026;
+}
+
+.view {
+  width: 100%;
+  height: 40px;
+  border: none;
+  border-top: 2px solid #ff2929;
+  background-color: transparent;
+  font-size: 16px;
+  transition: background-color linear .2s, color linear .2s;
+  margin-top: 20px;
+}
+
+.view:hover {
+  background-color: #ff2929;
+  color: white;
+}
+
+.car-price {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  width: 65px;
+  height: 45px;
+}
+
+.logo {
+  display: flex;
+  color: #e7e7e7;
+  position: relative;
+  cursor: pointer;
+  transition: transform linear .3s;
+}
+
+.logo:hover {
+  transform: scale(1.02);
+
+  .logo-title {
+    font-weight: 800;
+  }
+}
+
+.logo-title {
+  position: absolute;
+  font-size: 30px;
+  left: 40px;
+  top: -1px;
+  color: red;
+  transition: font-weight linear .3s;
+}
+
+header {
+  background-color: transparent;
+  height: 80px; 
+  position: fixed;
+  z-index: 999;
+  width: 100%;
+  transition: background-color linear .3s, height linear .3s;
+}
+
+nav {
+  display: flex;
+  gap: 30px;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+  transition: transform linear .2s, text-shadow linear .2s;
+}
+
+a:hover {
+  text-shadow: 0px 0px 5px white;
+  transform: translateY(-3px);
+}
+
+.favorites {
+  font-size: 30px;
+  transition: color linear .2s;
+  cursor: pointer;
+  position: relative;
+}
+
+.heart-fill {
+  opacity: 0;
+  color: #ff2929;
+  transition: opacity linear .1s;
+}
+
+.heart {
+  position: absolute;
+  top: 0;
+  transition: opacity linear .1s;
+}
+
+.favorites:hover {
+  .heart-fill {
+    opacity: 1;
+  }
+
+  .heart {
+    opacity: 0;
+  }
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+}
+
+.dark{
+  display: block;
+  transition: display-none linear .3s;
+}
+
+.light{
+  display: none;
+  transition: display-block linear .3s;
+}
+
+header.scrolled {
+  background-color: white;
+  box-shadow: 0 1px 15px #4d4d4d60;
+  color: black;
+  width: 100%;
+  height: 70px;
+
+  ul,li, a{
+    color: black;
+    transition: 1s;
+  }
+
+  .dark{
+    display: none;     
+  }
+
+  .light{
+    display: block;     
+  }
+
+  .menu{
+    color: black;
+  }
+
+}
+
+.background {
+  background: url('bmw.png') no-repeat;
+  background-size: cover;
+  height: 135vh;
+}
+
+.dream-title {
+  width: 550px;
+  font-size: 24px;
+  color: #ff2929;
+  padding: 180px 0 20px;
+}
+
+.hero-title {
+  font-size: 85px;
+  font-weight: bold;
+  color: white;
+  width: 550px;
+  line-height: 100%;
+}
+
+.hero-title span {
+  color: #ff2929;
+}
+
+.hero-text {
+  color: white;
+  font-size: 22px;
+  font-weight: 200;
+  width: 500px;
+  padding-top: 30px;
+}
+
+.hero-btns {
+  display: flex;
+  gap: 30px;
+  padding-top: 50px;
+  align-items: center;
+}
+
+.browse-btn button {
+  width: 250px;
+  height: 60px;
+  background-color: #ff2929;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 16px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.browse-btn span {
+  font-size: 20px;
+}
+
+.contact-btn button {
+  width: 200px;
+  height: 60px;
+  background-color: transparent;
+  border: 2px solid white;
+  border-radius: 8px;
+  color: white;
+  font-size: 17px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: border linear .2s;
+}
+
+.contact-btn button:hover {
+  border: 2px solid #ff2929;
+}
+
+.contact-btn span {
+  font-size: 20px;
+}
+
+.icon {
+  color: #ff2929;
+  font-size: 40px;
+  transition: transform linear .2s;
+}
+
+
+.static-panel {
+  display: flex;
+  background-color: #000000a4;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 10px;
+  margin-top: 150px;
+  margin-bottom: 50px;
+}
+
+.static-card {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 25px;
+  width: 300px;
+  cursor: pointer;
+  transition: transform linear .2s;
+}
+
+.static-card:hover {
+
+  transform: translateY(-8px);
+
+  .card-num {
+    text-shadow: 0px 0px 5px;
+  }
+}
+
+.card-num {
+  color: white;
+  font-size: 24px;
+  transition: text-shadow linear .2s;
+}
+
+p {
+  color: gray;
+}
+
+.line {
+  width: 1px;
+  height: 50px;
+  background-color: #8080808b;
+}
+
+hr {
+  margin: 30px 0;
+}
+
+.years p:hover {
+  color: black;
+}
+
+.sidebar {
+  flex: 0 0 350px;
+  padding: 100px 0;
+}
+
+.price-npts {
+  padding-top: 20px;
+  width: 75%;
+}
+
+.price-npts input {
+  padding: 10px 0 10px 10px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  border: 2px solid #ff2929;
+}
+
+.sidebar-content {
+  padding: 0px 20px 0px 20px;
+}
+
+.search-zone {
+  display: flex;
+  gap: 10px;
+}
+
+.search-npt input {
+  width: 250px;
+  height: 40px;
+  padding-left: 35px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid gray;
+}
+
+.search-npt {
+  position: relative;
+}
+
+.icon-npt {
+  position: absolute;
+  left: 10px;
+  top: 11px;
+  font-size: 18px;
+  color: #ff2929;
+}
+
+.search-npt input:focus {
+  outline: 2px solid #ff2929;
+}
+
+.search-btn button {
+  width: 100px;
+  height: 40px;
+  border-radius: 6px;
+  border: none;
+  background-color: #ff2929;
+  color: white;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.filter {
+  font-size: 25px;
+  font-weight: bold;
+  padding-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-title,
+.year-title,
+.price-title,
+.fuel-title {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.cars-scroll {
+  height: 130vh;
+  overflow-y: scroll;
+  margin-top: 10px;
+}
+
+@media screen and (max-width: 1300px) {
+
+  .car-card{
+    width: 250px;
+  }
+
+}
+
+@media screen and (max-width: 1080px) {
+  .hero-title {
+    font-size: 50px;
+    width: 350px;
+  }
+
+  .dream-title {
+    font-size: 18px;
+    padding-top: 80px;
+  }
+
+  .hero-text {
+    font-size: 18px;
+    width: 390px;
+  }
+
+  .browse-btn button {
+    width: 200px;
+    height: 40px;
+    font-size: 13px;
+  }
+
+  .contact-btn button {
+    width: 170px;
+    height: 40px;
+    font-size: 13px;
+  }
+
+  .background {
+    height: 80vh;
+  }
+
+  .card-num {
+    font-size: 20px;
+  }
+
+  .static-card {
+    padding: 15px;
+  }
+
+  p {
+    font-size: 13px;
+  }
+
+  .cars {
+    justify-content: center;
+  }
+
+  .cars-scroll{
+    height: 100vh;
+  }
+
+  .car-card{
+    width: 150px;
+    height: 330px;
+  }
+
+  .car-image{
+    height: 150px;
+  }
+
+  .car-name{
+    font-size: 13px;
+  }
+
+  .car-year{
+    font-size: 12px;
+  }
+  
+  .car-price{
+    font-size: 12px;
+  }
+
+  .view{
+    font-size: 14px;
+  }
+
+}
+
+.menu {
+  display: none;
+  cursor: pointer;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  padding: 7px;
+  position: relative;
+}
+
+.menu:hover {
+  background-color: #80808088;
+}
+
+.head-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+@media screen and (max-width: 700px) {
+  nav {
+    display: none;
+  }
+
+  .menu-tab{
+    background-color: white;
+    width: 130px;
+    padding: 10px;
+    border-radius: 7px;
+    border: 1px solid #ff2929;
+    position: absolute;
+    top: 120%;
+    right: -80px;
+  }
+
+  .menu-p{
+    font-size: 12px;
+    color: black;
+    padding: 5px;
+    border: 1px solid #ff2929;
+    border-radius: 3px;
+    margin: 5px 0;
+  }
+
+  .header-content {
+    justify-content: space-between;
+  }
+
+  .dream-title {
+    width: 230px;
+    font-size: 13px;
+  }
+
+  .menu {
+    display: block;
+    font-size: 30px;
+    color: white;
+  }
+
+  .static-panel {
+    margin-top: 25px;
+  }
+
+  .line {
+    height: 30px;
+  }
+
+  .icon {
+    font-size: 20px;
+  }
+
+  .card-num {
+    font-size: 12px;
+  }
+
+  .hero-title {
+    width: 200px;
+    font-size: 35px;
+  }
+
+  .background {
+    background-position: calc(-50px);
+    height: 75vh;
+  }
+
+  .hero-text {
+    font-size: 14px;
+    width: 280px;
+  }
+
+  .browse-btn button {
+    width: 180px;
+    height: 35px;
+    font-size: 12px;
+  }
+
+  .contact-btn button {
+    width: 130px;
+    height: 35px;
+    font-size: 10px;
+  }
+
+  .card-num {
+    font-size: 10px;
+  }
+
+  .icon {
+    font-size: 17px;
+  }
+
+  .hero-btns {
+    gap: 10px;
+  }
+
+  p {
+    font-size: 7px;
+  }
+
+  .sidebar-cars{
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .background {
+    height: 80vh;
+  }
+
+  .dream-title {
+    padding-top: 100px;
+  }
+
+  .menu-tab{
+    right: -60px;
+  }
+
+}
+
+@media screen and (max-width:350px) {
+  .background {
+    height: 100vh;
+  }
+
+  .logo-title {
+    font-size: 20px;
+  }
+
+  .dream-title {
+    padding-top: 70px;
+  }
+
+  .logo img {
+    width: 50px;
+    height: 35px;
+  }
+
+  .car-card{
+    width: 100%;
+  }
+
+  .menu-tab{
+    right: -45px;
+  }
+
+}
+
+.h-line {
+  align-self: stretch;
+  background-color: gray;
+  width: 2px;
+}
+
+.sidebar-cars {
+  display: flex;
+}
+
+.cars {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  padding: 30px;
+}
+
+.cars-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+p {
+  cursor: pointer;
+}
+
+.back-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: black;
+}

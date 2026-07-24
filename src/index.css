@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container{
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+
+body{
+    font-family: Outfit;
+    animation: fadeIn ease-in .8s;
+}
+
+.left-side{
+animation: fadeUp linear .5s;
+}
+
+@keyframes fadeUp {
+    from{transform: translateY(70px);}
+    to{transform: translateY(0px);}
+}
+
+@keyframes fadeIn {
+    from{filter: blur(20px);}
+    to{filter: blur(0px);}
+}
+
+button{
+    cursor: pointer;
+}
+
+@media screen and (max-width: 1300px) {
+    .container{
+        max-width: 1100px;
+    }
+}
+
+@media screen and (max-width: 1080px) {
+    .container{
+        max-width: 800px;
+    }
+
+}
+
+@media screen and (max-width: 700px) {
+  .container{
+    max-width: 350px;
+  }
+}

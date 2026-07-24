@@ -1,0 +1,191 @@
+.about-section {
+  padding: 80px 0;
+  background-color: #f8f9fa;
+}
+
+.about-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  gap: 60px;
+  align-items: center;
+}
+
+/* ===== CHAP USTUN ===== */
+
+.about-content {
+  flex: 1;
+}
+
+.about-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #ff2929;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.about-title {
+  font-size: 36px;
+  font-weight: 700;
+  color: #1a1a2e;
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+
+.about-text {
+  font-size: 16px;
+  color: #666;
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+
+/* ===== FEATURE KARTOCHKALAR ===== */
+
+.about-features {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.feature-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  border-left: 3px solid #ff2929;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.feature-icon {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  background: linear-gradient(135deg, #ff2929, #ff6b6b);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 16px;
+}
+
+.feature-card h4 {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1a1a2e;
+  margin-bottom: 4px;
+}
+
+.feature-card p {
+  font-size: 13px;
+  color: #888;
+  line-height: 1.5;
+}
+
+/* ===== O'NG USTUN (STAT) ===== */
+
+.about-stat {
+  flex: 0 0 380px;
+  background: #1a1a2e;
+  border-radius: 20px;
+  padding: 50px 40px;
+  text-align: center;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.about-stat::before {
+  content: "";
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 150px;
+  height: 150px;
+  background: rgba(255, 41, 41, 0.15);
+  border-radius: 50%;
+}
+
+.about-stat::after {
+  content: "";
+  position: absolute;
+  bottom: -30px;
+  left: -30px;
+  width: 100px;
+  height: 100px;
+  background: rgba(255, 41, 41, 0.1);
+  border-radius: 50%;
+}
+
+.stat-label {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.stat-percent {
+  font-size: 80px;
+  font-weight: 800;
+  color: #ff2929;
+  line-height: 1;
+  margin-bottom: 12px;
+  position: relative;
+  z-index: 1;
+}
+
+.stat-desc {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.7);
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media screen and (max-width: 992px) {
+  .about-container {
+    flex-direction: column;
+  }
+
+  .about-stat {
+    flex: none;
+    width: 100%;
+    max-width: 400px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .about-section {
+    padding: 50px 0;
+  }
+
+  .about-title {
+    font-size: 28px;
+  }
+
+  .about-features {
+    grid-template-columns: 1fr;
+  }
+
+  .about-stat {
+    padding: 40px 30px;
+  }
+
+  .stat-percent {
+    font-size: 60px;
+  }
+}
