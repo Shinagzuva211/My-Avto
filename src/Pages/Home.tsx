@@ -47,7 +47,7 @@ export default function Home() {
   useEffect(() => {
     fetch("http://localhost:3000/cars")
       .then((res) => res.json())
-      .then((data) => setCars(data.map((item) => ({ ...item, id: item.id ?? item._id }))))
+      .then((data: unknown) => setCars((data as Car[]).map((item) => ({ ...item, id: item.id ?? item._id }))))
       .catch((err) => console.log(err));
   }, [])
 
