@@ -52,8 +52,8 @@ export default function Header({ scrollToCars, scrollToHero, scrollToContact, sc
                     <div className="header-content">
 
                         <div className="logo">
-                            <img className="dark" src={logo} alt="" />
-                            <img className="light" src={logo2} alt="" />
+                            <img className="dark" src={logo} alt="Hodiy Avto logo" />
+                            <img className="light" src={logo2} alt="Hodiy Avto logo" />
                             <h1 className="logo-title">AVTO</h1>
                         </div>
 

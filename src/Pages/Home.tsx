@@ -5,6 +5,9 @@ import "../Home.css"
 import type { Car } from "../Types/car"
 import Contact from "../components/Contact"
 import About from "../components/About"
+import SEO from "../seo/SEO"
+import { localBusinessSchema } from "../seo/schema"
+
 export default function Home() {
 
   const [cars, setCars] = useState<Car[]>([])
@@ -12,7 +15,7 @@ export default function Home() {
   const carsRef = useRef<HTMLDivElement | null>(null)
 
   const heroRef = useRef<HTMLDivElement | null>(null)
-  
+
   const contactRef = useRef<HTMLDivElement | null>(null)
 
   const aboutRef = useRef<HTMLDivElement | null>(null)
@@ -44,12 +47,26 @@ export default function Home() {
   useEffect(() => {
     fetch("http://localhost:3000/cars")
       .then((res) => res.json())
-      .then((data) => setCars(data))
+      .then((data) => setCars(data.map((item) => ({ ...item, id: item.id ?? item._id }))))
       .catch((err) => console.log(err));
   }, [])
 
   return (
     <>
+      <SEO
+        title="Hodiy Avto — Toshkent Avtomobil Sotuv Markazi"
+        description="Hodiy Avto — Toshkentdagi professional avtomobil sotuv markazi. Sifatli tekshirilgan avtomobillarni eng yaxshi narxda toping. 500+ mashina, 5 yil tajriba."
+        url="https://hodiyavto.uz/"
+        image="/logo.png"
+        type="website"
+        locale="uz_UZ"
+      />
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema()) }}
+      />
+
       <div ref={heroRef}>
         <Hero
           scrollToCars={scrollToCars}

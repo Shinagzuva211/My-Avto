@@ -4,54 +4,140 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+  line-height: 1.6;
+}
+
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
 .cars-container {
   display: flex;
   gap: 30px;
 }
 
 .car-card {
-  width: 300px;
+  width: 100%;
+  max-width: 300px;
   background: white;
   border-radius: 15px;
   overflow: hidden;
-  transition: transform linear .2s, box-shadow linear .2s;
-  box-shadow: 0 5px 15px #00000026;
-  height: 410px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  height: 100%;
+  min-height: 410px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.car-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  flex-shrink: 0;
 }
 
 .car-image {
   width: 100%;
-  height: 220px;
+  height: 100%;
   object-fit: cover;
+}
+
+.favorite-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease, background 0.2s ease;
+  z-index: 10;
+}
+
+.favorite-btn:hover {
+  transform: scale(1.1);
+  background: #fff5f5;
+}
+
+.favorite-btn:focus-visible {
+  outline: 2px solid #ff2929;
+  outline-offset: 2px;
+}
+
+.favorite-btn .heart-fill {
+  opacity: 0;
+  color: #ff2929;
+  font-size: 22px;
+}
+
+.favorite-btn .heart {
+  opacity: 1;
+  color: #333;
+  font-size: 22px;
+  transition: opacity 0.2s ease;
+}
+
+.favorite-btn.active .heart-fill {
+  opacity: 1;
+}
+
+.favorite-btn.active .heart {
+  opacity: 0;
 }
 
 .car-info {
   padding: 15px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
 .car-year {
   margin-bottom: 10px;
+  color: #666;
+  font-size: 14px;
 }
 
 .car-name {
-  font-size: 20px;
-  font-weight: bold;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 8px;
 }
 
 .car-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 15px 20px #00000026;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
 }
 
 .view {
   width: 100%;
-  height: 40px;
+  height: 44px;
   border: none;
   border-top: 2px solid #ff2929;
   background-color: transparent;
-  font-size: 16px;
-  transition: background-color linear .2s, color linear .2s;
-  margin-top: 20px;
+  font-size: 15px;
+  font-weight: 500;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  margin-top: auto;
+  cursor: pointer;
 }
 
 .view:hover {
@@ -59,10 +145,23 @@
   color: white;
 }
 
-.car-price {
+.view:focus-visible {
+  outline: 2px solid #ff2929;
+  outline-offset: -2px;
+}
+
+.car-price2 {
   margin-bottom: 10px;
   display: flex;
   align-items: center;
+  font-size: 20px;
+  font-weight: 700;
+  color: #ff2929;
+}
+
+.car-price2 svg {
+  margin-right: 6px;
+  font-size: 22px;
 }
 
 .logo img {
@@ -74,6 +173,8 @@
   display: flex;
   color: #e7e7e7;
   position: relative;
+  align-items: center;
+  height: 62px;
   cursor: pointer;
   transition: transform linear .3s;
 }
@@ -81,9 +182,6 @@
 .logo:hover {
   transform: scale(1.02);
 
-  .logo-title {
-    font-weight: 800;
-  }
 }
 
 .logo-title {
@@ -92,7 +190,7 @@
   left: 40px;
   top: -1px;
   color: red;
-  transition: font-weight linear .3s;
+  transition: transform linear .3s;
 }
 
 header {
@@ -129,13 +227,12 @@ a:hover {
 
 .heart-fill {
   opacity: 0;
-  color: #ff2929;
+  color: #ff2929; 
   transition: opacity linear .1s;
 }
 
 .heart {
   position: absolute;
-  top: 0;
   transition: opacity linear .1s;
 }
 
@@ -565,7 +662,8 @@ hr {
   }
 
   .menu {
-    display: block;
+    display: flex;
+    align-items: center;
     font-size: 30px;
     color: white;
   }
@@ -707,4 +805,49 @@ p {
   align-items: center;
   gap: 5px;
   color: black;
+}
+
+.fav-back{
+  margin-top: 40px;
+  margin-left: 25px;
+}
+
+.favorites-page {
+  padding-top: 100px;
+  min-height: 100vh;
+}
+
+.favorites-title {
+  font-size: 36px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.empty-favorites {
+  text-align: center;
+  padding: 80px 20px;
+  color: #666;
+}
+
+.empty-favorites p {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.empty-favorites .view {
+  width: 200px;
+  height: 50px;
+  border: none;
+  border-radius: 8px;
+  background-color: #ff2929;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.empty-favorites .view:hover {
+  background-color: #e62424;
 }

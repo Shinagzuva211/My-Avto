@@ -131,6 +131,15 @@ export default function Sidebar({ cars }: SidebarProps) {
                     value="Kia"
                     onChange={(e) => setBrand(e.target.value)}
                   /> <label htmlFor="kia">Kia</label>
+                  <br />
+                  <input
+                    id="bugatti"
+                    type="radio"
+                    name="brand"
+                    checked={brand === "Bugatti"}
+                    value="Bugatti"
+                    onChange={(e) => setBrand(e.target.value)}
+                  /> <label htmlFor="kia">Bugatti</label>
 
                 </div>
 

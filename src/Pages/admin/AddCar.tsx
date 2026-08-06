@@ -12,16 +12,34 @@ export default function AddCar() {
     price: "",
     fuel: "Benzin",
     image: "",
+    condition: "new",
+    color: "",
+    transmission: "Avtomat",
+    mileage: "",
+    engine: "",
+    driveType: "FWD",
+    description: "",
+    features: "",
   });
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    const { name, value, type } = e.target;
+    if (type === "number") {
+      setForm({ ...form, [name]: value === "" ? "" : Number(value) });
+    } else {
+      setForm({ ...form, [name]: value });
+    }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    const featuresArray = form.features
+      .split(",")
+      .map((f: string) => f.trim())
+      .filter((f: string) => f.length > 0);
 
     const newCar = {
       brand: form.brand,
@@ -30,18 +48,34 @@ export default function AddCar() {
       price: Number(form.price),
       fuel: form.fuel,
       image: form.image,
+      condition: form.condition,
+      color: form.color || undefined,
+      transmission: form.transmission || undefined,
+      mileage: form.mileage ? Number(form.mileage) : undefined,
+      engine: form.engine || undefined,
+      driveType: form.driveType || undefined,
+      description: form.description || undefined,
+      features: featuresArray.length > 0 ? featuresArray : undefined,
     };
 
-    fetch("http://localhost:3000/cars", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(newCar),
-    })
-      .then(() => {
-        alert("Mashina muvaffaqiyatli qo'shildi!");
-        navigate("/admin/cars");
-      })
-      .catch((err) => console.log(err));
+    try {
+      const res = await fetch("http://localhost:3000/cars", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newCar),
+      });
+
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({}));
+        throw new Error(errorData.message || `Server xatosi: ${res.status}`);
+      }
+
+      alert("Mashina muvaffaqiyatli qo'shildi!");
+      navigate("/admin/cars");
+    } catch (err) {
+      console.error(err);
+      alert(err instanceof Error ? err.message : "Mashina qo'shishda xatolik yuz berdi");
+    }
   };
 
   return (
@@ -117,14 +151,98 @@ export default function AddCar() {
             </div>
 
             <div className="form-group">
+              <label>Holati</label>
+              <select name="condition" value={form.condition} onChange={handleChange}>
+                <option value="new">Yangi</option>
+                <option value="used">Ishlatilgan</option>
+              </select>
+            </div>
+
+            <div className="form-group">
+              <label>Rang</label>
+              <input
+                type="text"
+                name="color"
+                placeholder="Masalan: Qora, Oq, Metallik"
+                value={form.color}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="form-group">
+              <label>Uzatma</label>
+              <select name="transmission" value={form.transmission} onChange={handleChange}>
+                <option value="Avtomat">Avtomat</option>
+                <option value="Mexanika">Mexanika</option>
+                <option value="Variator">Variator (CVT)</option>
+                <option value="Robot">Robotizlangan</option>
+              </select>
+            </div>
+
+            <div className="form-group">
+              <label>Yurgan yo'li (km)</label>
+              <input
+                type="number"
+                name="mileage"
+                placeholder="Masalan: 15000"
+                min="0"
+                value={form.mileage}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="form-group">
+              <label>Dvigatel</label>
+              <input
+                type="text"
+                name="engine"
+                placeholder="Masalan: 2.0T, 3.0 V6, 1.5 Hybrid"
+                value={form.engine}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="form-group">
+              <label>Yo'lga kuchlanish</label>
+              <select name="driveType" value={form.driveType} onChange={handleChange}>
+                <option value="FWD">Oldin burish (FWD)</option>
+                <option value="RWD">Orqa burish (RWD)</option>
+                <option value="AWD">To'liq burish (AWD/4WD)</option>
+              </select>
+            </div>
+
+            <div className="form-group">
               <label>Rasm URL</label>
               <input
-                type="url"
+                type="file"
                 name="image"
-                placeholder="https://example.com/car.jpg"
+                placeholder="Rasm tanlash"
                 value={form.image}
                 onChange={handleChange}
                 required
+              />
+            </div>
+
+            <div className="form-group" style={{ gridColumn: "1 / -1" }}>
+              <label>Tavsif</label>
+              <textarea
+                name="description"
+                placeholder="Mashina haqida batafsil ma'lumot..."
+                value={form.description}
+                onChange={handleChange}
+                rows={4}
+                style={{ width: "100%", padding: "10px", borderRadius: "8px", border: "1px solid #ddd", fontFamily: "inherit" }}
+              />
+            </div>
+
+            <div className="form-group" style={{ gridColumn: "1 / -1" }}>
+              <label>Xususiyatlar (vergul bilan ajratib yozing)</label>
+              <input
+                type="text"
+                name="features"
+                placeholder="Masalan: ABS, Konditsioner, O'rindiq isitish, Parktronik, Kamerali ko'rinish"
+                value={form.features}
+                onChange={handleChange}
               />
             </div>
           </div>

@@ -1,3 +1,5 @@
+import { useState } from "react";
+import SEO from "../seo/SEO";
 import "./Contact.css";
 import {
     FaPhoneAlt,
@@ -7,8 +9,30 @@ import {
 } from "react-icons/fa";
 
 export default function Contact() {
+    const [form, setForm] = useState({ name: "", phone: "", model: "", question: "" });
+    const [submitted, setSubmitted] = useState(false);
+
+    function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+        setForm({ ...form, [e.target.name]: e.target.value });
+    }
+
+    function handleSubmit(e: React.FormEvent) {
+        e.preventDefault();
+        setSubmitted(true);
+        setForm({ name: "", phone: "", model: "", question: "" });
+    }
+
     return (
         <section id="contact">
+
+            <SEO
+                title="Kontakt — Hodiy Avto"
+                description="Hodiy Avto bilan bog'laning. Toshkentdagi avtomobil sotuv markazi. Manzil, telefon, email va murojaat formasi."
+                url="https://hodiyavto.uz/contact"
+                image="/logo.png"
+                type="website"
+                locale="uz_UZ"
+            />
 
             <div className="contact-header">
                 <div className="kontakt-title">
@@ -24,7 +48,7 @@ export default function Contact() {
 
                 <div className="contact-info">
 
-                    <h2>Get In Touch</h2>
+                    <h2>Bog'laning</h2>
 
                     <div className="contact-item">
 
@@ -59,24 +83,54 @@ export default function Contact() {
 
                 <div className="contact-form">
 
-                    <input type="text" placeholder="Ismingizni kiriting" />
+                    {submitted && (
+                        <div className="success-message">
+                            ✓ Xabaringiz qabul qilindi. Tez orada siz bilan bog'lanamiz.
+                        </div>
+                    )}
 
-                    <input type="tel" placeholder="+998__ ___ __ __" />
+                    <form onSubmit={handleSubmit}>
+                        <input
+                            type="text"
+                            name="name"
+                            placeholder="Ismingizni kiriting"
+                            value={form.name}
+                            onChange={handleChange}
+                        />
 
-                    <label htmlFor="model">Qiziqtirgan model (ixtiyoriy)</label>
+                        <input
+                            type="tel"
+                            name="phone"
+                            placeholder="+998__ ___ __ __"
+                            value={form.phone}
+                            onChange={handleChange}
+                        />
 
-                    <input type="text" id="model" placeholder="Masalan: Chevrolet Malibu" />
+                        <label htmlFor="model">Qiziqtirgan model (ixtiyoriy)</label>
 
-                    <label htmlFor="question">Xabaringiz</label>
-                    <textarea
-                        id="question"
-                        rows={6}
-                        placeholder="Savolingizni yozing..."
-                    ></textarea>
+                        <input
+                            type="text"
+                            id="model"
+                            name="model"
+                            placeholder="Masalan: Chevrolet Malibu"
+                            value={form.model}
+                            onChange={handleChange}
+                        />
 
-                    <button>Send Message</button>
+                        <label htmlFor="question">Xabaringiz</label>
+                        <textarea
+                            id="question"
+                            name="question"
+                            rows={6}
+                            placeholder="Savolingizni yozing..."
+                            value={form.question}
+                            onChange={handleChange}
+                        ></textarea>
 
-                    <p>Formani yuborish orqali siz bizning menejerimiz siz bilan bog'lanishiga rozilik bildirasiz.</p>
+                        <button type="submit">Send Message</button>
+
+                        <p>Formani yuborish orqali siz bizning menejerimiz siz bilan bog'lanishiga rozilik bildirasiz.</p>
+                    </form>
 
                 </div>
 

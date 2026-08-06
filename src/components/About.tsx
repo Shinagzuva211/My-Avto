@@ -1,17 +1,28 @@
 import { FaCheck, FaHryvnia, FaPhoneAlt } from "react-icons/fa";
 import { FaBolt } from "react-icons/fa6";
 import "./About.css";
+import SEO from "../seo/SEO";
 
 export default function About() {
   return (
-    <section className="about-section">
+    <>
+      <SEO
+        title="Biz haqimizda — Hodiy Avto"
+        description="Hodiy Avto — 2024-yildan buyon Toshkent bozorida sifatli va tekshirilgan avtomobillarni taklif qiluvchi avtosalon. 98% qayta murojaat."
+        url="https://hodiyavto.uz/about"
+        image="/logo.png"
+        type="website"
+        locale="uz_UZ"
+      />
+
+      <section className="about-section">
       <div className="about-container">
 
         <div className="about-content">
           <div className="kontakt-title">Biz haqimizda</div>
           <h2 className="about-title">Ishonchdan tug'ilgan avtosalon</h2>
           <p className="about-text">
-            2017-yildan buyon Hodiy Avto Toshkent bozorida sifatli va
+            2024-yildan buyon Hodiy Avto Toshkent bozorida sifatli va
             tekshirilgan avtomobillarni taklif qilib kelmoqda. Bizning
             maqsadimiz — har bir mijoz uchun mashina sotib olishni oddiy,
             shaffof va tashvishsiz jarayonga aylantirish.
@@ -68,5 +79,6 @@ export default function About() {
 
       </div>
     </section>
+    </>
   );
 }

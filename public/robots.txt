@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+Sitemap: https://hodiyavto.uz/sitemap.xml
+
+User-agent: Yandex
+Allow: /
+Sitemap: https://hodiyavto.uz/sitemap.xml
+
+User-agent: Googlebot
+Allow: /
+
+Disallow: /admin/
+Disallow: /admin
+Disallow: /favorites
+Disallow: /api/

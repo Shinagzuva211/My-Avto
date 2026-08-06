@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { FaPlus, FaEdit, FaTrash, FaSave, FaTimes } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useFavorites } from "../../context/useFavorites";
 
 type Car = {
   id: number;
@@ -10,11 +11,13 @@ type Car = {
   price: number;
   fuel: string;
   image: string;
+  condition?: string;
 };
 
 export default function Cars() {
   const [cars, setCars] = useState<Car[]>([]);
   const [editingCar, setEditingCar] = useState<Car | null>(null);
+  const { removeFromFavorites } = useFavorites();
   const [form, setForm] = useState({
     brand: "",
     model: "",
@@ -27,7 +30,7 @@ export default function Cars() {
   useEffect(() => {
     fetch("http://localhost:3000/cars")
       .then((res) => res.json())
-      .then((data) => setCars(data))
+      .then((data) => setCars(data.map((item) => ({ ...item, id: item.id ?? item._id }))))
       .catch((err) => console.log(err));
   }, []);
 
@@ -39,6 +42,7 @@ export default function Cars() {
     })
       .then(() => {
         setCars((prev) => prev.filter((car) => car.id !== id));
+        removeFromFavorites(id);
       })
       .catch((err) => console.log(err));
   };
