@@ -38,7 +38,7 @@ export default function CarDetails() {
       setLoading(true);
       setError(null);
       try {
-        const res = await fetch(`http://localhost:3000/cars/${id}`);
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/cars/${id}`);
         if (!res.ok) throw new Error("Mashina topilmadi");
         const carData = await res.json();
         setData({ ...carData, id: carData.id ?? carData._id });

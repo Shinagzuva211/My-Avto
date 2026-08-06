@@ -7,7 +7,6 @@ import Contact from "../components/Contact"
 import About from "../components/About"
 import SEO from "../seo/SEO"
 import { localBusinessSchema } from "../seo/schema"
-
 export default function Home() {
 
   const [cars, setCars] = useState<Car[]>([])
@@ -45,7 +44,7 @@ export default function Home() {
   };
 
   useEffect(() => {
-    fetch("https://my-avto-backend.onrender.com/cars")
+    fetch(`${import.meta.env.VITE_API_URL}/cars`)
       .then((res) => res.json())
       .then((data: unknown) => setCars((data as Car[]).map((item) => ({ ...item, id: item.id ?? item._id }))))
       .catch((err) => console.log(err));
