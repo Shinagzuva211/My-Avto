@@ -45,7 +45,7 @@ export default function Home() {
   };
 
   useEffect(() => {
-    fetch("http://localhost:3000/cars")
+    fetch("https://my-avto-backend.onrender.com/")
       .then((res) => res.json())
       .then((data: unknown) => setCars((data as Car[]).map((item) => ({ ...item, id: item.id ?? item._id }))))
       .catch((err) => console.log(err));
