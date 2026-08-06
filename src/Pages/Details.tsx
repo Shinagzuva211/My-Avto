@@ -6,6 +6,7 @@ import { useFavorites } from "../context/useFavorites";
 import "./Details.css";
 import SEO from "../seo/SEO";
 import { carSchema } from "../seo/schema";
+import type { Car } from "../Types/car";
 
 type CarData = {
   id: number;
@@ -136,7 +137,7 @@ export default function CarDetails() {
                 onClick={(e) => {
                   e.preventDefault();
                   e.stopPropagation();
-                  toggleFavorite(data);
+                  toggleFavorite(data as Car);
                 }}
                 aria-label={liked ? "Remove from favorites" : "Add to favorites"}
               >
