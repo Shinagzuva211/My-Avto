@@ -49,7 +49,7 @@ export default function Cars() {
   }, [apiUrl])
 
   const handleDelete = (id: number) => {
-    if (!confirm(t("common_confirm"))) return
+    if (!confirm(t("common.confirm"))) return
     fetch(`${apiUrl}/cars/${id}`, { method: "DELETE", headers: authHeader })
       .then((res) => {
         if (!res.ok) {
@@ -57,6 +57,7 @@ export default function Cars() {
             throw new Error(text || "Failed to delete car");
           });
         }
+        return res.json();
       })
       .then(() => {
         setCars((prev) => prev.filter((car) => car.id !== id))
