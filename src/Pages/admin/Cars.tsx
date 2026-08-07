@@ -29,7 +29,7 @@ export default function Cars() {
   });
 
   useEffect(() => {
-    fetch("http://localhost:3000/cars")
+    fetch(`${import.meta.env.VITE_API_URL}/cars`)
       .then((res) => res.json())
       .then((data: unknown) => setCars((data as Car[]).map((item) => ({ ...item, id: item.id ?? item._id }))))
       .catch((err) => console.log(err));
@@ -38,7 +38,7 @@ export default function Cars() {
   const handleDelete = (id: number) => {
     if (!confirm("Mashinani o'chirishni xohlaysizmi?")) return;
 
-    fetch(`http://localhost:3000/cars/${id}`, {
+    fetch(`${import.meta.env.VITE_API_URL}/cars/${id}`, {
       method: "DELETE",
     })
       .then(() => {
@@ -83,7 +83,7 @@ export default function Cars() {
       image: form.image,
     };
 
-    fetch(`http://localhost:3000/cars/${editingCar.id}`, {
+    fetch(`${import.meta.env.VITE_API_URL}/cars/${editingCar.id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updatedCar),
