@@ -851,3 +851,11 @@ p {
 .empty-favorites .view:hover {
   background-color: #e62424;
 }
+
+.loading-text {
+  text-align: center;
+  padding: 40px 20px;
+  font-size: 18px;
+  color: #666;
+  font-weight: 500;
+}

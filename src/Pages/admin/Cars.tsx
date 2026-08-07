@@ -17,6 +17,7 @@ type Car = {
 
 export default function Cars() {
   const [cars, setCars] = useState<Car[]>([]);
+  const [loading, setLoading] = useState(true);
   const [editingCar, setEditingCar] = useState<Car | null>(null);
   const { removeFromFavorites } = useFavorites();
   const [form, setForm] = useState({
@@ -31,8 +32,14 @@ export default function Cars() {
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}/cars`)
       .then((res) => res.json())
-      .then((data: unknown) => setCars((data as Car[]).map((item) => ({ ...item, id: item.id ?? item._id }))))
-      .catch((err) => console.log(err));
+      .then((data: unknown) => {
+        setCars((data as Car[]).map((item) => ({ ...item, id: item.id ?? item._id })));
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
+      });
   }, []);
 
   const handleDelete = (id: number) => {
@@ -125,7 +132,11 @@ export default function Cars() {
             </tr>
           </thead>
           <tbody>
-            {cars.map((car) => (
+            {loading ? (
+              <tr>
+                <td colSpan={7} className="loading-text">mashinalar backendan kelguncha mashinalar yuklanyapdi biroz kuting..</td>
+              </tr>
+            ) : cars.map((car) => (
               <tr key={car.id}>
                 <td>
                   <img

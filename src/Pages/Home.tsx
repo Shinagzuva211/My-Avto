@@ -10,6 +10,7 @@ import { localBusinessSchema } from "../seo/schema"
 export default function Home() {
 
   const [cars, setCars] = useState<Car[]>([])
+  const [loading, setLoading] = useState(true)
 
   const carsRef = useRef<HTMLDivElement | null>(null)
 
@@ -46,8 +47,14 @@ export default function Home() {
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}/cars`)
       .then((res) => res.json())
-      .then((data: unknown) => setCars((data as Car[]).map((item) => ({ ...item, id: item.id ?? item._id }))))
-      .catch((err) => console.log(err));
+      .then((data: unknown) => {
+        setCars((data as Car[]).map((item) => ({ ...item, id: item.id ?? item._id })))
+        setLoading(false)
+      })
+      .catch((err) => {
+        console.log(err)
+        setLoading(false)
+      });
   }, [])
 
   return (
@@ -76,7 +83,11 @@ export default function Home() {
       </div>
 
       <div ref={carsRef}>
-        <Sidebar cars={cars} />
+        {loading ? (
+          <div className="loading-text">mashinalar backendan kelguncha mashinalar yuklanyapdi biroz kuting..</div>
+        ) : (
+          <Sidebar cars={cars} />
+        )}
       </div>
 
       <div ref={aboutRef}>
