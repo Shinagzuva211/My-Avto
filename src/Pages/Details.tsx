@@ -126,7 +126,6 @@ export default function CarDetails() {
 
         <div className="details-grid">
           <div className="image-section">
-            <div className="car-image-wrapper">
               <img
                 src={data.image}
                 alt={`${data.brand} ${data.model} ${data.year}-yil`}
@@ -144,7 +143,6 @@ export default function CarDetails() {
                 <GoHeartFill className="heart-fill" />
                 <GoHeart className="heart" />
               </button>
-            </div>
           </div>
 
           <div className="info-section">

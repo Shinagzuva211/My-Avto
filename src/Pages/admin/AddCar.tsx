@@ -22,6 +22,8 @@ export default function AddCar() {
     features: "",
   });
 
+  const [preview, setPreview] = useState<string | null>(null);
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => {
@@ -31,6 +33,29 @@ export default function AddCar() {
     } else {
       setForm({ ...form, [name]: value });
     }
+  };
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (!file.type.startsWith("image/")) {
+      alert("Faqat rasm fayllarini tanlang");
+      return;
+    }
+
+    if (file.size > 5 * 1024 * 1024) {
+      alert("Rasm hajmi 5MB dan katta bo'lmasligi kerak");
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      const base64 = reader.result as string;
+      setForm({ ...form, image: base64 });
+      setPreview(base64);
+    };
+    reader.readAsDataURL(file);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -212,15 +237,19 @@ export default function AddCar() {
             </div>
 
             <div className="form-group">
-              <label>Rasm URL</label>
+              <label>Rasm File</label>
               <input
                 type="file"
                 name="image"
-                placeholder="Rasm tanlash"
-                value={form.image}
-                onChange={handleChange}
+                accept="image/*"
+                onChange={handleImageChange}
                 required
               />
+              {preview && (
+                <div style={{ marginTop: "10px" }}>
+                  <img src={preview} alt="Preview" style={{ maxWidth: "200px", maxHeight: "150px", borderRadius: "8px", border: "1px solid #ddd" }} />
+                </div>
+              )}
             </div>
 
             <div className="form-group" style={{ gridColumn: "1 / -1" }}>
