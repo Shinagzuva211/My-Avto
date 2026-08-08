@@ -4,6 +4,7 @@ import { BiCar } from "react-icons/bi";
 import { BsCarFrontFill } from "react-icons/bs";
 import { MdCall } from "react-icons/md";
 import { GoPeople, GoShieldCheck } from "react-icons/go";
+import { useTranslation } from "react-i18next";
 
 type HeroProps = {
     scrollToCars: () => void;
@@ -19,11 +20,10 @@ export default function Hero({
     scrollToAbout
     }: HeroProps) {
 
-
+    const { t } = useTranslation();
 
     return (
         <>
-
             <div className="background">
                 <Header 
                 scrollToCars={scrollToCars}
@@ -36,25 +36,25 @@ export default function Hero({
 
                     <div className="left-side">
                         <div className="dream-title">
-                            SIZNING ORZUYINGIZDAGI MASHINA
+                            {t("home.heroTitle")}
                         </div>
 
                         <div className="hero-title">
-                            Find Your Dream <span>Car</span>
+                            {t("home.heroSubtitle")}
                         </div>
 
                         <div className="hero-text">
-                            Eng yaxshi narxlarda premium avtomobillarni toping va orzuyingizdagi mashinaga ega bo'ling.
+                            {t("home.heroText")}
                         </div>
 
                         <div className="hero-btns">
 
                             <div className="browse-btn">
-                                <button onClick={scrollToCars}> <span><BsCarFrontFill /></span> Mashinalarni ko'rish </button>
+                                <button onClick={scrollToCars}> <span><BsCarFrontFill /></span> {t("home.browseCars")} </button>
                             </div>
 
                             <div className="contact-btn">
-                                <button onClick={scrollToContact}> <span><MdCall /></span> Biz bilan aloqa </button>
+                                <button onClick={scrollToContact}> <span><MdCall /></span> {t("home.contactUs")} </button>
                             </div>
 
                         </div>
@@ -73,7 +73,7 @@ export default function Hero({
                                     500+
                                 </div>
 
-                                <p>Mashinalar</p>
+                                <p>{t("home.carsCount")}</p>
                             </div>
 
                         </div>
@@ -91,7 +91,7 @@ export default function Hero({
                                     1200+
                                 </div>
 
-                                <p>Mamnun mijozlar</p>
+                                <p>{t("home.happyClients")}</p>
                             </div>
 
                         </div>
@@ -109,7 +109,7 @@ export default function Hero({
                                     5 Yil+
                                 </div>
 
-                                <p>Tajriba</p>
+                                <p>{t("home.experience")}</p>
                             </div>
 
                         </div>
@@ -127,7 +127,7 @@ export default function Hero({
                                     100%
                                 </div>
 
-                                <p> Ishonchilik </p>
+                                <p>{t("home.reliability")}</p>
                             </div>
 
                         </div>

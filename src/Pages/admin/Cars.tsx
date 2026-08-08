@@ -1,25 +1,27 @@
-import { useEffect, useState } from "react";
-import { FaPlus, FaEdit, FaTrash, FaSave, FaTimes } from "react-icons/fa";
-import { Link } from "react-router-dom";
-import { useFavorites } from "../../context/useFavorites";
+import { useEffect, useState } from "react"
+import { FaPlus, FaEdit, FaTrash, FaSave, FaTimes } from "react-icons/fa"
+import { Link } from "react-router-dom"
+import { useFavorites } from "../../context/useFavorites"
+import { useTranslation } from "react-i18next"
 
 type Car = {
-  id: number;
-  _id?: string;
-  brand: string;
-  model: string;
-  year: number;
-  price: number;
-  fuel: string;
-  image: string;
-  condition?: string;
-};
+  id: number
+  _id?: string
+  brand: string
+  model: string
+  year: number
+  price: number
+  fuel: string
+  image: string
+  condition?: string
+}
 
 export default function Cars() {
-  const [cars, setCars] = useState<Car[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [editingCar, setEditingCar] = useState<Car | null>(null);
-  const { removeFromFavorites } = useFavorites();
+  const { t } = useTranslation()
+  const [cars, setCars] = useState<Car[]>([])
+  const [loading, setLoading] = useState(true)
+  const [editingCar, setEditingCar] = useState<Car | null>(null)
+  const { removeFromFavorites } = useFavorites()
   const [form, setForm] = useState({
     brand: "",
     model: "",
@@ -27,36 +29,33 @@ export default function Cars() {
     price: "",
     fuel: "Benzin",
     image: "",
-  });
+  })
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}/cars`)
       .then((res) => res.json())
       .then((data: unknown) => {
-        setCars((data as Car[]).map((item) => ({ ...item, id: item.id ?? item._id })));
-        setLoading(false);
+        setCars((data as Car[]).map((item) => ({ ...item, id: item.id ?? item._id })))
+        setLoading(false)
       })
       .catch((err) => {
-        console.log(err);
-        setLoading(false);
-      });
-  }, []);
+        console.log(err)
+        setLoading(false)
+      })
+  }, [])
 
   const handleDelete = (id: number) => {
-    if (!confirm("Mashinani o'chirishni xohlaysizmi?")) return;
-
-    fetch(`${import.meta.env.VITE_API_URL}/cars/${id}`, {
-      method: "DELETE",
-    })
+    if (!confirm(t("common.confirm"))) return
+    fetch(`${import.meta.env.VITE_API_URL}/cars/${id}`, { method: "DELETE" })
       .then(() => {
-        setCars((prev) => prev.filter((car) => car.id !== id));
-        removeFromFavorites(id);
+        setCars((prev) => prev.filter((car) => car.id !== id))
+        removeFromFavorites(id)
       })
-      .catch((err) => console.log(err));
-  };
+      .catch((err) => console.log(err))
+  }
 
   const handleEditClick = (car: Car) => {
-    setEditingCar(car);
+    setEditingCar(car)
     setForm({
       brand: car.brand,
       model: car.model,
@@ -64,22 +63,20 @@ export default function Cars() {
       price: String(car.price),
       fuel: car.fuel,
       image: car.image,
-    });
-  };
+    })
+  }
 
   const handleCloseModal = () => {
-    setEditingCar(null);
-  };
+    setEditingCar(null)
+  }
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    setForm({ ...form, [e.target.name]: e.target.value })
+  }
 
   const handleUpdate = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!editingCar) return;
+    e.preventDefault()
+    if (!editingCar) return
 
     const updatedCar = {
       brand: form.brand,
@@ -88,7 +85,7 @@ export default function Cars() {
       price: Number(form.price),
       fuel: form.fuel,
       image: form.image,
-    };
+    }
 
     fetch(`${import.meta.env.VITE_API_URL}/cars/${editingCar.id}`, {
       method: "PUT",
@@ -97,53 +94,48 @@ export default function Cars() {
     })
       .then((res) => res.json())
       .then((data) => {
-        setCars((prev) => prev.map((car) => (car.id === editingCar.id ? data : car)));
-        setEditingCar(null);
+        setCars((prev) => prev.map((car) => (car.id === editingCar.id ? data : car)))
+        setEditingCar(null)
       })
-      .catch((err) => console.log(err));
-  };
+      .catch((err) => console.log(err))
+  }
 
   return (
     <div>
       <div className="admin-page-header">
-        <h1>Cars</h1>
-        <p>Barcha mashinalarni boshqarish</p>
+        <h1>{t("admin.cars")}</h1>
+        <p>{t("admin.manageCars")}</p>
       </div>
-
       <div className="admin-table-wrapper">
         <div className="admin-table-header">
-          <h2>Mashinalar ro'yxati ({cars.length})</h2>
+          <h2>{t("admin.carsList")} ({cars.length})</h2>
           <Link to="/admin/add-car">
             <button className="btn btn-primary">
-              <FaPlus /> Yangi Qo'shish
+              <FaPlus /> {t("admin.addCar")}
             </button>
           </Link>
         </div>
         <table className="admin-table">
           <thead>
             <tr>
-              <th>Rasm</th>
-              <th>Brand</th>
-              <th>Model</th>
-              <th>Yil</th>
-              <th>Narx</th>
-              <th>Yoqilg'i</th>
-              <th>Amallar</th>
+              <th>{t("car.image")}</th>
+              <th>{t("car.brand")}</th>
+              <th>{t("car.model")}</th>
+              <th>{t("car.year")}</th>
+              <th>{t("car.price")}</th>
+              <th>{t("car.fuel")}</th>
+              <th>{t("common.actions")}</th>
             </tr>
           </thead>
           <tbody>
             {loading ? (
               <tr>
-                <td colSpan={7} className="loading-text">mashinalar backendan kelguncha mashinalar yuklanyapdi biroz kuting..</td>
+                <td colSpan={7} className="loading-text">{t("home.loadingCars")}</td>
               </tr>
             ) : cars.map((car) => (
               <tr key={car.id}>
                 <td>
-                  <img
-                    className="admin-table-img"
-                    src={car.image}
-                    alt={`${car.brand} ${car.model}`}
-                  />
+                  <img className="admin-table-img" src={car.image} alt={`${car.brand} ${car.model}`} />
                 </td>
                 <td>{car.brand}</td>
                 <td>{car.model}</td>
@@ -152,17 +144,11 @@ export default function Cars() {
                 <td>{car.fuel}</td>
                 <td>
                   <div style={{ display: "flex", gap: "8px" }}>
-                    <button
-                      className="btn btn-edit"
-                      onClick={() => handleEditClick(car)}
-                    >
-                      <FaEdit /> Tahrirlash
+                    <button className="btn btn-edit" onClick={() => handleEditClick(car)}>
+                      <FaEdit /> {t("common.edit")}
                     </button>
-                    <button
-                      className="btn btn-delete"
-                      onClick={() => handleDelete(car.id)}
-                    >
-                      <FaTrash /> O'chirish
+                    <button className="btn btn-delete" onClick={() => handleDelete(car.id)}>
+                      <FaTrash /> {t("common.delete")}
                     </button>
                   </div>
                 </td>
@@ -171,12 +157,11 @@ export default function Cars() {
           </tbody>
         </table>
       </div>
-
       {editingCar && (
         <div className="modal-overlay" onClick={handleCloseModal}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
-              <h2>Mashinani Tahrirlash</h2>
+              <h2>{t("common.edit")} {t("admin.cars").slice(0, -1)}</h2>
               <button className="modal-close" onClick={handleCloseModal}>
                 <FaTimes />
               </button>
@@ -184,50 +169,23 @@ export default function Cars() {
             <form onSubmit={handleUpdate}>
               <div className="form-grid">
                 <div className="form-group">
-                  <label>Brand</label>
-                  <input
-                    type="text"
-                    name="brand"
-                    value={form.brand}
-                    onChange={handleChange}
-                    required
-                  />
+                  <label>{t("car.brand")}</label>
+                  <input type="text" name="brand" value={form.brand} onChange={handleChange} required />
                 </div>
                 <div className="form-group">
-                  <label>Model</label>
-                  <input
-                    type="text"
-                    name="model"
-                    value={form.model}
-                    onChange={handleChange}
-                    required
-                  />
+                  <label>{t("car.model")}</label>
+                  <input type="text" name="model" value={form.model} onChange={handleChange} required />
                 </div>
                 <div className="form-group">
-                  <label>Yil</label>
-                  <input
-                    type="number"
-                    name="year"
-                    min="1990"
-                    max="2030"
-                    value={form.year}
-                    onChange={handleChange}
-                    required
-                  />
+                  <label>{t("car.year")}</label>
+                  <input type="number" name="year" min="1990" max="2030" value={form.year} onChange={handleChange} required />
                 </div>
                 <div className="form-group">
-                  <label>Narx ($)</label>
-                  <input
-                    type="number"
-                    name="price"
-                    min="0"
-                    value={form.price}
-                    onChange={handleChange}
-                    required
-                  />
+                  <label>{t("car.price")} ($)</label>
+                  <input type="number" name="price" min="0" value={form.price} onChange={handleChange} required />
                 </div>
                 <div className="form-group">
-                  <label>Yoqilg'i Turi</label>
+                  <label>{t("car.fuel")}</label>
                   <select name="fuel" value={form.fuel} onChange={handleChange}>
                     <option value="Benzin">Benzin</option>
                     <option value="Gibrid">Gibrid</option>
@@ -236,26 +194,16 @@ export default function Cars() {
                   </select>
                 </div>
                 <div className="form-group">
-                  <label>Rasm URL</label>
-                  <input
-                    type="url"
-                    name="image"
-                    value={form.image}
-                    onChange={handleChange}
-                    required
-                  />
+                  <label>{t("car.image")} URL</label>
+                  <input type="url" name="image" value={form.image} onChange={handleChange} required />
                 </div>
               </div>
               <div className="form-actions">
                 <button type="submit" className="btn btn-primary">
-                  <FaSave /> Saqlash
+                  <FaSave /> {t("common.save")}
                 </button>
-                <button
-                  type="button"
-                  className="btn btn-edit"
-                  onClick={handleCloseModal}
-                >
-                  Bekor Qilish
+                <button type="button" className="btn btn-edit" onClick={handleCloseModal}>
+                  {t("common.cancel")}
                 </button>
               </div>
             </form>
@@ -263,5 +211,5 @@ export default function Cars() {
         </div>
       )}
     </div>
-  );
+  )
 }

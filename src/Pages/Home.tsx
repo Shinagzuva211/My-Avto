@@ -7,42 +7,31 @@ import Contact from "../components/Contact"
 import About from "../components/About"
 import SEO from "../seo/SEO"
 import { localBusinessSchema } from "../seo/schema"
+import { useTranslation } from "react-i18next"
+
 export default function Home() {
+  const { t } = useTranslation()
 
   const [cars, setCars] = useState<Car[]>([])
   const [loading, setLoading] = useState(true)
 
   const carsRef = useRef<HTMLDivElement | null>(null)
-
   const heroRef = useRef<HTMLDivElement | null>(null)
-
   const contactRef = useRef<HTMLDivElement | null>(null)
-
   const aboutRef = useRef<HTMLDivElement | null>(null)
 
   const scrollToCars = () => {
-    carsRef.current?.scrollIntoView({
-      behavior: "smooth"
-    })
+    carsRef.current?.scrollIntoView({ behavior: "smooth" })
   }
-
   const scrollToHero = () => {
-    heroRef.current?.scrollIntoView({
-      behavior: "smooth",
-    });
-  };
-
+    heroRef.current?.scrollIntoView({ behavior: "smooth" })
+  }
   const scrollToContact = () => {
-    contactRef.current?.scrollIntoView({
-      behavior: "smooth",
-    });
-  };
-
+    contactRef.current?.scrollIntoView({ behavior: "smooth" })
+  }
   const scrollToAbout = () => {
-    aboutRef.current?.scrollIntoView({
-      behavior: "smooth",
-    });
-  };
+    aboutRef.current?.scrollIntoView({ behavior: "smooth" })
+  }
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}/cars`)
@@ -54,25 +43,23 @@ export default function Home() {
       .catch((err) => {
         console.log(err)
         setLoading(false)
-      });
+      })
   }, [])
 
   return (
     <>
       <SEO
-        title="Hodiy Avto — Toshkent Avtomobil Sotuv Markazi"
-        description="Hodiy Avto — Toshkentdagi professional avtomobil sotuv markazi. Sifatli tekshirilgan avtomobillarni eng yaxshi narxda toping. 500+ mashina, 5 yil tajriba."
+        title={t("home.heroTitle") + " — Hodiy Avto"}
+        description={t("home.heroText")}
         url="https://hodiyavto.uz/"
         image="/logo.png"
         type="website"
         locale="uz_UZ"
       />
-
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema()) }}
       />
-
       <div ref={heroRef}>
         <Hero
           scrollToCars={scrollToCars}
@@ -81,23 +68,19 @@ export default function Home() {
           scrollToAbout={scrollToAbout}
         />
       </div>
-
       <div ref={carsRef}>
         {loading ? (
-          <div className="loading-text">mashinalar backendan kelguncha mashinalar yuklanyapdi biroz kuting..</div>
+          <div className="loading-text">{t("home.loadingCars")}</div>
         ) : (
           <Sidebar cars={cars} />
         )}
       </div>
-
       <div ref={aboutRef}>
         <About />
       </div>
-
       <div ref={contactRef}>
-        <Contact/>
+        <Contact />
       </div>
     </>
-
   )
 }

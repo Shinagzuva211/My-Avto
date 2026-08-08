@@ -5,6 +5,8 @@ import "../Home.css"
 import { BiMenu } from "react-icons/bi"
 import { Link } from "react-router-dom"
 import { useEffect, useState } from "react"
+import { useTranslation } from "react-i18next"
+import LanguageSwitcher from "./LanguageSwitcher"
 
 type HeroProps = {
     scrollToCars: () => void;
@@ -16,6 +18,7 @@ type HeroProps = {
 export default function Header({ scrollToCars, scrollToHero, scrollToContact, scrollToAbout }: HeroProps) {
 
     const [show, setShow] = useState<boolean>(false)
+    const { t } = useTranslation()
 
     const [scrolled, setScrolled] = useState<boolean>(false)
 
@@ -44,68 +47,56 @@ export default function Header({ scrollToCars, scrollToHero, scrollToContact, sc
 
     return (
         <>
-
             <header className={scrolled ? "scrolled" : ""}>
-
                 <div className="container">
-
                     <div className="header-content">
-
                         <div className="logo">
                             <img className="dark" src={logo} alt="Hodiy Avto logo" />
                             <img className="light" src={logo2} alt="Hodiy Avto logo" />
                             <h1 className="logo-title">AVTO</h1>
                         </div>
-
                         <nav>
                             <a href="#" onClick={(e) => {
                                 e.preventDefault();
                                 scrollToHero();
-                            }}>Bosh sahifa</a>
+                            }}>{t("nav.home")}</a>
                             <a href="#" onClick={(e) => {
                                 e.preventDefault();
                                 scrollToCars();
                             }}
-                            >Mashinalar</a>
+                            >{t("nav.cars")}</a>
                             <a href="#" onClick={(e) => {
                                 e.preventDefault();
                                 scrollToAbout();
-                            }}>Biz haqimizda</a>
+                            }}>{t("nav.about")}</a>
                             <a href="#" onClick={(e) => {
                                 e.preventDefault();
                                 scrollToContact();
-                            }}>Kontakt</a>
+                            }}>{t("nav.contact")}</a>
                         </nav>
-
                         <div className="head-right">
+                            <LanguageSwitcher />
                             <div className="menu" onClick={openMenu}>
                                 <BiMenu />
-
                                 {show && (
                                     <div className="menu-tab">
-                                        <p className="menu-p">Bosh sahifa</p>
-                                        <p className="menu-p" onClick={scrollToCars}>Mashinalar</p>
-                                        <p className="menu-p" onClick={scrollToAbout}>Biz haqimizda</p>
-                                        <p className="menu-p" onClick={scrollToContact}>Kontakt</p>
+                                        <p className="menu-p">{t("nav.home")}</p>
+                                        <p className="menu-p" onClick={scrollToCars}>{t("nav.cars")}</p>
+                                        <p className="menu-p" onClick={scrollToAbout}>{t("nav.about")}</p>
+                                        <p className="menu-p" onClick={scrollToContact}>{t("nav.contact")}</p>
                                     </div>
                                 )}
                             </div>
-
                             <Link to={'/favorites'}>
-                                <div className="favorites">
+                                <div className="favorites" title={t("nav.favorites")}>
                                     <GoHeart className="heart" />
                                     <GoHeartFill className="heart-fill" />
                                 </div>
                             </Link>
-
                         </div>
-
                     </div>
-
                 </div>
-
             </header>
-
         </>
     )
 }

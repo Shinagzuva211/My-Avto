@@ -1,107 +1,98 @@
-import { useEffect, useState } from "react";
-import { HiBackward } from "react-icons/hi2";
-import { Link, useParams } from "react-router-dom";
-import { GoHeart, GoHeartFill } from "react-icons/go";
-import { useFavorites } from "../context/useFavorites";
-import "./Details.css";
-import SEO from "../seo/SEO";
-import { carSchema } from "../seo/schema";
-import type { Car } from "../Types/car";
+import { useEffect, useState } from "react"
+import { HiBackward } from "react-icons/hi2"
+import { Link, useParams } from "react-router-dom"
+import { GoHeart, GoHeartFill } from "react-icons/go"
+import { useFavorites } from "../context/useFavorites"
+import "./Details.css"
+import SEO from "../seo/SEO"
+import { carSchema } from "../seo/schema"
+import type { Car } from "../Types/car"
+import { useTranslation } from "react-i18next"
 
 type CarData = {
-  id: number;
-  brand: string;
-  model: string;
-  year: number;
-  price: number;
-  fuel: string;
-  image: string;
-  description?: string;
-  transmission?: string;
-  mileage?: number;
-  color?: string;
-  engine?: string;
-  driveType?: string;
-  features?: string[];
-};
+  id: number
+  brand: string
+  model: string
+  year: number
+  price: number
+  fuel: string
+  image: string
+  description?: string
+  transmission?: string
+  mileage?: number
+  color?: string
+  engine?: string
+  driveType?: string
+  features?: string[]
+}
 
 export default function CarDetails() {
-  const { id } = useParams();
-  const [data, setData] = useState<CarData | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const { toggleFavorite, isFavorite } = useFavorites();
-  const liked = data ? isFavorite(data.id) : false;
+  const { t } = useTranslation()
+  const { id } = useParams()
+  const [data, setData] = useState<CarData | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+  const { toggleFavorite, isFavorite } = useFavorites()
+  const liked = data ? isFavorite(data.id) : false
 
   useEffect(() => {
     const fetchCar = async () => {
-      setLoading(true);
-      setError(null);
+      setLoading(true)
+      setError(null)
       try {
-        const res = await fetch(`${import.meta.env.VITE_API_URL}/cars/${id}`);
-        if (!res.ok) throw new Error("Mashina topilmadi");
-        const carData = await res.json();
-        setData({ ...carData, id: carData.id ?? carData._id });
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/cars/${id}`)
+        if (!res.ok) throw new Error(t("car.notFound"))
+        const carData = await res.json()
+        setData({ ...carData, id: carData.id ?? carData._id })
       } catch (err) {
-        setError(err instanceof Error ? err.message : "Xatolik yuz berdi");
+        setError(err instanceof Error ? err.message : t("common.error"))
       } finally {
-        setLoading(false);
+        setLoading(false)
       }
-    };
-
-    fetchCar();
-  }, [id]);
+    }
+    fetchCar()
+  }, [id, t])
 
   if (loading) {
     return (
       <div className="details-page container">
         <div className="loading-container">
           <div className="loading-spinner" />
-          <p className="loading-text">Mashina ma'lumotlari yuklanmoqda...</p>
+          <p className="loading-text">{t("car.loading")}</p>
         </div>
       </div>
-    );
+    )
   }
 
   if (error || !data) {
     return (
       <div className="details-page container">
         <div className="error-container">
-          <p className="error-text">{error || "Mashina ma'lumotlari topilmadi"}</p>
+          <p className="error-text">{error || t("car.notFound")}</p>
           <button className="retry-btn" onClick={() => window.location.reload()}>
-            Qayta urinish
+            {t("car.retry")}
           </button>
         </div>
       </div>
-    );
+    )
   }
 
   const formatPrice = (price: number) => {
-    return new Intl.NumberFormat("uz-UZ", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(price);
-  };
+    return new Intl.NumberFormat("uz-UZ", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(price)
+  }
 
   const specs = [
-    { label: "Yil", value: data.year.toString() },
-    { label: "Yurish yo'li", value: data.fuel },
-    { label: "Uzatma", value: data.transmission || "Avtomat" },
-    { label: "Yurgan yo'li", value: data.mileage ? `${data.mileage.toLocaleString()} km` : "Noma'lum" },
-    { label: "Rang", value: data.color || "Noma'lum" },
-    { label: "Dvigatel", value: data.engine || "Noma'lum" },
-    { label: "Yo'lga kuchlanish", value: data.driveType || "Noma'lum" },
-    { label: "Kuzov", value: "Sedan" },
-  ];
+    { label: t("car.specs.year"), value: data.year.toString() },
+    { label: t("car.specs.fuel"), value: data.fuel },
+    { label: t("car.specs.transmission"), value: data.transmission || t("car.transmission") },
+    { label: t("car.specs.mileage"), value: data.mileage ? `${data.mileage.toLocaleString()} km` : t("common.error") },
+    { label: t("car.specs.color"), value: data.color || t("common.error") },
+    { label: t("car.specs.engine"), value: data.engine || t("common.error") },
+    { label: t("car.specs.driveType"), value: data.driveType || t("common.error") },
+    { label: t("car.specs.bodyType"), value: "Sedan" },
+  ]
 
-  const defaultFeatures = [
-    "ABS tizimi",
-    "Konditsioner",
-    "O'rindiq isitish",
-    "Parktronik",
-    "Kamerali ko'rinish",
-    "Bluetooth",
-    "Kruzkontrol",
-    "Yurish rejimlari",
-    "Xavfsizlik podushkalari",
-  ];
+  const defaultFeatures = t("car.defaultFeatures", { returnObjects: true }) as string[]
 
   return (
     <>
@@ -113,45 +104,40 @@ export default function CarDetails() {
         type="product"
         locale="uz_UZ"
       />
-
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(carSchema(data)) }}
       />
-
       <div className="details-page container">
         <Link to="/" className="back-btn">
-          <HiBackward size={20} /> Ortga qaytish
+          <HiBackward size={20} /> {t("car.back")}
         </Link>
-
         <div className="details-grid">
           <div className="image-section">
-              <img
-                src={data.image}
-                alt={`${data.brand} ${data.model} ${data.year}-yil`}
-                className="main-image"
-              />
-              <button
-                className={`favorite-btn ${liked ? "active" : ""}`}
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  toggleFavorite(data as Car);
-                }}
-                aria-label={liked ? "Remove from favorites" : "Add to favorites"}
-              >
-                <GoHeartFill className="heart-fill" />
-                <GoHeart className="heart" />
-              </button>
+            <img
+              src={data.image}
+              alt={`${data.brand} ${data.model} ${data.year}-yil`}
+              className="main-image"
+            />
+            <button
+              className={`favorite-btn ${liked ? "active" : ""}`}
+              onClick={(e) => {
+                e.preventDefault()
+                e.stopPropagation()
+                toggleFavorite(data as Car)
+              }}
+              aria-label={liked ? t("car.removeFromFavorites") : t("car.addToFavorites")}
+            >
+              <GoHeartFill className="heart-fill" />
+              <GoHeart className="heart" />
+            </button>
           </div>
-
           <div className="info-section">
             <div className="car-header">
               <span className="car-brand">{data.brand}</span>
               <h1 className="car-model">{data.model}</h1>
               <div className="car-price">{formatPrice(data.price)}</div>
             </div>
-
             <div className="specs-grid">
               {specs.map((spec, index) => (
                 <div key={index} className="spec-card">
@@ -160,16 +146,14 @@ export default function CarDetails() {
                 </div>
               ))}
             </div>
-
             {data.description && (
               <div className="description-section">
-                <h2 className="section-title">Tavsif</h2>
+                <h2 className="section-title">{t("car.description")}</h2>
                 <p className="description-text">{data.description}</p>
               </div>
             )}
-
             <div className="features-section">
-              <h2 className="section-title">Asosiy xususiyatlar</h2>
+              <h2 className="section-title">{t("car.features")}</h2>
               <div className="features-grid">
                 {(data.features || defaultFeatures).map((feature, index) => (
                   <div key={index} className="feature-item">
@@ -183,5 +167,5 @@ export default function CarDetails() {
         </div>
       </div>
     </>
-  );
+  )
 }
