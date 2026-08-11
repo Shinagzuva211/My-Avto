@@ -196,5 +196,14 @@
     "actions": "Actions",
     "imageOnly": "Select only image files",
     "maxSize": "Image size must not exceed 5MB"
+  },
+  "auth": {
+    "adminLogin": "Admin Login",
+    "email": "Email",
+    "password": "Password",
+    "login": "Login",
+    "loggingIn": "Logging in...",
+    "logout": "Logout",
+    "loginError": "Invalid email or password"
   }
 }

@@ -1,4 +1,5 @@
 import AdminLayout from "./Pages/AdminLayout"
+import AdminLogin from "./Pages/AdminLogin"
 import Dashboard from "./Pages/admin/Dashboard"
 import Cars from "./Pages/admin/Cars"
 import AddCar from "./Pages/admin/AddCar"
@@ -11,28 +12,31 @@ import Home from "./Pages/Home"
 import ContactPage from "./Pages/Contact"
 import AboutPage from "./Pages/About"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { AuthProvider } from "./context/AuthContext"
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <Routes>
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/cars/:id" element={<CarDetails />} />
+          <Route path="/favorites" element={<Favorites />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/about" element={<AboutPage />} />
 
-        <Route path="/" element={<Home />} />
-        <Route path="/cars/:id" element={<CarDetails />} />
-        <Route path="/favorites" element={<Favorites />} />
-        <Route path="/contact" element={<ContactPage />} />
-        <Route path="/about" element={<AboutPage />} />
+          <Route path="/admin/login" element={<AdminLogin />} />
 
-        <Route path="/admin" element={<AdminLayout />}>
-          <Route index element={<Dashboard />} />
-          <Route path="cars" element={<Cars />} />
-          <Route path="add-car" element={<AddCar />} />
-          <Route path="orders" element={<Orders />} />
-          <Route path="users" element={<Users />} />
-          <Route path="settings" element={<Settings />} />
-        </Route>
-
-      </Routes>
-    </BrowserRouter>
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route index element={<Dashboard />} />
+            <Route path="cars" element={<Cars />} />
+            <Route path="add-car" element={<AddCar />} />
+            <Route path="orders" element={<Orders />} />
+            <Route path="users" element={<Users />} />
+            <Route path="settings" element={<Settings />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   )
 }

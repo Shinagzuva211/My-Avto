@@ -196,5 +196,14 @@
     "actions": "Amallar",
     "imageOnly": "Faqat rasm fayllarini tanlang",
     "maxSize": "Rasm hajmi 5MB dan katta bo'lmasligi kerak"
+  },
+  "auth": {
+    "adminLogin": "Admin kirish",
+    "email": "Email",
+    "password": "Parol",
+    "login": "Kirish",
+    "loggingIn": "Kirilmoqda...",
+    "logout": "Chiqish",
+    "loginError": "Email yoki parol noto'g'ri"
   }
 }

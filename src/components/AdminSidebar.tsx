@@ -4,10 +4,13 @@ import { FaPlus } from "react-icons/fa"
 import { BiBox } from "react-icons/bi"
 import { GoPeople } from "react-icons/go"
 import { SlSettings } from "react-icons/sl"
+import { FaSignOutAlt } from "react-icons/fa"
 import { useTranslation } from "react-i18next"
+import { useAuth } from "../context/AuthContext"
 
 export default function AdminSidebar() {
   const { t } = useTranslation()
+  const { logout, user } = useAuth()
 
   const menuItems = [
     { to: "/admin", icon: <BsHouseCheckFill />, label: t("admin.dashboard"), end: true },
@@ -39,6 +42,11 @@ export default function AdminSidebar() {
       </nav>
       <div className="sidebar-footer">
         <div className="sidebar-footer-text">{t("admin.dashboard")} Panel</div>
+        {user && (
+          <button className="btn btn-logout" onClick={logout}>
+            <FaSignOutAlt /> {t("auth.logout")}
+          </button>
+        )}
       </div>
     </aside>
   )

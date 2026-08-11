@@ -3,6 +3,7 @@ import { FaPlus, FaEdit, FaTrash, FaSave, FaTimes } from "react-icons/fa"
 import { Link } from "react-router-dom"
 import { useFavorites } from "../../context/useFavorites"
 import { useTranslation } from "react-i18next"
+import { getAuthHeader } from "../../context/AuthContext"
 
 type Car = {
   id: number
@@ -31,8 +32,11 @@ export default function Cars() {
     image: "",
   })
 
+  const apiUrl = import.meta.env.VITE_API_URL
+  const authHeader = getAuthHeader()
+
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/cars`)
+    fetch(`${apiUrl}/cars`, { headers: authHeader })
       .then((res) => res.json())
       .then((data: unknown) => {
         setCars((data as Car[]).map((item) => ({ ...item, id: item.id ?? item._id })))
@@ -46,7 +50,7 @@ export default function Cars() {
 
   const handleDelete = (id: number) => {
     if (!confirm(t("common.confirm"))) return
-    fetch(`${import.meta.env.VITE_API_URL}/cars/${id}`, { method: "DELETE" })
+    fetch(`${apiUrl}/cars/${id}`, { method: "DELETE", headers: authHeader })
       .then(() => {
         setCars((prev) => prev.filter((car) => car.id !== id))
         removeFromFavorites(id)
@@ -87,9 +91,9 @@ export default function Cars() {
       image: form.image,
     }
 
-    fetch(`${import.meta.env.VITE_API_URL}/cars/${editingCar.id}`, {
+    fetch(`${apiUrl}/cars/${editingCar.id}`, {
       method: "PUT",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", ...authHeader },
       body: JSON.stringify(updatedCar),
     })
       .then((res) => res.json())
