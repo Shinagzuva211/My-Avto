@@ -196,7 +196,7 @@ body {
 
 header {
   background-color: transparent;
-  height: 80px; 
+  height: 80px;
   position: fixed;
   z-index: 999;
   width: 100%;
@@ -228,7 +228,7 @@ a:hover {
 
 .heart-fill {
   opacity: 0;
-  color: #ff2929; 
+  color: #ff2929;
   transition: opacity linear .1s;
 }
 
@@ -277,11 +277,11 @@ header.scrolled {
   }
 
   .dark{
-    display: none;     
+    display: none;
   }
 
   .light{
-    display: block;     
+    display: block;
   }
 
   .menu{
@@ -644,7 +644,7 @@ hr {
   .car-year{
     font-size: 12px;
   }
-  
+
   .car-price{
     font-size: 12px;
   }
@@ -654,7 +654,6 @@ hr {
   }
 
 }
-
 
 
 .menu:hover {
@@ -1064,10 +1063,318 @@ p {
   background-color: #e62424;
 }
 
+.compare-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.compare-head .favorites-title {
+  margin-bottom: 6px;
+}
+
+.compare-subtitle {
+  font-size: 15px;
+  color: #666;
+}
+
+.compare-clear-btn {
+  width: 180px;
+  height: 44px;
+  margin: 0;
+  border: none;
+  border-top: 2px solid #ff2929;
+  background-color: transparent;
+  font-size: 15px;
+  font-weight: 500;
+  color: #333;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  flex-shrink: 0;
+}
+
+.compare-clear-btn:hover {
+  background-color: #ff2929;
+  color: white;
+}
+
+.compare-clear-btn:focus-visible {
+  outline: 2px solid #ff2929;
+  outline-offset: -2px;
+}
+
+.compare-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  align-items: stretch;
+  margin-bottom: 40px;
+}
+
+.compare-card {
+  flex: 1 1 260px;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  background: white;
+  border: 1px solid #e6e6e6;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.compare-card:hover {
+  transform: translateY(-5px);
+  border-color: #d4d4d4;
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.14);
+}
+
+.compare-card-head {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.compare-card-image {
+  display: block;
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  background: #f0f0f0;
+}
+
+.compare-card-name {
+  padding: 14px 16px 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: #222;
+}
+
+.compare-card-specs {
+  padding: 6px 16px 16px;
+  flex-grow: 1;
+}
+
+.compare-spec {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 9px 0;
+  border-bottom: 1px solid #f2f2f2;
+  font-size: 14px;
+}
+
+.compare-spec:last-child {
+  border-bottom: none;
+}
+
+.compare-spec-label {
+  color: #888;
+  flex-shrink: 0;
+}
+
+.compare-spec-value {
+  color: #333;
+  font-weight: 600;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+.compare-spec-price {
+  color: #ff2929;
+  font-size: 15px;
+}
+
+.compare-card .compare-details-btn {
+  margin: 0 16px 16px;
+  text-align: center;
+}
+
+.compare-remove {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.92);
+  color: #ff2929;
+  font-size: 18px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  z-index: 2;
+}
+
+.compare-remove:hover {
+  transform: scale(1.1);
+  background-color: white;
+}
+
+.compare-remove:focus-visible {
+  outline: 2px solid #ff2929;
+  outline-offset: 2px;
+}
+
+@media screen and (max-width: 560px) {
+  .compare-cards {
+    gap: 18px;
+  }
+
+  .compare-card {
+    flex-basis: 100%;
+    max-width: 100%;
+  }
+}
+
+.compare-details-btn {
+  display: inline-block;
+  padding: 8px 18px;
+  border: 1px solid #ff2929;
+  border-radius: 8px;
+  background-color: transparent;
+  color: #ff2929;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.compare-details-btn:hover {
+  background-color: #ff2929;
+  color: white;
+}
+
+.compare-details-btn:focus-visible {
+  outline: 2px solid #ff2929;
+  outline-offset: 2px;
+}
+
+@media screen and (max-width: 700px) {
+  .compare-head {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .compare-clear-btn {
+    width: 100%;
+    margin-top: 8px;
+  }
+}
+
 .loading-text {
   text-align: center;
   padding: 40px 20px;
   font-size: 18px;
   color: #666;
   font-weight: 500;
+}
+
+/* ===== RESPONSIVE REFINEMENTS ===== */
+
+/* Mobile menu dropdown: anchor to the trigger so it never runs off-screen */
+@media screen and (max-width: 1080px) {
+  .menu-tab {
+    right: 0;
+    max-width: calc(100vw - 24px);
+  }
+}
+
+/* Tablet: 2x2 stats panel instead of a cramped single row */
+@media screen and (min-width: 701px) and (max-width: 1080px) {
+  .static-panel {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    padding: 20px;
+  }
+
+  .static-card {
+    width: auto;
+    flex: 1 1 240px;
+    justify-content: center;
+  }
+
+  .line {
+    display: none;
+  }
+}
+
+/* Mobile hero: keep the swiper inside the background image */
+@media screen and (max-width: 700px) {
+  .background {
+    height: 100svh;
+    min-height: 560px;
+    padding-top: 80px;
+    background-position: center;
+  }
+
+  .hero-swiper-wrap {
+    height: calc(100svh - 80px);
+  }
+
+  /* Cars filter sidebar: stack naturally, no nested scroll area */
+  .sidebar {
+    flex: none;
+    width: 100%;
+    padding: 20px 0 0;
+  }
+
+  .sidebar-content {
+    padding: 0;
+  }
+
+  .sidebar-cars {
+    gap: 0;
+  }
+
+  .cars-scroll {
+    height: auto;
+    overflow: visible;
+    padding-bottom: 20px;
+  }
+
+  .h-line {
+    width: 100%;
+    height: 1px;
+    margin: 10px 0;
+    align-self: center;
+  }
+
+  .search-npt,
+  .search-npt input,
+  .search-zone {
+    width: 100%;
+  }
+}
+
+/* Small phones: tighten the header so logo and controls never collide */
+@media screen and (max-width: 400px) {
+  .head-right {
+    gap: 6px;
+  }
+
+  .favorites {
+    font-size: 24px;
+  }
+
+  .menu {
+    width: 40px;
+    height: 40px;
+    font-size: 22px;
+  }
+
+  .logo img {
+    width: 50px;
+    height: 36px;
+  }
 }
