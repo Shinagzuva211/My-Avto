@@ -21,7 +21,14 @@ export default function Dashboard() {
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}/cars`)
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) {
+          return res.text().then(text => {
+            throw new Error(text || "Failed to fetch cars");
+          });
+        }
+        return res.json();
+      })
       .then((data: unknown) => setCars((data as Car[]).map((item) => ({ ...item, id: item.id ?? item._id }))))
       .catch((err) => console.log(err))
   }, [])

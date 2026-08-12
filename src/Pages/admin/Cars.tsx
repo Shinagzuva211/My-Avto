@@ -37,7 +37,14 @@ export default function Cars() {
 
   useEffect(() => {
     fetch(`${apiUrl}/cars`, { headers: authHeader })
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) {
+          return res.text().then(text => {
+            throw new Error(text || "Failed to fetch cars");
+          });
+        }
+        return res.json();
+      })
       .then((data: unknown) => {
         setCars((data as Car[]).map((item) => ({ ...item, id: item.id ?? item._id })))
         setLoading(false)
@@ -49,8 +56,15 @@ export default function Cars() {
   }, [])
 
   const handleDelete = (id: number) => {
-    if (!confirm(t("common.confirm"))) return
+    if (!confirm(t("common_confirm"))) return
     fetch(`${apiUrl}/cars/${id}`, { method: "DELETE", headers: authHeader })
+      .then((res) => {
+        if (!res.ok) {
+          return res.text().then(text => {
+            throw new Error(text || "Failed to delete car");
+          });
+        }
+      })
       .then(() => {
         setCars((prev) => prev.filter((car) => car.id !== id))
         removeFromFavorites(id)
@@ -96,7 +110,14 @@ export default function Cars() {
       headers: { "Content-Type": "application/json", ...authHeader },
       body: JSON.stringify(updatedCar),
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) {
+          return res.text().then(text => {
+            throw new Error(text || "Failed to update car");
+          });
+        }
+        return res.json();
+      })
       .then((data) => {
         setCars((prev) => prev.map((car) => (car.id === editingCar.id ? data : car)))
         setEditingCar(null)

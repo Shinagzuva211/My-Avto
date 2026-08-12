@@ -5,7 +5,8 @@
     "about": "About",
     "contact": "Contact",
     "favorites": "Favorites",
-    "admin": "Admin Panel"
+    "admin": "Admin Panel",
+    "account": "Create Account"
   },
   "home": {
     "heroTitle": "Your Dream Car",
@@ -205,5 +206,29 @@
     "loggingIn": "Logging in...",
     "logout": "Logout",
     "loginError": "Invalid email or password"
+  },
+  "userAuth": {
+    "loginTitle": "Login",
+    "registerTitle": "Create Account",
+    "loginSubtitle": "Sign in to your account",
+    "registerSubtitle": "Create a new account",
+    "login": "Login",
+    "register": "Register",
+    "name": "Name",
+    "namePlaceholder": "Enter your name",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "loggingIn": "Logging in...",
+    "registering": "Registering...",
+    "createAccount": "Create Account",
+    "backHome": "Back to Home",
+    "adminLink": "Admin Login",
+    "errors": {
+      "accountExists": "An account with this email already exists",
+      "invalidCredentials": "Invalid email or password",
+      "passwordMismatch": "Passwords do not match",
+      "unknownError": "An error occurred"
+    }
   }
 }

@@ -1,0 +1,85 @@
+.user-login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f0f2f5 0%, #e8ebf0 100%);
+  padding: 20px;
+}
+
+.user-login-box {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  padding: 48px 40px;
+  width: 100%;
+  max-width: 420px;
+}
+
+.user-login-box h2 {
+  font-size: 26px;
+  font-weight: 700;
+  color: #1a1a2e;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.user-login-subtitle {
+  text-align: center;
+  color: #888;
+  margin-bottom: 24px;
+  font-size: 14px;
+}
+
+.user-auth-tabs {
+  display: flex;
+  background: #f0f2f5;
+  border-radius: 10px;
+  padding: 4px;
+  margin-bottom: 24px;
+}
+
+.user-auth-tabs button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  background: transparent;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.user-auth-tabs button.active {
+  background: #ff2929;
+  color: white;
+}
+
+.user-login-footer {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.user-login-footer a {
+  color: #ff2929;
+  text-decoration: none;
+}
+
+.user-login-footer a:hover {
+  text-decoration: underline;
+}
+
+.user-login-footer .divider {
+  color: #ccc;
+}
+
+@media screen and (max-width: 480px) {
+  .user-login-box {
+    padding: 32px 24px;
+  }
+}

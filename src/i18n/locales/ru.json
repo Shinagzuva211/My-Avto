@@ -5,7 +5,8 @@
     "about": "О нас",
     "contact": "Контакты",
     "favorites": "Избранное",
-    "admin": "Админ панель"
+    "admin": "Админ панель",
+    "account": "Создать аккаунт"
   },
   "home": {
     "heroTitle": "Автомобиль вашей мечты",
@@ -205,5 +206,29 @@
     "loggingIn": "Вход...",
     "logout": "Выйти",
     "loginError": "Неверный email или пароль"
+  },
+  "userAuth": {
+    "loginTitle": "Вход",
+    "registerTitle": "Создать аккаунт",
+    "loginSubtitle": "Войдите в свой аккаунт",
+    "registerSubtitle": "Создайте новый аккаунт",
+    "login": "Войти",
+    "register": "Регистрация",
+    "name": "Имя",
+    "namePlaceholder": "Введите ваше имя",
+    "email": "Email",
+    "password": "Пароль",
+    "confirmPassword": "Подтвердите пароль",
+    "loggingIn": "Вход...",
+    "registering": "Регистрация...",
+    "createAccount": "Создать аккаунт",
+    "backHome": "Вернуться на главную",
+    "adminLink": "Вход для админа",
+    "errors": {
+      "accountExists": "Аккаунт с таким email уже существует",
+      "invalidCredentials": "Неверный email или пароль",
+      "passwordMismatch": "Пароли не совпадают",
+      "unknownError": "Произошла ошибка"
+    }
   }
 }

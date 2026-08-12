@@ -3,10 +3,12 @@ import logo from "../../public/logo2.png"
 import logo2 from "../../public/logo.png"
 import "../Home.css"
 import { BiMenu } from "react-icons/bi"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import LanguageSwitcher from "./LanguageSwitcher"
+import { useUserAuth } from "../context/UserAuthContext"
+import { FaUserPlus, FaUser } from "react-icons/fa"
 
 type HeroProps = {
     scrollToCars: () => void;
@@ -19,6 +21,8 @@ export default function Header({ scrollToCars, scrollToHero, scrollToContact, sc
 
     const [show, setShow] = useState<boolean>(false)
     const { t } = useTranslation()
+    const navigate = useNavigate()
+    const { user: userAccount, logout: userLogout } = useUserAuth()
 
     const [scrolled, setScrolled] = useState<boolean>(false)
 
@@ -76,6 +80,19 @@ export default function Header({ scrollToCars, scrollToHero, scrollToContact, sc
                         </nav>
                         <div className="head-right">
                             <LanguageSwitcher />
+                            {userAccount ? (
+                                <div className="user-account">
+                                    <FaUser className="user-icon" />
+                                    <span className="user-name">{userAccount.name}</span>
+                                    <button className="logout-btn" onClick={() => userLogout()}>
+                                        {t("auth.logout")}
+                                    </button>
+                                </div>
+                            ) : (
+                                <button className="account-btn" onClick={() => navigate("/login")}>
+                                    <FaUserPlus /> {t("nav.account")}
+                                </button>
+                            )}
                             <div className="menu" onClick={openMenu}>
                                 <BiMenu />
                                 {show && (

@@ -16,9 +16,10 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-const API_URL = import.meta.env.VITE_API_URL;
+const ADMIN_EMAIL = import.meta.env.VITE_ADMIN_EMAIL || "admin@hodiyavto.uz";
+const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD || "admin123";
 
-export function AuthProvider({ children }: { children: ReactNode }) {
+export function AuthProvider({ children } : { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
@@ -34,24 +35,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const login = async (email: string, password: string) => {
-    const res = await fetch(`${API_URL}/auth/login`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
-
-    if (!res.ok) {
-      const err = await res.json();
-      throw new Error(err.message || "Login failed");
+    if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
+      const newToken = btoa(`${email}:${password}`);
+      const newUser = { id: "1", email, role: "admin" };
+      localStorage.setItem("admin_token", newToken);
+      localStorage.setItem("admin_user", JSON.stringify(newUser));
+      setToken(newToken);
+      setUser(newUser);
+      return;
     }
-
-    const data = await res.json();
-    const { token: newToken, user: newUser } = data;
-
-    localStorage.setItem("admin_token", newToken);
-    localStorage.setItem("admin_user", JSON.stringify(newUser));
-    setToken(newToken);
-    setUser(newUser);
+    throw new Error("Invalid email or password");
   };
 
   const logout = () => {
@@ -63,7 +56,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   return (
     <AuthContext.Provider value={{ user, token, login, logout, loading }}>
-      {children}
+     {children}
     </AuthContext.Provider>
   );
 }

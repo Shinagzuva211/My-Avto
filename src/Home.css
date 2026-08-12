@@ -628,6 +628,67 @@ hr {
   gap: 20px;
 }
 
+.account-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #ff2929;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.account-btn:hover {
+  background: #d11f1f;
+  transform: translateY(-2px);
+}
+
+.user-account {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.user-account .user-icon {
+  font-size: 18px;
+  color: #ff2929;
+}
+
+.user-name {
+  font-weight: 600;
+  font-size: 14px;
+  color: white;
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+header.scrolled .user-name {
+  color: black;
+}
+
+.user-account .logout-btn {
+  background: transparent;
+  border: 1px solid #ff2929;
+  color: #ff2929;
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.user-account .logout-btn:hover {
+  background: #ff2929;
+  color: white;
+}
+
 @media screen and (max-width: 700px) {
   nav {
     display: none;

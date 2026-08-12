@@ -41,17 +41,20 @@ export default function CarDetails() {
       setError(null)
       try {
         const res = await fetch(`${import.meta.env.VITE_API_URL}/cars/${id}`)
-        if (!res.ok) throw new Error(t("car.notFound"))
+        if (!res.ok) {
+          const text = await res.text()
+          throw new Error(text || "Car not found")
+        }
         const carData = await res.json()
         setData({ ...carData, id: carData.id ?? carData._id })
       } catch (err) {
-        setError(err instanceof Error ? err.message : t("common.error"))
+        setError(err instanceof Error ? err.message : "car.notFound")
       } finally {
         setLoading(false)
       }
     }
     fetchCar()
-  }, [id, t])
+  }, [id])
 
   if (loading) {
     return (

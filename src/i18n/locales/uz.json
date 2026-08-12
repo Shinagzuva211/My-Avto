@@ -5,7 +5,8 @@
     "about": "Biz haqimizda",
     "contact": "Aloqa",
     "favorites": "Sevimlilar",
-    "admin": "Admin panel"
+    "admin": "Admin panel",
+    "account": "Hisob ochish"
   },
   "home": {
     "heroTitle": "Sizning orzuingizdagi avtomobil",
@@ -205,5 +206,29 @@
     "loggingIn": "Kirilmoqda...",
     "logout": "Chiqish",
     "loginError": "Email yoki parol noto'g'ri"
+  },
+  "userAuth": {
+    "loginTitle": "Tizimga kirish",
+    "registerTitle": "Hisob yaratish",
+    "loginSubtitle": "Hisobingizga kiring",
+    "registerSubtitle": "Yangi hisob yarating",
+    "login": "Kirish",
+    "register": "Ro'yxatdan o'tish",
+    "name": "Ism",
+    "namePlaceholder": "Ismingizni kiriting",
+    "email": "Email",
+    "password": "Parol",
+    "confirmPassword": "Parolni tasdiqlang",
+    "loggingIn": "Kirilmoqda...",
+    "registering": "Ro'yxatdan o'tilmoqda...",
+    "createAccount": "Hisob yaratish",
+    "backHome": "Bosh sahifaga qaytish",
+    "adminLink": "Admin kirish",
+    "errors": {
+      "accountExists": "Bu email bilan hisob allaqachon mavjud",
+      "invalidCredentials": "Email yoki parol noto'g'ri",
+      "passwordMismatch": "Parollar mos kelmaydi",
+      "unknownError": "Xatolik yuz berdi"
+    }
   }
 }
