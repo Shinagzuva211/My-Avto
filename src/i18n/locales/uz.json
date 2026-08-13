@@ -75,6 +75,12 @@
     },
     "success": "✓ Xabaringiz qabul qilindi. Tez orada siz bilan bog'lanamiz."
   },
+  "footer": {
+    "about": "Hodiy Avto — sifatli va tekshirilgan avtomobillarni taqdim etuvchi ishonchli avtosalon.",
+    "quickLinks": "Tezkor havolalar",
+    "contactTitle": "Kontakt",
+    "rights": "Barcha huquqlar himoyalangan"
+  },
   "car": {
     "brand": "Brend",
     "model": "Model",

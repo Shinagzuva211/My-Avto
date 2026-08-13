@@ -5,6 +5,7 @@ import "../Home.css"
 import type { Car } from "../Types/car"
 import Contact from "../components/Contact"
 import About from "../components/About"
+import Footer from "../components/Footer"
 import SEO from "../seo/SEO"
 import { localBusinessSchema } from "../seo/schema"
 import { useTranslation } from "react-i18next"
@@ -60,7 +61,7 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema()) }}
       />
-      <div ref={heroRef}>
+      <div ref={heroRef} id="home">
         <Hero
           scrollToCars={scrollToCars}
           scrollToHero={scrollToHero}
@@ -68,19 +69,20 @@ export default function Home() {
           scrollToAbout={scrollToAbout}
         />
       </div>
-      <div ref={carsRef}>
+      <div ref={carsRef} id="cars">
         {loading ? (
           <div className="loading-text">{t("home.loadingCars")}</div>
         ) : (
           <Sidebar cars={cars} />
         )}
       </div>
-      <div ref={aboutRef}>
+      <div ref={aboutRef} id="about">
         <About />
       </div>
-      <div ref={contactRef}>
+      <div ref={contactRef} id="contact">
         <Contact />
       </div>
+      <Footer />
     </>
   )
 }

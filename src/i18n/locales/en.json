@@ -75,6 +75,12 @@
     },
     "success": "✓ Your message has been received. We'll contact you soon."
   },
+  "footer": {
+    "about": "Hodiy Avto — a trusted dealership offering quality, verified cars.",
+    "quickLinks": "Quick Links",
+    "contactTitle": "Contact",
+    "rights": "All rights reserved"
+  },
   "car": {
     "brand": "Brand",
     "model": "Model",
