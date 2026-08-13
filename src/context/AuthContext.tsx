@@ -16,8 +16,8 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-const ADMIN_EMAIL = import.meta.env.VITE_ADMIN_EMAIL || "admin@hodiyavto.uz";
-const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD || "admin123";
+const ADMIN_EMAIL = import.meta.env.VITE_ADMIN_EMAIL;
+const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD;
 
 export function AuthProvider({ children } : { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
