@@ -9,6 +9,7 @@ import Footer from "../components/Footer"
 import SEO from "../seo/SEO"
 import { localBusinessSchema } from "../seo/schema"
 import { useTranslation } from "react-i18next"
+import { fetchWithRetry } from "../utils/api"
 
 export default function Home() {
   const { t } = useTranslation()
@@ -35,8 +36,7 @@ export default function Home() {
   }
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/cars`)
-      .then((res) => res.json())
+    fetchWithRetry(`${import.meta.env.VITE_API_URL}/cars`)
       .then((data: unknown) => {
         setCars((data as Car[]).map((item) => ({ ...item, id: item.id ?? item._id })))
         setLoading(false)

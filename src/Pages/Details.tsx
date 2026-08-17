@@ -8,6 +8,7 @@ import SEO from "../seo/SEO"
 import { carSchema } from "../seo/schema"
 import type { Car } from "../Types/car"
 import { useTranslation } from "react-i18next"
+import { fetchWithRetry } from "../utils/api"
 
 type CarData = {
   id: number
@@ -40,12 +41,7 @@ export default function CarDetails() {
       setLoading(true)
       setError(null)
       try {
-        const res = await fetch(`${import.meta.env.VITE_API_URL}/cars/${id}`)
-        if (!res.ok) {
-          const text = await res.text()
-          throw new Error(text || "Car not found")
-        }
-        const carData = await res.json()
+        const carData = await fetchWithRetry(`${import.meta.env.VITE_API_URL}/cars/${id}`) as CarData & { _id?: string }
         setData({ ...carData, id: carData.id ?? carData._id })
       } catch (err) {
         setError(err instanceof Error ? err.message : "car.notFound")

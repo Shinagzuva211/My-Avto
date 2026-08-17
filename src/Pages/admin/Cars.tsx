@@ -4,6 +4,7 @@ import { Link } from "react-router-dom"
 import { useFavorites } from "../../context/useFavorites"
 import { useTranslation } from "react-i18next"
 import { getAuthHeader } from "../../context/AuthContext"
+import { fetchWithRetry } from "../../utils/api"
 
 type Car = {
   id: number
@@ -36,15 +37,7 @@ export default function Cars() {
   const authHeader = getAuthHeader()
 
   useEffect(() => {
-    fetch(`${apiUrl}/cars`, { headers: authHeader })
-      .then((res) => {
-        if (!res.ok) {
-          return res.text().then(text => {
-            throw new Error(text || "Failed to fetch cars");
-          });
-        }
-        return res.json();
-      })
+    fetchWithRetry(`${apiUrl}/cars`, { headers: authHeader })
       .then((data: unknown) => {
         setCars((data as Car[]).map((item) => ({ ...item, id: item.id ?? item._id })))
         setLoading(false)

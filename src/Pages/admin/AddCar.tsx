@@ -2,6 +2,7 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { FaSave } from "react-icons/fa"
 import { useTranslation } from "react-i18next"
+import { fetchWithRetry } from "../../utils/api"
 
 export default function AddCar() {
   const { t } = useTranslation()
@@ -84,16 +85,11 @@ export default function AddCar() {
     }
 
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/cars`, {
+      await fetchWithRetry(`${import.meta.env.VITE_API_URL}/cars`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newCar),
       })
-
-      if (!res.ok) {
-        const errorData = await res.json().catch(() => ({}))
-        throw new Error(errorData.message || `Server xatosi: ${res.status}`)
-      }
 
       alert(t("admin.carAdded"))
       navigate("/admin/cars")
