@@ -17,6 +17,7 @@ import { UserAuthProvider } from "./context/UserAuthContext"
 import UserLogin from "./Pages/UserLogin"
 
 export default function App() {
+  
   return (
     <AuthProvider>
       <UserAuthProvider>
@@ -28,7 +29,7 @@ export default function App() {
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/login" element={<UserLogin />} />
-
+            
             <Route path="/admin/login" element={<AdminLogin />} />
 
             <Route path="/admin" element={<AdminLayout />}>
