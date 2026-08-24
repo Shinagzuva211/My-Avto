@@ -6,7 +6,15 @@
     "contact": "Contact",
     "favorites": "Favorites",
     "admin": "Admin Panel",
-    "account": "Create Account"
+    "account": "Create Account",
+    "ai": "AI Assistant"
+  },
+  "aiChat": {
+    "title": "AI Assistant",
+    "subtitle": "Ask questions about cars and services — you will get an answer quickly",
+    "placeholder": "Type your question...",
+    "thinking": "Typing...",
+    "error": "Sorry, something went wrong. Please try again."
   },
   "home": {
     "heroTitle": "Your Dream Car",

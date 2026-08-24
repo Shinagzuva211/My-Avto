@@ -6,7 +6,15 @@
     "contact": "Aloqa",
     "favorites": "Sevimlilar",
     "admin": "Admin panel",
-    "account": "Hisob ochish"
+    "account": "Hisob ochish",
+    "ai": "AI Yordamchi"
+  },
+  "aiChat": {
+    "title": "AI Yordamchi",
+    "subtitle": "Mashinalar va xizmatlar haqida savollaringizni yozing — tez orada javob olasiz",
+    "placeholder": "Savolingizni kiriting...",
+    "thinking": "Yozmoqda...",
+    "error": "Kechirasiz, xatolik yuz berdi. Qayta urinib ko'ring."
   },
   "home": {
     "heroTitle": "Sizning orzuingizdagi avtomobil",

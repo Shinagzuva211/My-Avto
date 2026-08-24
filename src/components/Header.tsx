@@ -77,6 +77,7 @@ export default function Header({ scrollToCars, scrollToHero, scrollToContact, sc
                                 e.preventDefault();
                                 scrollToContact();
                             }}>{t("nav.contact")}</a>
+                            <Link to="/ai-chat">{t("nav.ai")}</Link>
                         </nav>
                         <div className="head-right">
                             <LanguageSwitcher />
@@ -101,6 +102,9 @@ export default function Header({ scrollToCars, scrollToHero, scrollToContact, sc
                                         <p className="menu-p" onClick={scrollToCars}>{t("nav.cars")}</p>
                                         <p className="menu-p" onClick={scrollToAbout}>{t("nav.about")}</p>
                                         <p className="menu-p" onClick={scrollToContact}>{t("nav.contact")}</p>
+                                        <Link to="/ai-chat" onClick={() => setShow(false)}>
+                                            <p className="menu-p">{t("nav.ai")}</p>
+                                        </Link>
                                     </div>
                                 )}
                             </div>

@@ -15,6 +15,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { AuthProvider } from "./context/AuthContext"
 import { UserAuthProvider } from "./context/UserAuthContext"
 import UserLogin from "./Pages/UserLogin"
+import AiChat from "./Pages/AiChat"
 
 export default function App() {
   
@@ -28,6 +29,7 @@ export default function App() {
             <Route path="/favorites" element={<Favorites />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/about" element={<AboutPage />} />
+            <Route path="/ai-chat" element={<AiChat />} />
             <Route path="/login" element={<UserLogin />} />
             
             <Route path="/admin/login" element={<AdminLogin />} />
