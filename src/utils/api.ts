@@ -29,13 +29,13 @@ export const fetchWithRetry = async (
 
     try {
       return JSON.parse(text);
-    } catch (e) {
+    } catch (err) {
       console.error("Failed to parse JSON:", text.slice(0, 500));
       if (i < retries - 1) {
         await new Promise((r) => setTimeout(r, baseDelay * (i + 1)));
         continue;
       }
-      throw new Error(`Invalid JSON response: ${text.slice(0, 200)}`);
+      throw new Error(`Invalid JSON response: ${text.slice(0, 200)}`, { cause: err });
     }
   }
   throw new Error("Max retries exceeded");

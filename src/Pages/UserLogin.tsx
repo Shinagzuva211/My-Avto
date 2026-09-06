@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { useUserAuth } from "../context/UserAuthContext";
+import { useUserAuth } from "../context/useUserAuth";
 import "./UserLogin.css";
 
 export default function UserLogin() {

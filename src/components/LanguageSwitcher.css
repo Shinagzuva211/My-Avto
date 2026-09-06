@@ -213,6 +213,20 @@
   }
 }
 
+@media (max-width: 400px) {
+  .lang-trigger {
+    min-width: 44px;
+    width: 44px;
+    padding: 8px;
+    justify-content: center;
+  }
+
+  .lang-trigger .lang-code,
+  .lang-trigger .lang-chevron {
+    display: none;
+  }
+}
+
 .flag{
   width: 25px;
   height: 15px;

@@ -242,6 +242,7 @@
       "accountExists": "An account with this email already exists",
       "invalidCredentials": "Invalid email or password",
       "passwordMismatch": "Passwords do not match",
+      "networkError": "Failed to connect to server. Check your internet",
       "unknownError": "An error occurred"
     }
   }

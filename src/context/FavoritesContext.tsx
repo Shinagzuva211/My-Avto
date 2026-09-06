@@ -1,15 +1,7 @@
-import { createContext, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import type { ReactNode } from "react";
 import type { Car } from "../Types/car";
-
-interface FavoritesContextType {
-  favorites: Car[];
-  toggleFavorite: (car: Car) => void;
-  isFavorite: (id: number) => boolean;
-  removeFromFavorites: (id: number) => void;
-}
-
-export const FavoritesContext = createContext<FavoritesContextType | undefined>(undefined);
+import { FavoritesContext } from "./favorites-context";
 
 export function FavoritesProvider({ children }: { children: ReactNode }) {
   const [favorites, setFavorites] = useState<Car[]>(() => {

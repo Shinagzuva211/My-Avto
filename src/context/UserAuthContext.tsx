@@ -1,74 +1,79 @@
-import { createContext, useContext, useState, useEffect, type ReactNode } from "react";
+import { useState, type ReactNode } from "react";
+import { UserAuthContext } from "./user-auth-context";
+import type { SessionUser } from "./user-auth-context";
 
-interface UserAccount {
-  id: string;
-  name: string;
-  email: string;
-  password: string;
-}
-
-interface UserAuthContextType {
-  user: Omit<UserAccount, "password"> | null;
-  register: (name: string, email: string, password: string) => Promise<void>;
-  login: (email: string, password: string) => Promise<void>;
-  logout: () => void;
-}
-
-const UserAuthContext = createContext<UserAuthContextType | undefined>(undefined);
-
-const USERS_KEY = "hodiy_users";
 const SESSION_KEY = "hodiy_user_session";
 
-function getStoredUsers(): UserAccount[] {
-  const raw = localStorage.getItem(USERS_KEY);
-  if (!raw) return [];
-  try {
-    return JSON.parse(raw);
-  } catch {
-    return [];
+const API_URL = (import.meta.env.VITE_AUTH_API_URL || "http://localhost:3001").replace(/\/$/, "");
+
+async function apiRequest(path: string, body: unknown): Promise<Response> {
+  const res = await fetch(`${API_URL}${path}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  });
+  return res;
+}
+
+function mapError(status: number, message: string): string {
+  if (status === 401 || message.toLowerCase().includes("invalid credentials")) {
+    return "invalidCredentials";
   }
+  if (message.toLowerCase().includes("already exists")) {
+    return "accountExists";
+  }
+  if (status === 400 && message.toLowerCase().includes("password")) {
+    return "passwordMismatch";
+  }
+  return "unknownError";
 }
 
 export function UserAuthProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<Omit<UserAccount, "password"> | null>(null);
-
-  useEffect(() => {
+  const [user, setUser] = useState<SessionUser | null>(() => {
     const raw = localStorage.getItem(SESSION_KEY);
-    if (raw) {
-      try {
-        setUser(JSON.parse(raw));
-      } catch {
-        localStorage.removeItem(SESSION_KEY);
-      }
+    if (!raw) return null;
+    try {
+      return JSON.parse(raw);
+    } catch {
+      localStorage.removeItem(SESSION_KEY);
+      return null;
     }
-  }, []);
+  });
 
   const register = async (name: string, email: string, password: string) => {
-    const users = getStoredUsers();
-    if (users.some((u) => u.email.toLowerCase() === email.toLowerCase())) {
-      throw new Error("accountExists");
+    let res: Response;
+    try {
+      res = await apiRequest("/api/users/register", { name, email, password });
+    } catch {
+      throw new Error("networkError");
     }
-    const newUser: UserAccount = {
-      id: Date.now().toString(),
-      name,
-      email,
-      password,
-    };
-    localStorage.setItem(USERS_KEY, JSON.stringify([...users, newUser]));
-    const sessionUser = { id: newUser.id, name: newUser.name, email: newUser.email };
+
+    if (!res.ok) {
+      const data = await res.json().catch(() => ({ error: "" }));
+      throw new Error(mapError(res.status, data.error || ""));
+    }
+
+    const created = await res.json();
+    const sessionUser: SessionUser = { id: created.id, name: created.name, email: created.email };
     localStorage.setItem(SESSION_KEY, JSON.stringify(sessionUser));
     setUser(sessionUser);
   };
 
   const login = async (email: string, password: string) => {
-    const users = getStoredUsers();
-    const found = users.find(
-      (u) => u.email.toLowerCase() === email.toLowerCase() && u.password === password
-    );
-    if (!found) {
-      throw new Error("invalidCredentials");
+    let res: Response;
+    try {
+      res = await apiRequest("/api/users/login", { email, password });
+    } catch {
+      throw new Error("networkError");
     }
-    const sessionUser = { id: found.id, name: found.name, email: found.email };
+
+    if (!res.ok) {
+      const data = await res.json().catch(() => ({ error: "" }));
+      throw new Error(mapError(res.status, data.error || ""));
+    }
+
+    const data = await res.json();
+    const sessionUser: SessionUser = { id: data.user.id, name: data.user.name, email: data.user.email };
     localStorage.setItem(SESSION_KEY, JSON.stringify(sessionUser));
     setUser(sessionUser);
   };
@@ -83,10 +88,4 @@ export function UserAuthProvider({ children }: { children: ReactNode }) {
       {children}
     </UserAuthContext.Provider>
   );
-}
-
-export function useUserAuth() {
-  const ctx = useContext(UserAuthContext);
-  if (!ctx) throw new Error("useUserAuth must be used within UserAuthProvider");
-  return ctx;
 }

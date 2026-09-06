@@ -242,6 +242,7 @@
       "accountExists": "Bu email bilan hisob allaqachon mavjud",
       "invalidCredentials": "Email yoki parol noto'g'ri",
       "passwordMismatch": "Parollar mos kelmaydi",
+      "networkError": "Serverga ulanishda xatolik. Internetni tekshiring",
       "unknownError": "Xatolik yuz berdi"
     }
   }

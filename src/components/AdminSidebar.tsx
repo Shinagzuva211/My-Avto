@@ -6,7 +6,7 @@ import { GoPeople } from "react-icons/go"
 import { SlSettings } from "react-icons/sl"
 import { FaSignOutAlt } from "react-icons/fa"
 import { useTranslation } from "react-i18next"
-import { useAuth } from "../context/AuthContext"
+import { useAuth } from "../context/useAuth"
 
 export default function AdminSidebar() {
   const { t } = useTranslation()

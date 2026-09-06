@@ -1,38 +1,20 @@
-import { createContext, useContext, useState, useEffect, type ReactNode } from "react";
-
-interface User {
-  id: string;
-  email: string;
-  role: string;
-}
-
-interface AuthContextType {
-  user: User | null;
-  token: string | null;
-  login: (email: string, password: string) => Promise<void>;
-  logout: () => void;
-  loading: boolean;
-}
-
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
+import { useState, type ReactNode } from "react";
+import { AuthContext } from "./auth-context";
+import type { User } from "./auth-context";
 
 const ADMIN_EMAIL = import.meta.env.VITE_ADMIN_EMAIL;
 const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD;
 
 export function AuthProvider({ children } : { children: ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
-  const [token, setToken] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const storedToken = localStorage.getItem("admin_token");
-    const storedUser = localStorage.getItem("admin_user");
-    if (storedToken && storedUser) {
-      setToken(storedToken);
-      setUser(JSON.parse(storedUser));
+  const [user, setUser] = useState<User | null>(() => {
+    try {
+      const storedUser = localStorage.getItem("admin_user");
+      return storedUser ? JSON.parse(storedUser) : null;
+    } catch {
+      return null;
     }
-    setLoading(false);
-  }, []);
+  });
+  const [token, setToken] = useState<string | null>(() => localStorage.getItem("admin_token"));
 
   const login = async (email: string, password: string) => {
     if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
@@ -55,19 +37,8 @@ export function AuthProvider({ children } : { children: ReactNode }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, token, login, logout, loading }}>
+    <AuthContext.Provider value={{ user, token, login, logout, loading: false }}>
      {children}
     </AuthContext.Provider>
   );
-}
-
-export function useAuth() {
-  const ctx = useContext(AuthContext);
-  if (!ctx) throw new Error("useAuth must be used within AuthProvider");
-  return ctx;
-}
-
-export function getAuthHeader(): Record<string, string> {
-  const token = localStorage.getItem("admin_token");
-  return token ? { Authorization: `Bearer ${token}` } : {};
 }

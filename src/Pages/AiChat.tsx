@@ -53,7 +53,7 @@ export default function AiChat() {
                 ...prev,
                 { role: "ai", text: data.response ?? t("aiChat.error") },
             ])
-        } catch (err) {
+        } catch {
             setMessages((prev) => [...prev, { role: "ai", text: t("aiChat.error") }])
         } finally {
             setLoading(false)

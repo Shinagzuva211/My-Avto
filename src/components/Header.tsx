@@ -7,7 +7,7 @@ import { Link, useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import LanguageSwitcher from "./LanguageSwitcher"
-import { useUserAuth } from "../context/UserAuthContext"
+import { useUserAuth } from "../context/useUserAuth"
 import { FaUserPlus, FaUser } from "react-icons/fa"
 
 type HeroProps = {
@@ -91,7 +91,7 @@ export default function Header({ scrollToCars, scrollToHero, scrollToContact, sc
                                 </div>
                             ) : (
                                 <button className="account-btn" onClick={() => navigate("/login")}>
-                                    <FaUserPlus /> {t("nav.account")}
+                                    <FaUserPlus /> <span className="account-span">{t("nav.account")}</span>
                                 </button>
                             )}
                             <div className="menu" onClick={openMenu}>

@@ -3,7 +3,7 @@ import { FaPlus, FaEdit, FaTrash, FaSave, FaTimes } from "react-icons/fa"
 import { Link } from "react-router-dom"
 import { useFavorites } from "../../context/useFavorites"
 import { useTranslation } from "react-i18next"
-import { getAuthHeader } from "../../context/AuthContext"
+import { getAuthHeader } from "../../context/useAuth"
 import { fetchWithRetry } from "../../utils/api"
 
 type Car = {
@@ -37,7 +37,7 @@ export default function Cars() {
   const authHeader = getAuthHeader()
 
   useEffect(() => {
-    fetchWithRetry(`${apiUrl}/cars`, { headers: authHeader })
+    fetchWithRetry(`${apiUrl}/cars`, { headers: getAuthHeader() })
       .then((data: unknown) => {
         setCars((data as Car[]).map((item) => ({ ...item, id: item.id ?? item._id })))
         setLoading(false)
@@ -46,7 +46,7 @@ export default function Cars() {
         console.log(err)
         setLoading(false)
       })
-  }, [])
+  }, [apiUrl])
 
   const handleDelete = (id: number) => {
     if (!confirm(t("common_confirm"))) return

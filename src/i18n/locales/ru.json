@@ -242,6 +242,7 @@
       "accountExists": "Аккаунт с таким email уже существует",
       "invalidCredentials": "Неверный email или пароль",
       "passwordMismatch": "Пароли не совпадают",
+      "networkError": "Ошибка подключения к серверу. Проверьте интернет",
       "unknownError": "Произошла ошибка"
     }
   }
