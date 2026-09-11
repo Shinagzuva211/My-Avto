@@ -17,7 +17,9 @@ type HeroProps = {
     scrollToAbout: () => void;
 }
 
+
 export default function Header({ scrollToCars, scrollToHero, scrollToContact, scrollToAbout }: HeroProps) {
+
 
     const [show, setShow] = useState<boolean>(false)
     const { t } = useTranslation()
@@ -57,7 +59,7 @@ export default function Header({ scrollToCars, scrollToHero, scrollToContact, sc
                         <div className="logo">
                             <img className="dark" src={logo} alt="Hodiy Avto logo" />
                             <img className="light" src={logo2} alt="Hodiy Avto logo" />
-                            <h1 className="logo-title">AVTO</h1>
+                            <span className="logo-title">AVTO</span>
                         </div>
                         <nav>
                             <a href="#" onClick={(e) => {
@@ -79,6 +81,7 @@ export default function Header({ scrollToCars, scrollToHero, scrollToContact, sc
                             }}>{t("nav.contact")}</a>
                             <Link to="/ai-chat">{t("nav.ai")}</Link>
                         </nav>
+
                         <div className="head-right">
                             <LanguageSwitcher />
                             {userAccount ? (

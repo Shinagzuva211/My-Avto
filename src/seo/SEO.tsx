@@ -1,5 +1,12 @@
 import { useEffect } from "react";
 
+const SITE_URL = "https://hodiyavto.uz";
+
+function toAbsoluteUrl(value: string): string {
+  if (/^https?:\/\//i.test(value)) return value;
+  return `${SITE_URL}${value.startsWith("/") ? value : `/${value}`}`;
+}
+
 type SEOProps = {
   title: string;
   description: string;
@@ -12,12 +19,15 @@ type SEOProps = {
 export default function SEO({
   title,
   description,
-  url = "https://hodiyavto.uz",
-  image = "/logo.png",
+  url = SITE_URL,
+  image = `${SITE_URL}/logo.png`,
   type = "website",
   locale = "uz_UZ",
 }: SEOProps) {
   useEffect(() => {
+    const absoluteUrl = toAbsoluteUrl(url);
+    const absoluteImage = toAbsoluteUrl(image);
+
     document.title = title;
 
     const existingMeta = document.querySelectorAll(
@@ -42,7 +52,7 @@ export default function SEO({
 
     const metaOgUrl = document.createElement("meta");
     metaOgUrl.setAttribute("property", "og:url");
-    metaOgUrl.content = url;
+    metaOgUrl.content = absoluteUrl;
     document.head.appendChild(metaOgUrl);
 
     const metaOgType = document.createElement("meta");
@@ -52,7 +62,7 @@ export default function SEO({
 
     const metaOgImage = document.createElement("meta");
     metaOgImage.setAttribute("property", "og:image");
-    metaOgImage.content = image;
+    metaOgImage.content = absoluteImage;
     document.head.appendChild(metaOgImage);
 
     const metaOgLocale = document.createElement("meta");
@@ -62,25 +72,25 @@ export default function SEO({
 
     const canonical = document.createElement("link");
     canonical.rel = "canonical";
-    canonical.href = url;
+    canonical.href = absoluteUrl;
     document.head.appendChild(canonical);
 
     const hreflangUz = document.createElement("link");
     hreflangUz.rel = "alternate";
     hreflangUz.hreflang = "uz-UZ";
-    hreflangUz.href = url;
+    hreflangUz.href = absoluteUrl;
     document.head.appendChild(hreflangUz);
 
     const hreflangRu = document.createElement("link");
     hreflangRu.rel = "alternate";
     hreflangRu.hreflang = "ru-RU";
-    hreflangRu.href = url.replace("hodiyavto.uz", "hodiyavto.ru");
+    hreflangRu.href = absoluteUrl.replace("hodiyavto.uz", "hodiyavto.ru");
     document.head.appendChild(hreflangRu);
 
     const hreflangXDefault = document.createElement("link");
     hreflangXDefault.rel = "alternate";
     hreflangXDefault.hreflang = "x-default";
-    hreflangXDefault.href = url;
+    hreflangXDefault.href = absoluteUrl;
     document.head.appendChild(hreflangXDefault);
   }, [title, description, url, image, type, locale]);
 

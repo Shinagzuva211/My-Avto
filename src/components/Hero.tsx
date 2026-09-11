@@ -45,17 +45,17 @@ export default function Hero({
 
     const leftSide = (
         <div className="left-side">
-            <div className="dream-title">
+            <p className="dream-title">
                 {t("home.heroTitle")}
-            </div>
+            </p>
 
-            <div className="hero-title">
+            <h1 className="hero-title">
                 {t("home.heroSubtitle")}
-            </div>
+            </h1>
 
-            <div className="hero-text">
+            <p className="hero-text">
                 {t("home.heroText")}
-            </div>
+            </p>
 
             <div className="hero-btns">
 
