@@ -1,6 +1,6 @@
 import { GoHeart, GoHeartFill } from "react-icons/go"
-import logo from "../../public/logo2.png"
-import logo2 from "../../public/logo.png"
+import logo from "../../public/logo-dark.webp"
+import logo2 from "../../public/logo-light.webp"
 import "../Home.css"
 import { BiMenu } from "react-icons/bi"
 import { Link, useNavigate } from "react-router-dom"
@@ -33,8 +33,6 @@ export default function Header({ scrollToCars, scrollToHero, scrollToContact, sc
         const handleScroll = () => {
 
             setScrolled(window.scrollY > 50)
-
-            console.log(window.scrollY);
         };
 
         handleScroll()

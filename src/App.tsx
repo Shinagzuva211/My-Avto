@@ -1,48 +1,57 @@
-import AdminLayout from "./Pages/AdminLayout"
-import AdminLogin from "./Pages/AdminLogin"
-import Dashboard from "./Pages/admin/Dashboard"
-import Cars from "./Pages/admin/Cars"
-import AddCar from "./Pages/admin/AddCar"
-import Orders from "./Pages/admin/Orders"
-import Users from "./Pages/admin/Users"
-import Settings from "./Pages/admin/Settings"
-import CarDetails from "./Pages/Details"
-import Favorites from "./Pages/Favorites"
+import { lazy, Suspense } from "react"
 import Home from "./Pages/Home"
-import ContactPage from "./Pages/Contact"
-import AboutPage from "./Pages/About"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { AuthProvider } from "./context/AuthContext"
 import { UserAuthProvider } from "./context/UserAuthContext"
-import UserLogin from "./Pages/UserLogin"
-import AiChat from "./Pages/AiChat"
+
+const CarDetails = lazy(() => import("./Pages/Details"))
+const Favorites = lazy(() => import("./Pages/Favorites"))
+const ContactPage = lazy(() => import("./Pages/Contact"))
+const AboutPage = lazy(() => import("./Pages/About"))
+const AiChat = lazy(() => import("./Pages/AiChat"))
+const UserLogin = lazy(() => import("./Pages/UserLogin"))
+
+const AdminLogin = lazy(() => import("./Pages/AdminLogin"))
+const AdminLayout = lazy(() => import("./Pages/AdminLayout"))
+const Dashboard = lazy(() => import("./Pages/admin/Dashboard"))
+const Cars = lazy(() => import("./Pages/admin/Cars"))
+const AddCar = lazy(() => import("./Pages/admin/AddCar"))
+const Orders = lazy(() => import("./Pages/admin/Orders"))
+const Users = lazy(() => import("./Pages/admin/Users"))
+const Settings = lazy(() => import("./Pages/admin/Settings"))
+
+function RouteFallback() {
+  return <div className="loading-text" style={{ padding: "40px 0", textAlign: "center" }} />
+}
 
 export default function App() {
-  
+
   return (
     <AuthProvider>
       <UserAuthProvider>
         <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/cars/:id" element={<CarDetails />} />
-            <Route path="/favorites" element={<Favorites />} />
-            <Route path="/contact" element={<ContactPage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/ai-chat" element={<AiChat />} />
-            <Route path="/login" element={<UserLogin />} />
-            
-            <Route path="/admin/login" element={<AdminLogin />} />
+          <Suspense fallback={<RouteFallback />}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/cars/:id" element={<CarDetails />} />
+              <Route path="/favorites" element={<Favorites />} />
+              <Route path="/contact" element={<ContactPage />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/ai-chat" element={<AiChat />} />
+              <Route path="/login" element={<UserLogin />} />
 
-            <Route path="/admin" element={<AdminLayout />}>
-              <Route index element={<Dashboard />} />
-              <Route path="cars" element={<Cars />} />
-              <Route path="add-car" element={<AddCar />} />
-              <Route path="orders" element={<Orders />} />
-              <Route path="users" element={<Users />} />
-              <Route path="settings" element={<Settings />} />
-            </Route>
-          </Routes>
+              <Route path="/admin/login" element={<AdminLogin />} />
+
+              <Route path="/admin" element={<AdminLayout />}>
+                <Route index element={<Dashboard />} />
+                <Route path="cars" element={<Cars />} />
+                <Route path="add-car" element={<AddCar />} />
+                <Route path="orders" element={<Orders />} />
+                <Route path="users" element={<Users />} />
+                <Route path="settings" element={<Settings />} />
+              </Route>
+            </Routes>
+          </Suspense>
         </BrowserRouter>
       </UserAuthProvider>
     </AuthProvider>

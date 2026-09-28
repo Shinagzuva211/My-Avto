@@ -22,6 +22,8 @@ export default function CarCard({ car }: CarCardProps) {
                     src={car.image}
                     alt={car.model}
                     className="car-image"
+                    loading="lazy"
+                    decoding="async"
                 />
                 <button
                     className={`favorite-btn ${liked ? "active" : ""}`}

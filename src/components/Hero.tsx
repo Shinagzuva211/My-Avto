@@ -1,15 +1,13 @@
 import "../Home.css"
-import { useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import Header from "./Header";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/pagination";
 import { BiCar } from "react-icons/bi";
 import { BsCarFrontFill } from "react-icons/bs";
 import { MdCall } from "react-icons/md";
 import { GoPeople, GoShieldCheck } from "react-icons/go";
 import { useTranslation } from "react-i18next";
+
+const HeroSwiper = lazy(() => import("./HeroSwiper"));
 
 function useIsMobile() {
     const [isMobile, setIsMobile] = useState(() =>
@@ -160,19 +158,9 @@ export default function Hero({
                 <div className="container">
 
                     {isMobile ? (
-                        <div className="hero-swiper-wrap">
-                            <Swiper
-                                className="hero-swiper"
-                                modules={[Pagination]}
-                                pagination={{ clickable: true }}
-                                slidesPerView={1}
-                                spaceBetween={0}
-                                grabCursor
-                            >
-                                    <SwiperSlide className="hero-slide">{leftSide}</SwiperSlide>
-                                    <SwiperSlide className="hero-slide">{statsPanel}</SwiperSlide>
-                            </Swiper>
-                        </div>
+                        <Suspense fallback={<div className="hero-swiper-wrap">{leftSide}</div>}>
+                            <HeroSwiper leftSide={leftSide} statsPanel={statsPanel} />
+                        </Suspense>
                     ) : (
                         <>
                             {leftSide}

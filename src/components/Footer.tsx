@@ -8,7 +8,7 @@ import {
     FaInstagram,
     FaFacebookF,
 } from "react-icons/fa"
-import logo from "../../public/logo2.png"
+import logo from "../../public/logo-dark.webp"
 import { useTranslation } from "react-i18next"
 import "./Footer.css"
 

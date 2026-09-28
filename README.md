@@ -1,74 +1,38 @@
-# React + TypeScript + Vite
+# Hodiy Avto
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Avtosalon veb-sayti — avtomobillar katalogi, batafsil sahifalar, sevimlilar, kontakt, AI chat va admin panel.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- React 19 + TypeScript + Vite
+- React Router
+- react-i18next (uz / ru / en)
+- Swiper (Hero slayder)
+- Vercel deploy (SPA rewrite + `/sitemap.xml` via `api/sitemap.ts`)
 
-## React Compiler
+## Sozlash
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Backend API URL va admin hisob `VITE_API_URL`, `VITE_ADMIN_EMAIL`, `VITE_ADMIN_PASSWORD`
+o'zgaruvchilari bilan beriladi (qarang: `.env.example`).
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Skriptlar
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run dev      # lokal server
+npm run build    # tsc + vite build
+npm run lint     # eslint
+npm run preview  # build natijasini ko'rsatish
 ```
-# My-Avto
+
+## Sahifalar
+
+- `/` — bosh sahifa (Hero, avtomobillar katalogi, About, Contact)
+- `/cars/:id` — avtomobil batafsil
+- `/favorites` — sevimlilar
+- `/contact`, `/about`, `/ai-chat`, `/login`
+- `/admin` — admin panel (Dashboard, Cars, Add Car, Orders, Users, Settings)
