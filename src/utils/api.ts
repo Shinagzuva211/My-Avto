@@ -1,3 +1,11 @@
+const AUTH_API_FALLBACK = import.meta.env.DEV
+  ? "http://localhost:3001"
+  : "https://authorization-8nex.onrender.com";
+
+export const AUTH_API_URL = (
+  import.meta.env.VITE_AUTH_API_URL || AUTH_API_FALLBACK
+).replace(/\/$/, "");
+
 export const fetchWithRetry = async (
   url: string,
   options: RequestInit = {},

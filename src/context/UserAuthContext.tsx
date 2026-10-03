@@ -1,10 +1,11 @@
 import { useState, type ReactNode } from "react";
 import { UserAuthContext } from "./user-auth-context";
 import type { SessionUser } from "./user-auth-context";
+import { AUTH_API_URL } from "../utils/api";
 
 const SESSION_KEY = "hodiy_user_session";
 
-const API_URL = (import.meta.env.VITE_AUTH_API_URL || "http://localhost:3001").replace(/\/$/, "");
+const API_URL = AUTH_API_URL;
 
 async function apiRequest(path: string, body: unknown): Promise<Response> {
   const res = await fetch(`${API_URL}${path}`, {

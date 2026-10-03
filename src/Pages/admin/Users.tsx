@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { AUTH_API_URL } from "../../utils/api";
 
 type User = {
   _id?: string;
@@ -13,7 +14,7 @@ function getUserKey(u: User): string {
   return u._id ?? u.id ?? u.email ?? Math.random().toString(36);
 }
 
-const API_URL = (import.meta.env.VITE_AUTH_API_URL || "http://localhost:3001").replace(/\/$/, "");
+const API_URL = AUTH_API_URL;
 
 export default function Users() {
   const [users, setUsers] = useState<User[]>([]);
