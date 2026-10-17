@@ -4,7 +4,7 @@
   animation: fadeIn ease-in 0.8s;
 }
 
-.back-btn {
+/* .back-btn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -19,14 +19,14 @@
   transition: all 0.2s ease;
   margin: 20px 0;
   width: auto;
-}
+} */
 
-.back-btn:hover {
+/* .back-btn:hover {
   background: #ff2929;
   border-color: #ff2929;
   color: white;
   transform: translateX(-4px);
-}
+} */
 
 .back-btn svg {
   font-size: 18px;

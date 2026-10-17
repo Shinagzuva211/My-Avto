@@ -246,6 +246,7 @@
     "addCarError": "Error adding car"
   },
   "common": {
+    "back": "Go back",
     "save": "Save",
     "cancel": "Cancel",
     "delete": "Delete",

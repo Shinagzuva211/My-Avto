@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
-import { HiBackward } from "react-icons/hi2"
-import { Link } from "react-router-dom"
 import Sidebar from "../components/Sidebar"
+import BackButton from "../components/BackButton"
 import "./Cars.css"
 import type { Car } from "../Types/car"
 import SEO from "../seo/SEO"
@@ -36,13 +35,7 @@ export default function Cars() {
         locale="uz_UZ"
       />
       <div className="container">
-        <div className="fav-back">
-          <Link to={'/'}>
-            <div className="back-btn">
-              <HiBackward /> {t("cars.back")} 
-            </div>
-          </Link>
-        </div>
+        <BackButton />
       </div>
       <div className="cars-page">
         {loading ? (

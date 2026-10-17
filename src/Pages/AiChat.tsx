@@ -1,9 +1,8 @@
 import { useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { HiBackward } from "react-icons/hi2"
 import { IoSend } from "react-icons/io5"
-import { Link } from "react-router-dom"
 import { fetchWithRetry } from "../utils/api"
+import BackButton from "../components/BackButton"
 import SEO from "../seo/SEO"
 import "./AiChat.css"
 
@@ -70,13 +69,7 @@ export default function AiChat() {
                 locale="uz_UZ"
             />
             <div className="container">
-                <div className="fav-back">
-                    <Link to={'/'}>
-                        <div className="back-btn">
-                            <HiBackward /> {t("favorites.back")}
-                        </div>
-                    </Link>
-                </div>
+                <BackButton />
                 <div className="ai-chat-page">
                     {pageLoading ? (
                         <div className="ai-chat-skeleton" aria-hidden="true">

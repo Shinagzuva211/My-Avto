@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
-import { HiBackward } from "react-icons/hi2"
-import { Link, useParams } from "react-router-dom"
+import { useParams } from "react-router-dom"
+import BackButton from "../components/BackButton"
 import { GoHeart, GoHeartFill } from "react-icons/go"
 import { useFavorites } from "../context/useFavorites"
 import { useCompare } from "../context/useCompare"
@@ -113,9 +113,7 @@ export default function CarDetails() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(carSchema(data)) }}
       />
       <div className="details-page container">
-        <Link to="/cars" className="back-btn">
-          <HiBackward size={20} /> {t("car.back")}
-        </Link>
+        <BackButton />
         <div className="details-grid">
           <div className="image-section">
             <img

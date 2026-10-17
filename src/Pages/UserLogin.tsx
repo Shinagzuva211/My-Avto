@@ -2,8 +2,8 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useUserAuth } from "../context/useUserAuth";
+import BackButton from "../components/BackButton";
 import "./UserLogin.css";
-import { HiBackward } from "react-icons/hi2";
 
 export default function UserLogin() {
   const { t } = useTranslation();
@@ -48,13 +48,7 @@ export default function UserLogin() {
 
   return (
     <>
-      <div className="fav-back">
-        <Link to={'/'}>
-          <div className="back-btn">
-            <HiBackward /> {t("favorites.back")}
-          </div>
-        </Link>
-      </div>
+      <BackButton />
 
       <div className="user-login-container">
         <div className="user-login-box">

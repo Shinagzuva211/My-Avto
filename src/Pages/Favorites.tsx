@@ -1,7 +1,7 @@
-import { HiBackward } from "react-icons/hi2"
 import { Link } from "react-router-dom"
 import { useFavorites } from "../context/useFavorites"
 import CarCard from "../components/CarCard"
+import BackButton from "../components/BackButton"
 import SEO from "../seo/SEO"
 import { useTranslation } from "react-i18next"
 
@@ -20,13 +20,7 @@ export default function Favorites() {
                 locale="uz_UZ"
             />
             <div className="container">
-                <div className="fav-back">
-                <Link to={'/'}>
-                    <div className="back-btn">
-                        <HiBackward /> {t("favorites.back")}
-                    </div>
-                </Link>
-                </div>
+                <BackButton />
                 <div className="favorites-page">
                     <h1 className="favorites-title">{t("favorites.title")}</h1>
                     {favorites.length === 0 ? (

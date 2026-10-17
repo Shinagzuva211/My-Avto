@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom"
-import { HiBackward } from "react-icons/hi2"
 import { useCompare } from "../context/useCompare"
 import SEO from "../seo/SEO"
 import { useTranslation } from "react-i18next"
+import BackButton from "../components/BackButton"
 import "./Compare.css"
 
 const fields: { key: string; labelKey: string }[] = [
@@ -44,13 +44,7 @@ export default function Compare() {
         locale="uz_UZ"
       />
       <div className="container">
-        <div className="fav-back">
-          <Link to={"/"}>
-            <div className="back-btn">
-              <HiBackward /> {t("favorites.back")}
-            </div>
-          </Link>
-        </div>
+        <BackButton />
         <div className="favorites-page">
           <div className="compare-head">
             <div>

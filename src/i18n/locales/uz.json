@@ -246,6 +246,7 @@
     "addCarError": "Mashina qo'shishda xatolik yuz berdi"
   },
   "common": {
+    "back": "Orqaga qaytish",
     "save": "Saqlash",
     "cancel": "Bekor qilish",
     "delete": "O'chirish",
