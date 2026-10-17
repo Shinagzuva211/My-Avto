@@ -1,19 +1,38 @@
+.fav-back {
+  display: inline-block;
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
 .back-btn {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: transparent;
+  background: linear-gradient(135deg, #ff2929, #ff6b6b);
   border: none;
-  padding: 8px 0;
-  color: black;
-  font-size: 16px;
+  border-radius: 10px;
+  padding: 10px 20px;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: Outfit, sans-serif;
   cursor: pointer;
-  transition: opacity 0.2s, transform 0.2s;
+  box-shadow: 0 4px 15px rgba(255, 41, 41, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.back-btn svg {
+  font-size: 18px;
 }
 
 .back-btn:hover {
-  opacity: 0.8;
-  transform: translateX(-4px);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(255, 41, 41, 0.45);
+}
+
+.back-btn:active {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 41, 41, 0.35);
 }
 
 .back-btn:focus-visible {
