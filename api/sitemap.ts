@@ -27,6 +27,7 @@ function urlEntry(path: string, priority: string, changefreq: string) {
 
 const STATIC_ENTRIES = [
   urlEntry("/", "1.0", "weekly"),
+  urlEntry("/cars", "0.9", "weekly"),
   urlEntry("/contact", "0.5", "monthly"),
   urlEntry("/about", "0.5", "monthly"),
 ];

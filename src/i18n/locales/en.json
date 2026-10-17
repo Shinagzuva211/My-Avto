@@ -16,6 +16,11 @@
     "thinking": "Typing...",
     "error": "Sorry, something went wrong. Please try again."
   },
+  "cars": {
+    "title": "All Cars",
+    "description": "Browse all cars in the Hodiy Avto catalog — find the best match with search and filters",
+    "back": "Go back"
+  },
   "home": {
     "heroTitle": "Your Dream Car",
     "heroSubtitle": "Cars at the best prices",
@@ -104,6 +109,8 @@
     "details": "Details",
     "addToFavorites": "Add to Favorites",
     "removeFromFavorites": "Remove from Favorites",
+    "addToCompare": "Compare",
+    "removeFromCompare": "Remove",
     "description": "Description",
     "features": "Key Features",
     "back": "Back",
@@ -155,11 +162,64 @@
     "featuresPlaceholder": "e.g. ABS, AC, Heated Seats, Parking Sensors, Rear Camera",
     "commaSeparated": "comma separated"
   },
+  "calculator": {
+    "title": "Loan Calculator",
+    "downPayment": "Down Payment",
+    "rate": "Interest Rate",
+    "term": "Term",
+    "months": "months",
+    "monthlyPayment": "Monthly Payment",
+    "loanAmount": "Loan Amount",
+    "totalInterest": "Total Interest",
+    "totalPayment": "Total Payment",
+    "carTypeNew": "New",
+    "carTypeUsed": "Used",
+    "paymentType": "Payment Type",
+    "annuity": "Annuity",
+    "differentiated": "Differentiated",
+    "rateLow": "Low rate",
+    "rateMedium": "Medium rate",
+    "rateHigh": "High rate",
+    "differentiatedNote": "First month payment",
+    "recommendations": {
+      "excellent": "Excellent terms! Best offers for you.",
+      "good": "Good terms. Calculations ready soon.",
+      "average": "Average terms. Consider other options."
+    }
+  },
   "favorites": {
     "title": "Favorite Cars",
     "back": "Back",
     "empty": "No favorite cars yet",
     "browseCars": "Browse Cars"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "description": "Sorry, the page you are looking for does not exist, has been removed, or the address is incorrect.",
+    "home": "Back to home page",
+    "browseCars": "Browse cars",
+    "popular": "Popular sections",
+    "help": "Need help? "
+  },
+  "compare": {
+    "title": "Comparison",
+    "subtitle": "Compare selected cars by their features",
+    "empty": "No cars selected for comparison",
+    "clear": "Clear all",
+    "remove": "Remove",
+    "details": "View details",
+    "fields": "Feature",
+    "brand": "Brand",
+    "model": "Model",
+    "year": "Year",
+    "price": "Price ($)",
+    "fuel": "Fuel",
+    "transmissio": "Transmission",
+    "mileage": "Mileage (km)",
+    "color": "Color",
+    "engine": "Engine",
+    "driveType": "Drive type",
+    "condition": "Condition"
   },
   "admin": {
     "dashboard": "Dashboard",
@@ -197,6 +257,7 @@
     "search": "Search",
     "filter": "Filter",
     "resetFilter": "Reset Filter",
+    "apply": "Apply",
     "language": "Language",
     "uzbek": "UZ",
     "russian": "Ру",

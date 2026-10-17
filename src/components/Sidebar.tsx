@@ -1,5 +1,5 @@
 import { BiFilter, BiSearch } from "react-icons/bi"
-import "../Home.css"
+import "./Sidebar.css"
 import CarCard from "./CarCard"
 import type { Car } from "../Types/car"
 import { useState } from "react"
@@ -18,6 +18,7 @@ export default function Sidebar({ cars }: SidebarProps) {
   const [price2, setPrice2] = useState<number | null>(null)
   const [year, setYear] = useState<number | null>(null)
   const [fuel, setFuel] = useState<string>("")
+  const [filtersOpen, setFiltersOpen] = useState<boolean>(false)
 
   const searchText = search.trim().toLowerCase()
 
@@ -61,85 +62,93 @@ export default function Sidebar({ cars }: SidebarProps) {
         <div className="sidebar">
           <div className="container">
             <div className="sidebar-content">
-              <div className="search-zone">
-                <div className="search-npt">
-                  <input
-                    type="text"
-                    placeholder={t("home.searchPlaceholder")}
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)}
-                  />
-                  <BiSearch className="icon-npt" />
-                </div>
-              </div>
-              <hr />
-              <div className="filters">
-                <div className="filter">
-                  {t("common.filter")} <BiFilter />
-                </div>
-                <div className="brands">
-                  <div className="brand-title">
-                    {t("common.brand")}
-                  </div>
-                  <input id="bmw" type="radio" name="brand" value="BMW" checked={brand === "BMW"} onChange={(e) => setBrand(e.target.value)} /> <label htmlFor="bmw">BMW</label> <br />
-                  <input id="mercedes" type="radio" name="brand" checked={brand === "Mercedes"} value="Mercedes" onChange={(e) => setBrand(e.target.value)} /> <label htmlFor="mercedes">Mercedes</label> <br />
-                  <input id="chevrolet" type="radio" name="brand" checked={brand === "Chevrolet"} value="Chevrolet" onChange={(e) => setBrand(e.target.value)} /> <label htmlFor="chevrolet">Chevrolet</label> <br />
-                  <input id="kia" type="radio" name="brand" checked={brand === "Kia"} value="Kia" onChange={(e) => setBrand(e.target.value)} /> <label htmlFor="kia">Kia</label> <br />
-                  <input id="bugatti" type="radio" name="brand" checked={brand === "Bugatti"} value="Bugatti" onChange={(e) => setBrand(e.target.value)} /> <label htmlFor="bugatti">Bugatti</label>
-                </div>
-                <hr />
-                <div className="prices">
-                  <div className="price-title">
-                    {t("common.price")}
-                  </div>
-                  <div className="price-npts">
-                    <label>{t("common.minPrice")}: </label>
+              <button
+                className="filters-toggle"
+                onClick={() => setFiltersOpen(true)}
+                aria-expanded={filtersOpen}
+              >
+                {t("common.filter")} <BiFilter />
+              </button>
+
+              <div className="sidebar-filters">
+                <div className="search-zone">
+                  <div className="search-npt">
                     <input
-                      type="number"
-                      placeholder={t("common.minPrice")}
-                      value={price ?? ""}
-                      onChange={(e) => setPrice(e.target.value === "" ? null : Number(e.target.value))}
+                      type="text"
+                      placeholder={t("home.searchPlaceholder")}
+                      value={search}
+                      onChange={(e) => setSearch(e.target.value)}
                     />
-                    <br />
-                    <label>{t("common.maxPrice")}: </label>
-                    <input
-                      type="number"
-                      placeholder={t("common.maxPrice")}
-                      value={price2 ?? ""}
-                      onChange={(e) => setPrice2(e.target.value === "" ? null : Number(e.target.value))}
-                    />
+                    <BiSearch className="icon-npt" />
                   </div>
                 </div>
                 <hr />
-                <div className="years">
-                  <div className="year-title">
-                    {t("common.year")}
+
+                <div className="filters">
+                  <div className="filter">
+                    {t("common.filter")} <BiFilter />
                   </div>
-                  <select value={year ?? ""} onChange={(e) => setYear(e.target.value === "" ? null : Number(e.target.value))}>
-                    <option value="">{t("common.all")}</option>
-                    <option value="2018">2018</option>
-                    <option value="2019">2019</option>
-                    <option value="2020">2020</option>
-                    <option value="2021">2021</option>
-                    <option value="2022">2022</option>
-                    <option value="2023">2023</option>
-                    <option value="2024">2024</option>
-                    <option value="2025">2025</option>
-                    <option value="2026">2026</option>
-                  </select>
-                </div>
-                <hr />
-                <div className="fuel-content">
-                  <div className="fuel-title">
-                    {t("common.fuel")}
+
+                  <div className="brands">
+                    <div className="brand-title">{t("common.brand")}</div>
+                    <input id="bmw" type="radio" name="brand" value="BMW" checked={brand === "BMW"} onChange={(e) => setBrand(e.target.value)} /> <label htmlFor="bmw">BMW</label> <br />
+                    <input id="mercedes" type="radio" name="brand" value="Mercedes" checked={brand === "Mercedes"} onChange={(e) => setBrand(e.target.value)} /> <label htmlFor="mercedes">Mercedes</label> <br />
+                    <input id="chevrolet" type="radio" name="brand" value="Chevrolet" checked={brand === "Chevrolet"} onChange={(e) => setBrand(e.target.value)} /> <label htmlFor="chevrolet">Chevrolet</label> <br />
+                    <input id="kia" type="radio" name="brand" value="Kia" checked={brand === "Kia"} onChange={(e) => setBrand(e.target.value)} /> <label htmlFor="kia">Kia</label> <br />
+                    <input id="bugatti" type="radio" name="brand" value="Bugatti" checked={brand === "Bugatti"} onChange={(e) => setBrand(e.target.value)} /> <label htmlFor="bugatti">Bugatti</label>
                   </div>
-                  <input type="radio" name="fuel" value="Benzin" checked={fuel === "Benzin"} onChange={(e) => setFuel(e.target.value)} /> <label>Benzin</label> <br />
-                  <input type="radio" name="fuel" value="Gibrid" checked={fuel === "Gibrid"} onChange={(e) => setFuel(e.target.value)} /> <label>Gibrid</label> <br />
-                  <input type="radio" name="fuel" value="Elektra" checked={fuel === "Elektra"} onChange={(e) => setFuel(e.target.value)} /> <label>Elektr</label> <br />
+                  <hr />
+
+                  <div className="prices">
+                    <div className="price-title">{t("common.price")}</div>
+                    <div className="price-npts">
+                      <label>{t("common.minPrice")}: </label>
+                      <input
+                        type="number"
+                        placeholder={t("common.minPrice")}
+                        value={price ?? ""}
+                        onChange={(e) => setPrice(e.target.value === "" ? null : Number(e.target.value))}
+                      />
+                      <br />
+                      <label>{t("common.maxPrice")}: </label>
+                      <input
+                        type="number"
+                        placeholder={t("common.maxPrice")}
+                        value={price2 ?? ""}
+                        onChange={(e) => setPrice2(e.target.value === "" ? null : Number(e.target.value))}
+                      />
+                    </div>
+                  </div>
+                  <hr />
+
+                  <div className="years">
+                    <div className="year-title">{t("common.year")}</div>
+                    <select value={year ?? ""} onChange={(e) => setYear(e.target.value === "" ? null : Number(e.target.value))}>
+                      <option value="">{t("common.all")}</option>
+                      <option value="2018">2018</option>
+                      <option value="2019">2019</option>
+                      <option value="2020">2020</option>
+                      <option value="2021">2021</option>
+                      <option value="2022">2022</option>
+                      <option value="2023">2023</option>
+                      <option value="2024">2024</option>
+                      <option value="2025">2025</option>
+                      <option value="2026">2026</option>
+                    </select>
+                  </div>
+                  <hr />
+
+                  <div className="fuel-content">
+                    <div className="fuel-title">{t("common.fuel")}</div>
+                    <input type="radio" name="fuel" value="Benzin" checked={fuel === "Benzin"} onChange={(e) => setFuel(e.target.value)} /> <label>Benzin</label> <br />
+                    <input type="radio" name="fuel" value="Gibrid" checked={fuel === "Gibrid"} onChange={(e) => setFuel(e.target.value)} /> <label>Gibrid</label> <br />
+                    <input type="radio" name="fuel" value="Elektra" checked={fuel === "Elektra"} onChange={(e) => setFuel(e.target.value)} /> <label>Elektr</label> <br />
+                  </div>
+
+                  <button onClick={resetFilter} className="view">
+                    {t("common.resetFilter")}
+                  </button>
                 </div>
-                <button onClick={resetFilter} className="view">
-                  {t("common.resetFilter")}
-                </button>
               </div>
             </div>
           </div>
@@ -147,12 +156,124 @@ export default function Sidebar({ cars }: SidebarProps) {
         <div className="h-line"></div>
         <div className="cars-scroll">
           <div className="cars">
-            {filteredCars.map((car) => (
-              <CarCard key={car.id} car={car} />
-            ))}
+            {filteredCars.length === 0 ? (
+              <div className="loading-text">{t("home.noCars")}</div>
+            ) : (
+              filteredCars.map((car) => (
+                <CarCard key={car.id} car={car} />
+              ))
+            )}
           </div>
         </div>
       </div>
+
+      {filtersOpen && (
+        <div className="filters-overlay" onClick={() => setFiltersOpen(false)}>
+          <aside
+            className="filters-drawer"
+            onClick={(e) => e.stopPropagation()}
+            aria-hidden={!filtersOpen}
+          >
+            <div className="filters-drawer-header">
+              <span>{t("common.filter")} <BiFilter /></span>
+              <button
+                className="filters-close"
+                onClick={() => setFiltersOpen(false)}
+                aria-label="Close filters"
+              >
+                ✕
+              </button>
+            </div>
+
+            <div className="search-zone">
+              <div className="search-npt">
+                <input
+                  type="text"
+                  placeholder={t("home.searchPlaceholder")}
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                />
+                <BiSearch className="icon-npt" />
+              </div>
+            </div>
+            <hr />
+
+            <div className="filters">
+              <div className="filter">
+                {t("common.filter")} <BiFilter />
+              </div>
+
+              <div className="brands">
+                <div className="brand-title">{t("common.brand")}</div>
+                <input id="bmw" type="radio" name="brand" value="BMW" checked={brand === "BMW"} onChange={(e) => setBrand(e.target.value)} /> <label htmlFor="bmw">BMW</label> <br />
+                <input id="mercedes" type="radio" name="brand" value="Mercedes" checked={brand === "Mercedes"} onChange={(e) => setBrand(e.target.value)} /> <label htmlFor="mercedes">Mercedes</label> <br />
+                <input id="chevrolet" type="radio" name="brand" value="Chevrolet" checked={brand === "Chevrolet"} onChange={(e) => setBrand(e.target.value)} /> <label htmlFor="chevrolet">Chevrolet</label> <br />
+                <input id="kia" type="radio" name="brand" value="Kia" checked={brand === "Kia"} onChange={(e) => setBrand(e.target.value)} /> <label htmlFor="kia">Kia</label> <br />
+                <input id="bugatti" type="radio" name="brand" value="Bugatti" checked={brand === "Bugatti"} onChange={(e) => setBrand(e.target.value)} /> <label htmlFor="bugatti">Bugatti</label>
+              </div>
+              <hr />
+
+              <div className="prices">
+                <div className="price-title">{t("common.price")}</div>
+                <div className="price-npts">
+                  <label>{t("common.minPrice")}: </label>
+                  <input
+                    type="number"
+                    placeholder={t("common.minPrice")}
+                    value={price ?? ""}
+                    onChange={(e) => setPrice(e.target.value === "" ? null : Number(e.target.value))}
+                  />
+                  <br />
+                  <label>{t("common.maxPrice")}: </label>
+                  <input
+                    type="number"
+                    placeholder={t("common.maxPrice")}
+                    value={price2 ?? ""}
+                    onChange={(e) => setPrice2(e.target.value === "" ? null : Number(e.target.value))}
+                  />
+                </div>
+              </div>
+              <hr />
+
+              <div className="years">
+                <div className="year-title">{t("common.year")}</div>
+                <select value={year ?? ""} onChange={(e) => setYear(e.target.value === "" ? null : Number(e.target.value))}>
+                  <option value="">{t("common.all")}</option>
+                  <option value="2018">2018</option>
+                  <option value="2019">2019</option>
+                  <option value="2020">2020</option>
+                  <option value="2021">2021</option>
+                  <option value="2022">2022</option>
+                  <option value="2023">2023</option>
+                  <option value="2024">2024</option>
+                  <option value="2025">2025</option>
+                  <option value="2026">2026</option>
+                </select>
+              </div>
+              <hr />
+
+              <div className="fuel-content">
+                <div className="fuel-title">{t("common.fuel")}</div>
+                <input type="radio" name="fuel" value="Benzin" checked={fuel === "Benzin"} onChange={(e) => setFuel(e.target.value)} /> <label>Benzin</label> <br />
+                <input type="radio" name="fuel" value="Gibrid" checked={fuel === "Gibrid"} onChange={(e) => setFuel(e.target.value)} /> <label>Gibrid</label> <br />
+                <input type="radio" name="fuel" value="Elektra" checked={fuel === "Elektra"} onChange={(e) => setFuel(e.target.value)} /> <label>Elektr</label> <br />
+              </div>
+
+              <div className="filters-actions">
+                <button onClick={resetFilter} className="view">
+                  {t("common.resetFilter")}
+                </button>
+                <button
+                  className="filters-apply"
+                  onClick={() => setFiltersOpen(false)}
+                >
+                  {t("common.apply")}
+                </button>
+              </div>
+            </div>
+          </aside>
+        </div>
+      )}
     </>
   )
 }

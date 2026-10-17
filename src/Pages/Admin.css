@@ -256,7 +256,7 @@
   background: white;
   border-radius: 14px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-  overflow: hidden;
+  overflow-x: auto;
 }
 
 .admin-table-header {
@@ -545,7 +545,7 @@
 
   .admin-main {
     margin-left: 70px;
-    padding: 20px;
+    padding: 16px;
   }
 
   .stat-cards {
@@ -555,7 +555,23 @@
   .form-grid {
     grid-template-columns: 1fr;
   }
+
+  .admin-table {
+    min-width: 600px;
+  }
+
+  .admin-table th,
+  .admin-table td {
+    padding: 12px 14px;
+    white-space: nowrap;
+  }
+
+  .admin-table-header {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
 }
+
 
 .loading-text {
   text-align: center;

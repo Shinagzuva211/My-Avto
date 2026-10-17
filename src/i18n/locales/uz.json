@@ -16,6 +16,11 @@
     "thinking": "Yozmoqda...",
     "error": "Kechirasiz, xatolik yuz berdi. Qayta urinib ko'ring."
   },
+  "cars": {
+    "title": "Barcha mashinalar",
+    "description": "Hodiy Avto katalogida barcha mashinalar — qidiruv va filtrlar bilan eng mos variantni toping",
+    "back": "Orqaga qaytish"
+  },
   "home": {
     "heroTitle": "Sizning orzuingizdagi avtomobil",
     "heroSubtitle": "Eng yaxshi narxlarda mashinalar",
@@ -104,6 +109,8 @@
     "details": "Batafsil",
     "addToFavorites": "Sevimlilarga qo'shish",
     "removeFromFavorites": "Sevimlilardan olib tashlash",
+    "addToCompare": "Taqqoslash",
+    "removeFromCompare": "Ro'yxatdan chiqarish",
     "description": "Tavsif",
     "features": "Asosiy xususiyatlar",
     "back": "Orga qaytish",
@@ -155,11 +162,64 @@
     "featuresPlaceholder": "Masalan: ABS, Konditsioner, O'rindiq isitish, Parktronik, Kamerali ko'rinish",
     "commaSeparated": "vergul bilan ajratib yozing"
   },
+  "calculator": {
+    "title": "Kredit kalkulyatori",
+    "downPayment": "Oldindan to'lov",
+    "rate": "Foiz stavkasi",
+    "term": "Muddat",
+    "months": "oy",
+    "monthlyPayment": "Oylik to'lov",
+    "loanAmount": "Kredit summasi",
+    "totalInterest": "Jami foiz",
+    "totalPayment": "Jami to'lov",
+    "carTypeNew": "Yangi",
+    "carTypeUsed": "Ishlatilgan",
+    "paymentType": "To'lov turi",
+    "annuity": "Annuitet",
+    "differentiated": "Differensial",
+    "rateLow": "Past stavka",
+    "rateMedium": "O'rtacha stavka",
+    "rateHigh": "Yuqori stavka",
+    "differentiatedNote": "Birinchi oy to'lov",
+    "recommendations": {
+      "excellent": "A'lo sharoitlar! Siz uchun eng yaxshi takliflar.",
+      "good": "Yaxshi sharoitlar. Hisob-kitoblar tez orada tayyor.",
+      "average": "O'rtacha sharoitlar. Boshqa variantlarni ham ko'rib chiqing."
+    }
+  },
   "favorites": {
     "title": "Sevimli Mashinalar",
     "back": "Orga qaytish",
     "empty": "Hozircha sevimli mashinalar yo'q",
     "browseCars": "Mashinalarni ko'rish"
+  },
+  "notFound": {
+    "title": "Sahifa topilmadi",
+    "description": "Kechirasiz, siz izlagan sahifa mavjud emas, o'chirilgan yoki manzil noto'g'ri kiritilgan.",
+    "home": "Bosh sahifaga qaytish",
+    "browseCars": "Mashinalarni ko'rish",
+    "popular": "Mashhur bo'limlar",
+    "help": "Yordam kerakmi? "
+  },
+  "compare": {
+    "title": "Taqqoslash",
+    "subtitle": "Tanlangan mashinalarni xususiyatlari bo'yicha solishtiring",
+    "empty": "Taqqoslash uchun mashina tanlanmagan",
+    "clear": "Tozalash",
+    "remove": "O'chirish",
+    "details": "Batafsil ko'rish",
+    "fields": "Xususiyatlar",
+    "brand": "Marka",
+    "model": "Model",
+    "year": "Yil",
+    "price": "Narx ($)",
+    "fuel": "Yoqilg'i",
+    "transmissio": "Uzatmalar",
+    "mileage": "Yurgan (km)",
+    "color": "Rang",
+    "engine": "Dvigatel",
+    "driveType": "Yuritma",
+    "condition": "Holati"
   },
   "admin": {
     "dashboard": "Boshqaruv paneli",
@@ -197,6 +257,7 @@
     "search": "Qidirish",
     "filter": "Filtrlash",
     "resetFilter": "Filterni asliga qaytarish",
+    "apply": "Qo'llash",
     "language": "Til",
     "uzbek": "UZ",
     "russian": "Ру",

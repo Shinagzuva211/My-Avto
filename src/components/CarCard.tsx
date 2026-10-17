@@ -1,7 +1,7 @@
 import type { Car } from "../Types/car"
 import { useFavorites } from "../context/useFavorites"
 import { GoHeart, GoHeartFill } from "react-icons/go"
-import "../Home.css"
+import "./CarCard.css"
 import { BiDollar } from "react-icons/bi"
 import { Link } from "react-router-dom"
 import { useTranslation } from "react-i18next"
@@ -46,7 +46,7 @@ export default function CarCard({ car }: CarCardProps) {
                     {t("car.year")}: {car.year}
                 </div>
                 <div className="car-price2">
-                     <BiDollar/>{car.price}
+                    <BiDollar />{car.price}
                 </div>
                 <Link to={`/cars/${car.id}`}>
                     <button className="view">{t("car.details")}</button>

@@ -1,0 +1,323 @@
+/* ============================================
+   NotFound (404) sahifasi uslublari
+   ============================================ */
+
+.notfound-page {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 20px;
+  overflow: hidden;
+  background: radial-gradient(1100px 600px at 50% -10%, #262a33 0%, #16191f 45%, #0c0e12 100%);
+  text-align: center;
+}
+
+/* Fon uchun nozik panjara */
+.notfound-bg {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(circle at 50% 38%, #000 0%, transparent 72%);
+  -webkit-mask-image: radial-gradient(circle at 50% 38%, #000 0%, transparent 72%);
+}
+
+/* Qizil yorug'lik halo */
+.notfound-glow {
+  position: absolute;
+  top: 6%;
+  left: 50%;
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 41, 41, 0.32) 0%, rgba(255, 41, 41, 0) 65%);
+  filter: blur(12px);
+  transform: translateX(-50%);
+  animation: notfound-pulse 6s ease-in-out infinite;
+}
+
+@keyframes notfound-pulse {
+
+  0%,
+  100% {
+    opacity: 0.7;
+    transform: translateX(-50%) scale(1);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translateX(-50%) scale(1.08);
+  }
+}
+
+.notfound-card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 620px;
+  padding: 40px 40px 32px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  animation: fadeUp 0.6s ease both;
+}
+
+/* Logo */
+.notfound-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #fff;
+}
+
+.notfound-brand:hover {
+  text-shadow: none;
+  transform: none;
+}
+
+.notfound-brand img {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.notfound-brand span {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* Mashina ikonasi va aylanuvchi halqa */
+.notfound-visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 92px;
+  margin-top: 14px;
+}
+
+.notfound-ring {
+  position: absolute;
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  border: 1px dashed rgba(255, 255, 255, 0.22);
+  animation: notfound-spin 20s linear infinite;
+}
+
+.notfound-ring::after {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: 50%;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #ff2929;
+  box-shadow: 0 0 12px #ff2929;
+}
+
+@keyframes notfound-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.notfound-car {
+  font-size: 40px;
+  color: #ff2929;
+}
+
+/* 404 raqami */
+.notfound-code {
+  margin: 4px 0 6px;
+  font-size: clamp(88px, 20vw, 150px);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 6px;
+  background: linear-gradient(180deg, #ffffff 0%, #ffb3b3 55%, #ff2929 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.notfound-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+  cursor: default;
+}
+
+.notfound-description {
+  max-width: 420px;
+  margin: 8px auto 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.65);
+  cursor: default;
+}
+
+/* Asosiy tugmalar */
+.notfound-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 26px;
+}
+
+.notfound-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 46px;
+  padding: 0 22px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+
+.notfound-btn:hover {
+  text-shadow: none;
+}
+
+.notfound-btn-primary {
+  background: linear-gradient(135deg, #ff2929, #ff6b6b);
+  color: #fff;
+  box-shadow: 0 8px 24px rgba(255, 41, 41, 0.35);
+}
+
+.notfound-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(255, 41, 41, 0.45);
+}
+
+.notfound-btn-secondary {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #fff;
+}
+
+.notfound-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.13);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Ajratgich */
+.notfound-divider {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 28px 0 18px;
+}
+
+.notfound-divider::before,
+.notfound-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.notfound-divider span {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+/* Tez havolalar */
+.notfound-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.notfound-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 16px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85);
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.notfound-link svg {
+  font-size: 16px;
+  color: #ff2929;
+}
+
+.notfound-link:hover {
+  background: rgba(255, 41, 41, 0.14);
+  border-color: rgba(255, 41, 41, 0.5);
+  color: #fff;
+  text-shadow: none;
+  transform: translateY(-2px);
+}
+
+/* Yordam matni */
+.notfound-help {
+  margin-top: 24px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: default;
+}
+
+.notfound-help a {
+  color: #ff6b6b;
+  font-weight: 600;
+}
+
+.notfound-help a:hover {
+  color: #ff2929;
+  text-shadow: none;
+}
+
+@media screen and (max-width: 560px) {
+  .notfound-page {
+    padding: 32px 16px;
+  }
+
+  .notfound-card {
+    padding: 28px 22px 24px;
+    border-radius: 20px;
+  }
+
+  .notfound-code {
+    letter-spacing: 4px;
+  }
+
+  .notfound-title {
+    font-size: 19px;
+  }
+
+  .notfound-description {
+    font-size: 14px;
+  }
+
+  .notfound-btn {
+    width: 100%;
+  }
+}

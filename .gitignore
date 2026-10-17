@@ -13,8 +13,25 @@ dist-ssr
 *.local
 
 # Environment variables
+# NOTE: .env / .env.* patterns are unanchored, so they already match at any
+# depth (e.g. src/.env). The explicit entries below document that intent.
 .env
 .env.*
+.env.local
+.env.*.local
+src/.env
+**/.env
+**/.env.*
+
+# Admin panel credentials — never commit these.
+# VITE_ADMIN_EMAIL / VITE_ADMIN_PASSWORD must live in .env only.
+# Note: any VITE_* variable is inlined into the public JS bundle at build
+# time, so a real admin password there is readable by anyone. See README.md.
+.env.secrets
+.env.production
+.env.production.local
+
+# Keep the documented template tracked, but nothing else.
 !.env.example
 
 # Playwright MCP artifacts (screenshots/logs)

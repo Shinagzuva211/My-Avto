@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react"
+import { Link } from "react-router-dom"
 import Hero from "../components/Hero"
-import Sidebar from "../components/Sidebar"
-import "../Home.css"
+import CarCard from "../components/CarCard"
+import "./Home.css"
 import type { Car } from "../Types/car"
 import Contact from "../components/Contact"
 import About from "../components/About"
@@ -17,14 +18,10 @@ export default function Home() {
   const [cars, setCars] = useState<Car[]>([])
   const [loading, setLoading] = useState(true)
 
-  const carsRef = useRef<HTMLDivElement | null>(null)
   const heroRef = useRef<HTMLDivElement | null>(null)
   const contactRef = useRef<HTMLDivElement | null>(null)
   const aboutRef = useRef<HTMLDivElement | null>(null)
 
-  const scrollToCars = () => {
-    carsRef.current?.scrollIntoView({ behavior: "smooth" })
-  }
   const scrollToHero = () => {
     heroRef.current?.scrollIntoView({ behavior: "smooth" })
   }
@@ -47,6 +44,8 @@ export default function Home() {
       })
   }, [])
 
+  const featuredCars = [...cars].sort((a, b) => b.price - a.price).slice(0, 4)
+
   return (
     <>
       <SEO
@@ -63,19 +62,32 @@ export default function Home() {
       />
       <div ref={heroRef} id="home">
         <Hero
-          scrollToCars={scrollToCars}
           scrollToHero={scrollToHero}
           scrollToContact={scrollToContact}
           scrollToAbout={scrollToAbout}
         />
       </div>
-      <div ref={carsRef} id="cars">
+      <section className="featured-section" id="featured-cars">
+        <div className="featured-header">
+          <h2>{t("home.featuredCars")}</h2>
+          <Link to="/cars" className="view-all-btn">
+            {t("home.viewAll")}
+          </Link>
+        </div>
         {loading ? (
-          <div className="loading-text">{t("home.loadingCars")}</div>
+          <div className="featured-grid">
+            {Array.from({ length: 4 }).map((_, i) => (
+              <div key={i} className="featured-skeleton" />
+            ))}
+          </div>
         ) : (
-          <Sidebar cars={cars} />
+          <div className="featured-grid">
+            {featuredCars.map((car) => (
+              <CarCard key={car.id} car={car} />
+            ))}
+          </div>
         )}
-      </div>
+      </section>
       <div ref={aboutRef} id="about">
         <About />
       </div>

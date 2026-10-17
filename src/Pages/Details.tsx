@@ -3,12 +3,15 @@ import { HiBackward } from "react-icons/hi2"
 import { Link, useParams } from "react-router-dom"
 import { GoHeart, GoHeartFill } from "react-icons/go"
 import { useFavorites } from "../context/useFavorites"
+import { useCompare } from "../context/useCompare"
 import "./Details.css"
+import "../components/CreditCalculator.css"
 import SEO from "../seo/SEO"
 import { carSchema } from "../seo/schema"
 import type { Car } from "../Types/car"
 import { useTranslation } from "react-i18next"
 import { fetchWithRetry } from "../utils/api"
+import CreditCalculator from "../components/CreditCalculator"
 
 type CarData = {
   id: number
@@ -34,7 +37,9 @@ export default function CarDetails() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const { toggleFavorite, isFavorite } = useFavorites()
+  const { toggleCompare, isInCompare } = useCompare()
   const liked = data ? isFavorite(data.id) : false
+  const inCompare = data ? isInCompare(data.id) : false
 
   useEffect(() => {
     const fetchCar = async () => {
@@ -108,7 +113,7 @@ export default function CarDetails() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(carSchema(data)) }}
       />
       <div className="details-page container">
-        <Link to="/" className="back-btn">
+        <Link to="/cars" className="back-btn">
           <HiBackward size={20} /> {t("car.back")}
         </Link>
         <div className="details-grid">
@@ -118,18 +123,30 @@ export default function CarDetails() {
               alt={`${data.brand} ${data.model} ${data.year}-yil`}
               className="main-image"
             />
-            <button
-              className={`favorite-btn ${liked ? "active" : ""}`}
-              onClick={(e) => {
-                e.preventDefault()
-                e.stopPropagation()
-                toggleFavorite(data as Car)
-              }}
-              aria-label={liked ? t("car.removeFromFavorites") : t("car.addToFavorites")}
-            >
-              <GoHeartFill className="heart-fill" />
-              <GoHeart className="heart" />
-            </button>
+
+            <div className="compare-fav">
+
+              <button
+                className={` compare-btn ${inCompare ? "in-compare" : ""}`}
+                onClick={() => toggleCompare(data as Car)}
+              >
+                {inCompare ? t("car.removeFromCompare") : t("car.addToCompare")}
+              </button>
+
+              <button
+                className={`favorite-btn ${liked ? "active" : ""}`}
+                onClick={(e) => {
+                  e.preventDefault()
+                  e.stopPropagation()
+                  toggleFavorite(data as Car)
+                }}
+                aria-label={liked ? t("car.removeFromFavorites") : t("car.addToFavorites")}
+              >
+                <GoHeartFill className="heart-fill" />
+                <GoHeart className="heart" />
+              </button>
+            </div>
+
           </div>
           <div className="info-section">
             <div className="car-header">
@@ -164,6 +181,7 @@ export default function CarDetails() {
             </div>
           </div>
         </div>
+        <CreditCalculator price={data.price} />
       </div>
     </>
   )

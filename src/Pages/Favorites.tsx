@@ -2,7 +2,6 @@ import { HiBackward } from "react-icons/hi2"
 import { Link } from "react-router-dom"
 import { useFavorites } from "../context/useFavorites"
 import CarCard from "../components/CarCard"
-import "../Home.css"
 import SEO from "../seo/SEO"
 import { useTranslation } from "react-i18next"
 
@@ -33,7 +32,7 @@ export default function Favorites() {
                     {favorites.length === 0 ? (
                         <div className="empty-favorites">
                             <p>{t("favorites.empty")}</p>
-                            <Link to="/">
+                            <Link to="/cars">
                                 <button className="view">{t("favorites.browseCars")}</button>
                             </Link>
                         </div>

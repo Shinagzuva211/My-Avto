@@ -41,7 +41,7 @@ export default function Footer() {
                     <h4 className="footer-title">{t("footer.quickLinks")}</h4>
                     <ul className="footer-links">
                         <li><a href="#home">{t("nav.home")}</a></li>
-                        <li><a href="#cars">{t("nav.cars")}</a></li>
+                        <li><Link to="/cars">{t("nav.cars")}</Link></li>
                         <li><a href="#about">{t("nav.about")}</a></li>
                         <li><a href="#contact">{t("nav.contact")}</a></li>
                         <li><Link to="/favorites">{t("nav.favorites")}</Link></li>

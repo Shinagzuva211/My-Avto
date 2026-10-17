@@ -1,0 +1,125 @@
+/* ============================================
+   Umumiy UI elementlar — bir nechta sahifa/komponentda ishlatiladi
+   ============================================ */
+
+.view {
+  width: 100%;
+  height: 44px;
+  border: none;
+  border-top: 2px solid #ff2929;
+  background-color: transparent;
+  font-size: 15px;
+  font-weight: 500;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  margin-top: auto;
+  cursor: pointer;
+}
+
+.view:hover {
+  background-color: #ff2929;
+  color: white;
+}
+
+.view:focus-visible {
+  outline: 2px solid #ff2929;
+  outline-offset: -2px;
+}
+
+.back-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: black;
+}
+
+.back-btn svg {
+  font-size: 18px;
+}
+
+.fav-back {
+  margin-top: 40px;
+  margin-left: 25px;
+}
+
+.favorites-page {
+  padding-top: 100px;
+  min-height: 100vh;
+}
+
+.favorites-title {
+  font-size: 36px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.empty-favorites {
+  text-align: center;
+  padding: 80px 20px;
+  color: #666;
+}
+
+.empty-favorites p {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.empty-favorites .view {
+  width: 200px;
+  height: 50px;
+  border: none;
+  border-radius: 8px;
+  background-color: #ff2929;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.empty-favorites .view:hover {
+  background-color: #e62424;
+}
+
+.cars {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  padding: 30px;
+}
+
+.loading-text {
+  text-align: center;
+  padding: 40px 20px;
+  font-size: 18px;
+  color: #666;
+  font-weight: 500;
+}
+
+@media screen and (max-width: 1080px) {
+  .cars {
+    justify-content: center;
+  }
+
+  .view {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .cars {
+    padding: 20px;
+    gap: 20px;
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .favorites-title {
+    font-size: 26px;
+    margin-bottom: 24px;
+  }
+
+  .favorites-page {
+    padding-top: 24px;
+  }
+}

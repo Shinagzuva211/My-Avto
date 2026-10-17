@@ -1,8 +1,8 @@
-import { GoHeart, GoHeartFill } from "react-icons/go"
+import { GoGitCompare, GoHeart, GoHeartFill } from "react-icons/go"
 import logo from "../../public/logo-dark.webp"
 import logo2 from "../../public/logo-light.webp"
-import "../Home.css"
-import { BiMenu } from "react-icons/bi"
+import "./Header.css"
+import {  BiMenu } from "react-icons/bi"
 import { Link, useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
@@ -11,14 +11,13 @@ import { useUserAuth } from "../context/useUserAuth"
 import { FaUserPlus, FaUser } from "react-icons/fa"
 
 type HeroProps = {
-    scrollToCars: () => void;
     scrollToHero: () => void;
     scrollToContact: () => void;
     scrollToAbout: () => void;
 }
 
 
-export default function Header({ scrollToCars, scrollToHero, scrollToContact, scrollToAbout }: HeroProps) {
+export default function Header({ scrollToHero, scrollToContact, scrollToAbout }: HeroProps) {
 
 
     const [show, setShow] = useState<boolean>(false)
@@ -64,11 +63,7 @@ export default function Header({ scrollToCars, scrollToHero, scrollToContact, sc
                                 e.preventDefault();
                                 scrollToHero();
                             }}>{t("nav.home")}</a>
-                            <a href="#" onClick={(e) => {
-                                e.preventDefault();
-                                scrollToCars();
-                            }}
-                            >{t("nav.cars")}</a>
+                            <Link to="/cars">{t("nav.cars")}</Link>
                             <a href="#" onClick={(e) => {
                                 e.preventDefault();
                                 scrollToAbout();
@@ -99,8 +94,10 @@ export default function Header({ scrollToCars, scrollToHero, scrollToContact, sc
                                 <BiMenu />
                                 {show && (
                                     <div className="menu-tab">
-                                        <p className="menu-p">{t("nav.home")}</p>
-                                        <p className="menu-p" onClick={scrollToCars}>{t("nav.cars")}</p>
+                                        <p className="menu-p" onClick={scrollToHero}>{t("nav.home")}</p>
+                                        <Link to="/cars" onClick={() => setShow(false)}>
+                                            <p className="menu-p">{t("nav.cars")}</p>
+                                        </Link>
                                         <p className="menu-p" onClick={scrollToAbout}>{t("nav.about")}</p>
                                         <p className="menu-p" onClick={scrollToContact}>{t("nav.contact")}</p>
                                         <Link to="/ai-chat" onClick={() => setShow(false)}>
@@ -113,6 +110,11 @@ export default function Header({ scrollToCars, scrollToHero, scrollToContact, sc
                                 <div className="favorites" title={t("nav.favorites")}>
                                     <GoHeart className="heart" />
                                     <GoHeartFill className="heart-fill" />
+                                </div>
+                            </Link>
+                            <Link to={'/compare'}>
+                                <div className="compare2" title="Taqqoslash" style={{ marginLeft: 12 }}>
+                                    <span style={{ margin: 0 }}><GoGitCompare className="compare-icon"/></span>
                                 </div>
                             </Link>
                         </div>

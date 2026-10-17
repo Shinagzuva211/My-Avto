@@ -1,0 +1,14 @@
+/* ============================================
+   Cars sahifasi uslublari
+   ============================================ */
+
+.cars-page {
+  min-height: 100vh;
+  padding-top: 100px;
+}
+
+@media screen and (max-width: 700px) {
+  .cars-page {
+    padding-top: 90px;
+  }
+}

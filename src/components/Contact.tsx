@@ -13,6 +13,7 @@ export default function Contact() {
     const { t } = useTranslation()
     const [form, setForm] = useState({ name: "", phone: "", model: "", question: "" })
     const [submitted, setSubmitted] = useState(false)
+    const [errors, setErrors] = useState<{ name?: string; phone?: string; question?: string }>({})
 
     function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
         setForm({ ...form, [e.target.name]: e.target.value })
@@ -20,6 +21,12 @@ export default function Contact() {
 
     function handleSubmit(e: React.FormEvent) {
         e.preventDefault()
+        const next: typeof errors = {}
+        if (!form.name.trim()) next.name = "Ism kiritilishi shart"
+        if (!/^\+?[0-9\s()-]{7,20}$/.test(form.phone.trim())) next.phone = "Telefon raqami noto'g'ri"
+        if (!form.question.trim()) next.question = "Xabar kiritilishi shart"
+        setErrors(next)
+        if (Object.keys(next).length > 0) return
         setSubmitted(true)
         setForm({ name: "", phone: "", model: "", question: "" })
     }
@@ -82,6 +89,7 @@ export default function Contact() {
                             value={form.name}
                             onChange={handleChange}
                         />
+                        {errors.name && <p style={{ color: "red" }}>{errors.name}</p>}
                         <input
                             type="tel"
                             name="phone"
@@ -89,6 +97,7 @@ export default function Contact() {
                             value={form.phone}
                             onChange={handleChange}
                         />
+                        {errors.phone && <p style={{ color: "red" }}>{errors.phone}</p>}
                         <label htmlFor="model">{t("contact.form.model")}</label>
                         <input
                             type="text"
@@ -107,6 +116,7 @@ export default function Contact() {
                             value={form.question}
                             onChange={handleChange}
                         ></textarea>
+                        {errors.question && <p style={{ color: "red" }}>{errors.question}</p>}
                         <button type="submit">{t("contact.form.submit")}</button>
                         <p>{t("contact.form.consent")}</p>
                     </form>

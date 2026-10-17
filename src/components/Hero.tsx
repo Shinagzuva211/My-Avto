@@ -1,5 +1,6 @@
-import "../Home.css"
+import "./Hero.css"
 import { lazy, Suspense, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Header from "./Header";
 import { BiCar } from "react-icons/bi";
 import { BsCarFrontFill } from "react-icons/bs";
@@ -25,14 +26,12 @@ function useIsMobile() {
 }
 
 type HeroProps = {
-    scrollToCars: () => void;
     scrollToHero: () => void;
     scrollToContact: () => void;
     scrollToAbout: () => void;
 }
 
 export default function Hero({
-    scrollToCars,
     scrollToHero,
     scrollToContact,
     scrollToAbout
@@ -40,6 +39,7 @@ export default function Hero({
 
     const { t } = useTranslation();
     const isMobile = useIsMobile();
+    const navigate = useNavigate();
 
     const leftSide = (
         <div className="left-side">
@@ -58,7 +58,7 @@ export default function Hero({
             <div className="hero-btns">
 
                 <div className="browse-btn">
-                    <button onClick={scrollToCars}> <span><BsCarFrontFill /></span> {t("home.browseCars")} </button>
+                    <button onClick={() => navigate("/cars")}> <span><BsCarFrontFill /></span> {t("home.browseCars")} </button>
                 </div>
 
                 <div className="contact-btn">
@@ -149,7 +149,6 @@ export default function Hero({
         <>
             <div className="background">
                 <Header
-                    scrollToCars={scrollToCars}
                     scrollToHero={scrollToHero}
                     scrollToContact={scrollToContact}
                     scrollToAbout={scrollToAbout}

@@ -5,7 +5,6 @@ import { IoSend } from "react-icons/io5"
 import { Link } from "react-router-dom"
 import { fetchWithRetry } from "../utils/api"
 import SEO from "../seo/SEO"
-import "../Home.css"
 import "./AiChat.css"
 
 type Message = {

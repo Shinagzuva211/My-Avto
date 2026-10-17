@@ -28,7 +28,7 @@ export default function About() {
           <div className="about-features">
             <div className="feature-card">
               <div className="feature-icon">
-                <FaCheck />
+                <FaCheck className="icon-text"/>
               </div>
               <div>
                 <h4>{t("about.features.quality.title")}</h4>
@@ -37,7 +37,7 @@ export default function About() {
             </div>
             <div className="feature-card">
               <div className="feature-icon">
-                <FaHryvnia />
+                <FaHryvnia className="icon-text"/>
               </div>
               <div>
                 <h4>{t("about.features.price.title")}</h4>
@@ -46,7 +46,7 @@ export default function About() {
             </div>
             <div className="feature-card">
               <div className="feature-icon">
-                <FaBolt />
+                <FaBolt className="icon-text"/>
               </div>
               <div>
                 <h4>{t("about.features.speed.title")}</h4>
@@ -55,7 +55,7 @@ export default function About() {
             </div>
             <div className="feature-card">
               <div className="feature-icon">
-                <FaPhoneAlt />
+                <FaPhoneAlt className="icon-text"/>
               </div>
               <div>
                 <h4>{t("about.features.support.title")}</h4>

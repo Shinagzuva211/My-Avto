@@ -1,0 +1,354 @@
+/* ============================================
+   Hero komponenti uslublari
+   ============================================ */
+
+.background {
+  background: url('/bmw.webp') no-repeat;
+  background-size: cover;
+  height: 135vh;
+}
+
+.dream-title {
+  width: 550px;
+  font-size: 24px;
+  color: #ff2929;
+  padding: 180px 0 20px;
+}
+
+.hero-title {
+  font-size: 85px;
+  font-weight: bold;
+  color: white;
+  width: 550px;
+  line-height: 100%;
+}
+
+.hero-title span {
+  color: #ff2929;
+}
+
+.hero-text {
+  color: white;
+  font-size: 22px;
+  font-weight: 200;
+  width: 500px;
+  padding-top: 30px;
+}
+
+.hero-btns {
+  display: flex;
+  gap: 30px;
+  padding-top: 50px;
+  align-items: center;
+}
+
+.browse-btn button {
+  width: 250px;
+  height: 60px;
+  background-color: #ff2929;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 16px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.browse-btn span {
+  font-size: 20px;
+}
+
+.contact-btn button {
+  width: 200px;
+  height: 60px;
+  background-color: transparent;
+  border: 2px solid white;
+  border-radius: 8px;
+  color: white;
+  font-size: 17px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: border linear .2s;
+}
+
+.contact-btn button:hover {
+  border: 2px solid #ff2929;
+}
+
+.contact-btn span {
+  font-size: 20px;
+}
+
+.icon {
+  color: #ff2929;
+  font-size: 40px;
+  transition: transform linear .2s;
+}
+
+.static-panel {
+  display: flex;
+  background-color: #000000a4;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 10px;
+  margin-top: 150px;
+  margin-bottom: 50px;
+}
+
+.static-card {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 25px;
+  width: 300px;
+  cursor: pointer;
+  transition: transform linear .2s;
+}
+
+.static-card:hover {
+  transform: translateY(-8px);
+
+  .card-num {
+    text-shadow: 0px 0px 5px;
+  }
+}
+
+.card-num {
+  color: white;
+  font-size: 24px;
+  transition: text-shadow linear .2s;
+}
+
+.line {
+  width: 1px;
+  height: 50px;
+  background-color: #8080808b;
+}
+
+.hero-swiper-wrap {
+  width: 100%;
+  height: calc(100vh - 90px);
+}
+
+.hero-swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.hero-swiper .swiper-slide {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  height: 100%;
+}
+
+.hero-slide .dream-title {
+  padding-top: 0;
+}
+
+.hero-slide .static-panel {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.hero-swiper .swiper-pagination-bullet {
+  background: #ff29298f;
+  opacity: 1;
+  width: 8px;
+  height: 8px;
+}
+
+.hero-swiper .swiper-pagination-bullet-active {
+  background: #ff2929;
+  width: 22px;
+  border-radius: 4px;
+}
+
+@media screen and (max-width: 1080px) {
+
+  .hero-title {
+    font-size: 50px;
+    width: 350px;
+  }
+
+  .dream-title {
+    font-size: 18px;
+    padding-top: 80px;
+  }
+
+  .hero-text {
+    font-size: 18px;
+    width: 390px;
+  }
+
+  .browse-btn button {
+    width: 200px;
+    height: 40px;
+    font-size: 13px;
+  }
+
+  .contact-btn button {
+    width: 170px;
+    height: 40px;
+    font-size: 13px;
+  }
+
+  .background {
+    height: 80vh;
+  }
+
+  .card-num {
+    font-size: 20px;
+  }
+
+  .static-card {
+    padding: 15px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+
+  .background {
+    height: 100vh;
+  }
+
+  .dream-title {
+    width: 230px;
+    font-size: 13px;
+  }
+
+  .menu {
+    display: flex;
+    align-items: center;
+    font-size: 30px;
+    color: white;
+  }
+
+  .static-panel {
+    margin-top: 25px;
+  }
+
+  .static-panel {
+    padding: 15px;
+    text-align: center;
+    flex-direction: column;
+  }
+
+  .static-card {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .line {
+    width: 70%;
+    height: 1px;
+    align-self: center;
+  }
+
+  .icon {
+    font-size: 20px;
+  }
+
+  .card-num {
+    font-size: 14px;
+  }
+
+  .static-card p {
+    font-size: 11px;
+  }
+
+  .hero-title {
+    width: 200px;
+    font-size: 35px;
+  }
+
+  .background {
+    background-position: calc(-50px);
+    height: 75vh;
+  }
+
+  .hero-text {
+    font-size: 14px;
+    width: 280px;
+  }
+
+  .browse-btn button {
+    width: 180px;
+    height: 35px;
+    font-size: 12px;
+  }
+
+  .contact-btn button {
+    width: 130px;
+    height: 35px;
+    font-size: 10px;
+  }
+
+  .hero-btns {
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .left-side {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .dream-title {
+    padding-top: 100px;
+  }
+}
+
+@media screen and (max-width: 350px) {
+
+  .background {
+    height: 100vh;
+  }
+
+  .dream-title {
+    padding-top: 70px;
+  }
+}
+
+/* Planshet: stat panel bir qatorda siqilmasligi uchun 2x2 */
+@media screen and (min-width: 701px) and (max-width: 1080px) {
+  .static-panel {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    padding: 20px;
+  }
+
+  .static-card {
+    width: auto;
+    justify-content: center;
+  }
+
+  .line {
+    display: none;
+  }
+}
+
+/* Mobil hero: swiper fon rasmidan chiqib ketmasligi uchun */
+@media screen and (max-width: 700px) {
+  .background {
+    height: 100svh;
+    min-height: 560px;
+    padding-top: 80px;
+    background-position: center;
+  }
+
+  .hero-swiper-wrap {
+    height: calc(100svh - 80px);
+  }
+}
