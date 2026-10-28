@@ -16,6 +16,7 @@ type Car = {
   fuel: string
   image: string
   condition?: string
+  status: "available" | "sold"
 }
 
 export default function Cars() {
@@ -31,6 +32,7 @@ export default function Cars() {
     price: "",
     fuel: "Benzin",
     image: "",
+    status: "available",
   })
 
   const apiUrl = import.meta.env.VITE_API_URL
@@ -39,7 +41,8 @@ export default function Cars() {
   useEffect(() => {
     fetchWithRetry(`${apiUrl}/cars`, { headers: getAuthHeader() })
       .then((data: unknown) => {
-        setCars((data as Car[]).map((item) => ({ ...item, id: item.id ?? item._id })))
+        const allCars = (data as Car[]).map((item) => ({ ...item, id: item.id ?? item._id }))
+        setCars(allCars.filter((car) => car.status !== "sold"))
         setLoading(false)
       })
       .catch((err) => {
@@ -75,6 +78,7 @@ export default function Cars() {
       price: String(car.price),
       fuel: car.fuel,
       image: car.image,
+      status: car.status ?? "available",
     })
   }
 
@@ -97,6 +101,7 @@ export default function Cars() {
       price: Number(form.price),
       fuel: form.fuel,
       image: form.image,
+      status: form.status,
     }
 
     fetch(`${apiUrl}/cars/${editingCar.id}`, {
@@ -143,6 +148,7 @@ export default function Cars() {
               <th>{t("car.year")}</th>
               <th>{t("car.price")}</th>
               <th>{t("car.fuel")}</th>
+              <th>{t("car.status")}</th>
               <th>{t("common.actions")}</th>
             </tr>
           </thead>
@@ -161,6 +167,11 @@ export default function Cars() {
                 <td>{car.year}</td>
                 <td>${car.price.toLocaleString()}</td>
                 <td>{car.fuel}</td>
+                <td>
+                  <span className="status-badge" style={{ color: car.status === "sold" ? "var(--red)" : "var(--green)" }}>
+                    {t(car.status)}
+                  </span>
+                </td>
                 <td>
                   <div style={{ display: "flex", gap: "8px" }}>
                     <button className="btn btn-edit" onClick={() => handleEditClick(car)}>
@@ -210,6 +221,13 @@ export default function Cars() {
                     <option value="Gibrid">Gibrid</option>
                     <option value="Elektra">Elektr</option>
                     <option value="Dizel">Dizel</option>
+                  </select>
+                </div>
+                <div className="form-group">
+                  <label>{t("car.status")}</label>
+                  <select name="status" value={form.status} onChange={handleChange}>
+                    <option value="available" selected={form.status === "available"}>Available</option>
+                    <option value="sold" selected={form.status === "sold"}>Sold</option>
                   </select>
                 </div>
                 <div className="form-group">

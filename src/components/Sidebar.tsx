@@ -18,6 +18,7 @@ export default function Sidebar({ cars }: SidebarProps) {
   const [price2, setPrice2] = useState<number | null>(null)
   const [year, setYear] = useState<number | null>(null)
   const [fuel, setFuel] = useState<string>("")
+  const [sort, setSort] = useState<'price-asc' | 'price-desc' | 'year-asc' | 'year-desc' | 'default'>('default')
   const [filtersOpen, setFiltersOpen] = useState<boolean>(false)
 
   const searchText = search.trim().toLowerCase()
@@ -31,30 +32,38 @@ export default function Sidebar({ cars }: SidebarProps) {
     setFuel("")
   }
 
-  const filteredCars = cars.filter((car) => {
-    const matchSearch =
-      car.brand.toLowerCase().includes(searchText) ||
-      car.model.toLowerCase().includes(searchText)
-    const matchBrand =
-      brand === "" || car.brand === brand
-    const matchPrice =
-      price === null || car.price >= price
-    const matchPrice2 =
-      price2 === null || car.price <= price2
-    const matchYear =
-      year === null || car.year === year
-    const matchFuel =
-      fuel === "" || car.fuel === fuel
+  const filteredCars = cars
+    .filter((car) => {
+      const matchSearch =
+        car.brand.toLowerCase().includes(searchText) ||
+        car.model.toLowerCase().includes(searchText)
+      const matchBrand =
+        brand === "" || car.brand === brand
+      const matchPrice =
+        price === null || car.price >= price
+      const matchPrice2 =
+        price2 === null || car.price <= price2
+      const matchYear =
+        year === null || car.year === year
+      const matchFuel =
+        fuel === "" || car.fuel === fuel
 
-    return (
-      matchSearch &&
-      matchBrand &&
-      matchPrice &&
-      matchYear &&
-      matchFuel &&
-      matchPrice2
-    )
-  })
+      return (
+        matchSearch &&
+        matchBrand &&
+        matchPrice &&
+        matchYear &&
+        matchFuel &&
+        matchPrice2
+      )
+    })
+    .sort((a, b) => {
+      if (sort === "price-asc") return a.price - b.price
+      if (sort === "price-desc") return b.price - a.price
+      if (sort === "year-asc") return a.year - b.year
+      if (sort === "year-desc") return b.year - a.year
+      return 0
+    })
 
   return (
     <>
@@ -257,6 +266,17 @@ export default function Sidebar({ cars }: SidebarProps) {
                 <input type="radio" name="fuel" value="Benzin" checked={fuel === "Benzin"} onChange={(e) => setFuel(e.target.value)} /> <label>Benzin</label> <br />
                 <input type="radio" name="fuel" value="Gibrid" checked={fuel === "Gibrid"} onChange={(e) => setFuel(e.target.value)} /> <label>Gibrid</label> <br />
                 <input type="radio" name="fuel" value="Elektra" checked={fuel === "Elektra"} onChange={(e) => setFuel(e.target.value)} /> <label>Elektr</label> <br />
+              </div>
+
+              <div className="sort-section">
+                <div className="sort-title">{t("common.sort")}</div>
+                <select value={sort} onChange={(e) => setSort(e.target.value as typeof sort)}>
+                  <option value="default">{t("common.all")}</option>
+                  <option value="price-asc">{t("common.priceLowToHigh")}</option>
+                  <option value="price-desc">{t("common.priceHighToLow")}</option>
+                  <option value="year-asc">{t("common.oldToNew")}</option>
+                  <option value="year-desc">{t("common.newToOld")}</option>
+                </select>
               </div>
 
               <div className="filters-actions">

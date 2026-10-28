@@ -27,7 +27,7 @@
     "heroText": "Найдите премиальные автомобили по лучшим ценам и станьте владельцем машины своей мечты.",
     "browseCars": "автомобили",
     "contactUs": "Свяжитесь",
-    "carsCount": "Автомобили",
+    "carsCount": "Найдено машин: {{count}}",
     "happyClients": "Довольные клиенты",
     "experience": "Опыт",
     "reliability": "Надежность",
@@ -160,7 +160,19 @@
     "driveAwd": "Полный привод (AWD/4WD)",
     "descriptionPlaceholder": "Подробная информация об автомобиле...",
     "featuresPlaceholder": "Например: ABS, Кондиционер, Подогрев сидений, Парктроник, Камера заднего вида",
-    "commaSeparated": "через запятую"
+    "commaSeparated": "через запятую",
+    "status": "Статус",
+    "orderNow": "Заказать",
+    "orderSuccess": "Ваш заказ принят!",
+    "customerName": "Ваше имя",
+    "orderText": "Вы хотите заказать автомобиль {{carModel}} за {{carPrice}} USD?",
+    "customerNamePlaceholder": "Введите своё имя",
+    "sort": "Saralash",
+    "all": "Barchasi",
+    "priceLowToHigh": "Narxdan kichikga",
+    "priceHighToLow": "Narxdan kattaga",
+    "oldToNew": "Eski dan yangi",
+    "newToOld": "Yangi dan eski"
   },
   "calculator": {
     "title": "Кредитный калькулятор",
@@ -267,12 +279,13 @@
     "brand": "Бренд",
     "price": "Цена",
     "fuel": "Топливо",
-    "all": "Все",
+    "all": "Barchasi",
     "minPrice": "Мин. цена",
     "maxPrice": "Макс. цена",
     "actions": "Действия",
     "imageOnly": "Выбирайте только файлы изображений",
-    "maxSize": "Размер изображения не должен превышать 5МБ"
+    "maxSize": "Размер изображения не должен превышать 5МБ",
+    "submit": "Отправить"
   },
   "auth": {
     "adminLogin": "Вход в админку",

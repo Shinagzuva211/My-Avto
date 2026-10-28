@@ -4,7 +4,7 @@ import { FavoritesProvider } from "../context/FavoritesContext"
 import { useFavorites } from "../context/useFavorites"
 import type { Car } from "../Types/car"
 
-const car = { id: 1, brand: "BMW", model: "X5", year: 2023, price: 50000, fuel: "Benzin", image: "", condition: "new", description: "", transmissio: "", mileage: 0, color: "", engine: "", driveType: "", features: [] } as Car
+const car = { id: 1, brand: "BMW", model: "X5", year: 2023, price: 50000, fuel: "Benzin", image: "", condition: "new", description: "", transmissio: "", mileage: 0, color: "", engine: "", driveType: "", features: [] } as unknown as Car
 
 function Probe() {
   const { favorites, toggleFavorite, isFavorite } = useFavorites()

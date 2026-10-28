@@ -15,4 +15,5 @@ export interface Car {
     engine: string;
     driveType: string;
     features: string[];
+    status: "available" | "sold"
 }

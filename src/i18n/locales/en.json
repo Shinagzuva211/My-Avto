@@ -27,7 +27,7 @@
     "heroText": "Find premium cars at the best prices and own the car of your dreams.",
     "browseCars": "Browse Cars",
     "contactUs": "Contact Us",
-    "carsCount": "Cars",
+    "carsCount": "{{count}} cars found",
     "happyClients": "Happy Clients",
     "experience": "Experience",
     "reliability": "Reliability",
@@ -160,7 +160,19 @@
     "driveAwd": "All Wheel Drive (AWD/4WD)",
     "descriptionPlaceholder": "Detailed car information...",
     "featuresPlaceholder": "e.g. ABS, AC, Heated Seats, Parking Sensors, Rear Camera",
-    "commaSeparated": "comma separated"
+    "commaSeparated": "comma separated",
+    "status": "Status",
+    "orderNow": "Place Order",
+    "orderSuccess": "Your order has been submitted!",
+    "customerName": "Your Name",
+    "orderText": "Would you like to order the {{carModel}} for {{carPrice}} USD?",
+    "customerNamePlaceholder": "Enter your name",
+    "sort": "Saralash",
+    "all": "Barchasi",
+    "priceLowToHigh": "Narxdan kichikga",
+    "priceHighToLow": "Narxdan kattaga",
+    "oldToNew": "Eski dan yangi",
+    "newToOld": "Yangi dan eski"
   },
   "calculator": {
     "title": "Loan Calculator",
@@ -267,12 +279,13 @@
     "brand": "Brand",
     "price": "Price",
     "fuel": "Fuel",
-    "all": "All",
+    "all": "Barchasi",
     "minPrice": "Min Price",
     "maxPrice": "Max Price",
     "actions": "Actions",
     "imageOnly": "Select only image files",
-    "maxSize": "Image size must not exceed 5MB"
+    "maxSize": "Image size must not exceed 5MB",
+    "submit": "Submit"
   },
   "auth": {
     "adminLogin": "Admin Login",

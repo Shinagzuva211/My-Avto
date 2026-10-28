@@ -1,15 +1,6 @@
-import { useState, useEffect, createContext, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
+import { AuthContext } from "./auth-context";
 import type { User } from "./auth-context";
-
-interface AuthContextType {
-  user: User | null;
-  token: string | null;
-  login: (email: string, password: string) => Promise<void>;
-  logout: () => void;
-  loading: boolean;
-}
-
-export const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 const ADMIN_EMAIL = import.meta.env.VITE_ADMIN_EMAIL;
 const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD;

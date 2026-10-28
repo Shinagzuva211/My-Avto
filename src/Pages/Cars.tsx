@@ -15,7 +15,8 @@ export default function Cars() {
   useEffect(() => {
     fetchWithRetry(`${import.meta.env.VITE_API_URL}/cars`)
       .then((data: unknown) => {
-        setCars((data as Car[]).map((item) => ({ ...item, id: item.id ?? item._id })))
+        const allCars = (data as Car[]).map((item) => ({ ...item, id: item.id ?? item._id }))
+        setCars(allCars.filter((car) => car.status !== "sold"))
         setLoading(false)
       })
       .catch((err) => {

@@ -44,7 +44,11 @@ export default function Home() {
       })
   }, [])
 
-  const featuredCars = [...cars].sort((a, b) => b.price - a.price).slice(0, 4)
+  const featuredCars = [
+    ...cars.filter((car) => car.status !== "sold"),
+  ].sort((a, b) => b.price - a.price).slice(0, 4)
+
+
 
   return (
     <>
@@ -70,6 +74,7 @@ export default function Home() {
       <section className="featured-section" id="featured-cars">
         <div className="featured-header">
           <h2>{t("home.featuredCars")}</h2>
+          <div className="featured-count">{t("home.carsCount", { count: cars.length })}</div>
           <Link to="/cars" className="view-all-btn">
             {t("home.viewAll")}
           </Link>

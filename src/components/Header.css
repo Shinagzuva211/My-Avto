@@ -342,6 +342,10 @@ header.scrolled .user-name {
     gap: 6px;
   }
 
+  .logo-title{
+    display: none;
+  }
+
   .favorites {
     font-size: 24px;
   }

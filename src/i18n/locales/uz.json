@@ -27,7 +27,7 @@
     "heroText": "Eng yaxshi narxlarda premium avtomobillarni toping va orzuingizdagi mashinaga ega bo'ling.",
     "browseCars": "Mashinalarni ko'rish",
     "contactUs": " bog'laning",
-    "carsCount": "Mashinalar",
+    "carsCount": "Mashinalar soni {{count}} ta",
     "happyClients": "Mamnun mijozlar",
     "experience": "Tajriba",
     "reliability": "Ishonchlilik",
@@ -160,7 +160,19 @@
     "driveAwd": "To'liq burish (AWD/4WD)",
     "descriptionPlaceholder": "Mashina haqida batafsil ma'lumot...",
     "featuresPlaceholder": "Masalan: ABS, Konditsioner, O'rindiq isitish, Parktronik, Kamerali ko'rinish",
-    "commaSeparated": "vergul bilan ajratib yozing"
+    "commaSeparated": "vergul bilan ajratib yozing",
+    "status": "Holati",
+    "orderNow": "Buyurtma berish",
+    "orderSuccess": "Buyurtmangiz qabul qilindi!",
+    "customerName": "Ismingiz",
+    "orderText": "{{carModel}} avtomobilini {{carPrice}} USD narxda buyurtma berishni istaysizmi?",
+    "customerNamePlaceholder": "Ismingizni kiriting",
+    "sort": "Saralash",
+    "all": "Barchasi",
+    "priceLowToHigh": "Narxdan kichikga",
+    "priceHighToLow": "Narxdan kattaga",
+    "oldToNew": "Eski dan yangi",
+    "newToOld": "Yangi dan eski"
   },
   "calculator": {
     "title": "Kredit kalkulyatori",
@@ -272,7 +284,8 @@
     "maxPrice": "Maksimum narx",
     "actions": "Amallar",
     "imageOnly": "Faqat rasm fayllarini tanlang",
-    "maxSize": "Rasm hajmi 5MB dan katta bo'lmasligi kerak"
+    "maxSize": "Rasm hajmi 5MB dan katta bo'lmasligi kerak",
+    "submit": "Yuborish"
   },
   "auth": {
     "adminLogin": "Admin kirish",

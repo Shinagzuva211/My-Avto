@@ -36,6 +36,7 @@ export default function CarDetails() {
   const [data, setData] = useState<CarData | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [showOrderModal, setShowOrderModal] = useState(false)
   const { toggleFavorite, isFavorite } = useFavorites()
   const { toggleCompare, isInCompare } = useCompare()
   const liked = data ? isFavorite(data.id) : false
@@ -56,6 +57,11 @@ export default function CarDetails() {
     }
     fetchCar()
   }, [id])
+
+  const handleOrderSubmit = () => {
+    setShowOrderModal(false)
+    alert(t("car.orderSuccess"))
+  }
 
   if (loading) {
     return (
@@ -180,7 +186,84 @@ export default function CarDetails() {
           </div>
         </div>
         <CreditCalculator price={data.price} />
+        <button
+          className="btn btn-primary"
+          onClick={() => setShowOrderModal(true)}
+          style={{ marginTop: "16px", width: "100%" }}
+        >
+          {t("car.orderNow")}
+        </button>
+        <OrderModal
+          isOpen={showOrderModal}
+          onClose={() => setShowOrderModal(false)}
+          onSubmit={handleOrderSubmit}
+          carPrice={data.price}
+          carModel={`${data.brand} ${data.model}`}
+        />
       </div>
     </>
+  )
+}
+
+const OrderModal = ({
+  isOpen,
+  onClose,
+  onSubmit,
+  carPrice,
+  carModel,
+}: {
+  isOpen: boolean
+  onClose: () => void
+  onSubmit: (customerName: string) => void
+  carPrice: number
+  carModel: string
+}) => {
+  const { t } = useTranslation()
+  const [orderCustomer, setOrderCustomer] = useState('')
+
+  if (!isOpen) return null
+
+  return (
+    <div
+      className="order-modal-overlay"
+      onClick={(e) => e.target === e.currentTarget && onClose()}
+    >
+      <div
+        className="order-modal"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="order-modal-header">
+          <h2>{t("car.orderNow")}</h2>
+          <button className="modal-close" onClick={onClose}>×</button>
+        </div>
+        <div className="order-modal-body">
+          <p>{t("car.orderText", { carPrice: carPrice.toLocaleString("en-US"), carModel })}</p>
+          <div className="form-group">
+            <label>{t("car.customerName")}</label>
+            <input
+              type="text"
+              value={orderCustomer}
+              onChange={(e) => setOrderCustomer(e.target.value)}
+              placeholder={t("car.customerNamePlaceholder")}
+              required
+            />
+          </div>
+          <div className="form-actions">
+            <button
+              className="btn btn-primary"
+              onClick={() => {
+                if (!orderCustomer.trim()) return
+                onSubmit(orderCustomer)
+              }}
+            >
+              {t("common.submit")}
+            </button>
+            <button className="btn btn-edit" onClick={onClose}>
+              {t("common.cancel")}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   )
 }
