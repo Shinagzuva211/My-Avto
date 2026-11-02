@@ -316,6 +316,15 @@
   object-fit: cover;
 }
 
+.admin-empty {
+  padding: 24px;
+  font-size: 14px;
+  color: #666;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 /* ===== BUTTONS ===== */
 .btn {
   display: inline-flex;

@@ -58,9 +58,25 @@ export default function CarDetails() {
     fetchCar()
   }, [id])
 
-  const handleOrderSubmit = () => {
-    setShowOrderModal(false)
-    alert(t("car.orderSuccess"))
+  const handleOrderSubmit = async (customerName: string) => {
+    if (!data) return
+    try {
+      await fetchWithRetry(`${import.meta.env.VITE_API_URL}/orders`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          customer: customerName,
+          carId: data.id,
+          car: `${data.brand} ${data.model}`,
+          price: data.price,
+        }),
+      })
+      setShowOrderModal(false)
+      alert(t("car.orderSuccess"))
+    } catch (err) {
+      console.error("Order create error:", err)
+      alert(t("car.orderError"))
+    }
   }
 
   if (loading) {
