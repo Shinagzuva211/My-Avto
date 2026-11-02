@@ -25,7 +25,12 @@ export default function Orders() {
       const data = (await fetchWithRetry(
         `${import.meta.env.VITE_API_URL}/orders`
       )) as Order[];
-      setOrders(data);
+      // buyurtmalar tartib raqami bo'yicha o'sish tartibida ko'rsatiladi (#1 eng tepada)
+      setOrders(
+        [...data].sort(
+          (a, b) => (a.orderNumber ?? 0) - (b.orderNumber ?? 0)
+        )
+      );
     } catch (err) {
       setError(err instanceof Error ? err.message : "Buyurtmalarni yuklashda xatolik");
     } finally {
