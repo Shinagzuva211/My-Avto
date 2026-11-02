@@ -5,6 +5,7 @@ type OrderStatus = "pending" | "completed" | "cancelled";
 
 type Order = {
   _id: string;
+  orderNumber?: number;
   customer: string;
   car: string;
   price: number;
@@ -117,7 +118,7 @@ export default function Orders() {
             <tbody>
               {orders.map((order) => (
                 <tr key={order._id}>
-                  <td>#{order._id.slice(-6)}</td>
+                  <td>#{order.orderNumber ?? order._id.slice(-6)}</td>
                   <td>{order.customer}</td>
                   <td>{order.car}</td>
                   <td>{formatDate(order.createdAt)}</td>
