@@ -1031,18 +1031,6 @@ p {
   cursor: pointer;
 }
 
-.back-btn {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  color: black; 
-}
-
-.fav-back{
-  margin-top: 40px;
-  margin-left: 25px;
-}
-
 .favorites-page {
   padding-top: 100px;
   min-height: 100vh;

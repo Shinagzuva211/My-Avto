@@ -25,22 +25,6 @@
   outline-offset: -2px;
 }
 
-.back-btn {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  color: black;
-}
-
-.back-btn svg {
-  font-size: 18px;
-}
-
-.fav-back {
-  margin-top: 40px;
-  margin-left: 25px;
-}
-
 .favorites-page {
   padding-top: 100px;
   min-height: 100vh;

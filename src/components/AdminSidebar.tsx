@@ -41,7 +41,7 @@ export default function AdminSidebar() {
         ))}
       </nav>
       <div className="sidebar-footer">
-        <div className="sidebar-footer-text">{t("admin.dashboard")} Panel</div>
+        <div className="sidebar-footer-text">{t("admin.dashboard")} </div>
         {user && (
           <button className="btn btn-logout" onClick={logout}>
             <FaSignOutAlt /> {t("auth.logout")}

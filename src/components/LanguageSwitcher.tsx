@@ -128,7 +128,6 @@ export default function LanguageSwitcher() {
             >
               <span className="lang-option-flag" aria-hidden="true"><img className="flag" src={lang.flag} alt="" /></span>
               <span className="lang-option-name">{lang.name}</span>
-              <span className="lang-option-code">{lang.short}</span>
             </button>
           ))}
         </div>

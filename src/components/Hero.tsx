@@ -2,7 +2,7 @@ import "./Hero.css"
 import { lazy, Suspense, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "./Header";
-import { BiCar } from "react-icons/bi";
+import { BiCar,  BiSignal4 } from "react-icons/bi";
 import { BsCarFrontFill } from "react-icons/bs";
 import { MdCall } from "react-icons/md";
 import { GoPeople, GoShieldCheck } from "react-icons/go";
@@ -80,10 +80,10 @@ export default function Hero({
 
                 <div className="card-right">
                     <div className="card-num">
-                        500+
+                        5+
                     </div>
 
-                    <p>{t("home.carsCount")}</p>
+                    <p>{t("home.carsTotal")}</p>
                 </div>
 
             </div>
@@ -111,7 +111,7 @@ export default function Hero({
             <div className="static-card">
 
                 <div className="icon">
-                    <BiCar />
+                    <BiSignal4 />
                 </div>
 
                 <div className="card-right">
