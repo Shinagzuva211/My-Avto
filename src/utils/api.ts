@@ -1,3 +1,23 @@
+export const ADMIN_API_URL = "/api/admin";
+
+/** Admin so'rovlari hech qachon parolni brauzerga yubormaydi — faqat session cookie ishlatiladi. */
+export async function fetchAdmin(path: string, options: RequestInit = {}): Promise<unknown> {
+  try {
+    return await fetchWithRetry(`${ADMIN_API_URL}${path}`, {
+      ...options,
+      credentials: "include",
+    });
+  } catch (error) {
+    if (error instanceof Error && error.message.startsWith("HTTP 401")) {
+      window.dispatchEvent(new Event("admin-session-expired"));
+    }
+    throw error;
+  }
+}
+
+export const adminProxy = (path: string) => `/proxy${path}`;
+export const adminAuthProxy = (path: string) => `/auth-proxy${path}`;
+
 const AUTH_API_FALLBACK = import.meta.env.DEV
   ? "http://localhost:3001"
   : "https://authorization-8nex.onrender.com";

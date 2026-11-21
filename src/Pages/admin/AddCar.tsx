@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { FaSave } from "react-icons/fa"
 import { useTranslation } from "react-i18next"
-import { fetchWithRetry } from "../../utils/api"
+import { fetchAdmin, adminProxy } from "../../utils/api"
 
 export default function AddCar() {
   const { t } = useTranslation()
@@ -45,7 +45,8 @@ export default function AddCar() {
       return
     }
 
-    if (file.size > 5 * 1024 * 1024) {
+    // Vercel funksiyalari uchun 4.5 MB cheklov bor; base64 ~33% kattalashadi.
+    if (file.size > 3 * 1024 * 1024) {
       alert(t("common.maxSize"))
       return
     }
@@ -85,7 +86,7 @@ export default function AddCar() {
     }
 
     try {
-      await fetchWithRetry(`${import.meta.env.VITE_API_URL}/cars`, {
+      await fetchAdmin(adminProxy("/cars"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newCar),

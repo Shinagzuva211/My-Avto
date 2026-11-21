@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchWithRetry } from "../../utils/api";
+import { fetchAdmin, adminProxy } from "../../utils/api";
 
 type OrderStatus = "pending" | "completed" | "cancelled";
 
@@ -19,12 +19,8 @@ export default function Orders() {
   const [error, setError] = useState<string | null>(null);
 
   const loadOrders = async () => {
-    setLoading(true);
-    setError(null);
     try {
-      const data = (await fetchWithRetry(
-        `${import.meta.env.VITE_API_URL}/orders`
-      )) as Order[];
+      const data = (await fetchAdmin(adminProxy("/orders"))) as Order[];
       // buyurtmalar tartib raqami bo'yicha o'sish tartibida ko'rsatiladi (#1 eng tepada)
       setOrders(
         [...data].sort(
@@ -39,8 +35,17 @@ export default function Orders() {
   };
 
   useEffect(() => {
-    loadOrders();
+    // Ma'lumot yuklash keyingi microtask'da boshlanadi — effect tanasida setState chaqirilmaydi.
+    queueMicrotask(() => {
+      void loadOrders();
+    });
   }, []);
+
+  const reloadOrders = () => {
+    setLoading(true);
+    setError(null);
+    void loadOrders();
+  };
 
   const handleStatusChange = async (id: string, newStatus: OrderStatus) => {
     const prev = orders;
@@ -51,8 +56,8 @@ export default function Orders() {
     );
 
     try {
-      await fetchWithRetry(
-        `${import.meta.env.VITE_API_URL}/orders/${id}/status`,
+      await fetchAdmin(
+        adminProxy(`/orders/${id}/status`),
         {
           method: "PATCH",
           headers: { "Content-Type": "application/json" },
@@ -97,7 +102,7 @@ export default function Orders() {
         {error && (
           <div className="admin-empty">
             <p>Buyurtmalarni yuklashda xatolik: {error}</p>
-            <button className="btn btn-edit" onClick={loadOrders}>
+            <button className="btn btn-edit" onClick={reloadOrders}>
               Qayta urinish
             </button>
           </div>

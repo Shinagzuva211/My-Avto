@@ -1,6 +1,6 @@
 import { GoGitCompare, GoHeart, GoHeartFill } from "react-icons/go"
-import logo from "../../public/logo-dark.webp"
-import logo2 from "../../public/logo-light.webp"
+import logo from "../../public/logo.svg"
+import logo2 from "../../public/logo2.svg"
 import "./Header.css"
 import {  BiMenu } from "react-icons/bi"
 import { Link, useNavigate } from "react-router-dom"
@@ -56,7 +56,6 @@ export default function Header({ scrollToHero, scrollToContact, scrollToAbout }:
                         <div className="logo">
                             <img className="dark" src={logo} alt="Hodiy Avto logo" />
                             <img className="light" src={logo2} alt="Hodiy Avto logo" />
-                            <span className="logo-title">AVTO</span>
                         </div>
                         <nav>
                             <a href="#" onClick={(e) => {

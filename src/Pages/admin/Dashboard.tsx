@@ -3,7 +3,7 @@ import { BsCarFrontFill } from "react-icons/bs"
 import { MdElectricBolt, MdAttachMoney } from "react-icons/md"
 import { FaStar } from "react-icons/fa"
 import { useTranslation } from "react-i18next"
-import { fetchWithRetry } from "../../utils/api"
+import { fetchAdmin, adminProxy } from "../../utils/api"
 
 type Car = {
   id: number
@@ -21,7 +21,7 @@ export default function Dashboard() {
   const [cars, setCars] = useState<Car[]>([])
 
   useEffect(() => {
-    fetchWithRetry(`${import.meta.env.VITE_API_URL}/cars`)
+    fetchAdmin(adminProxy("/cars"))
       .then((data: unknown) => setCars((data as Car[]).map((item) => ({ ...item, id: item.id ?? item._id }))))
       .catch((err) => console.log(err))
   }, [])

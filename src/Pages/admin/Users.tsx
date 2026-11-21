@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { AUTH_API_URL } from "../../utils/api";
+import { fetchAdmin, adminAuthProxy } from "../../utils/api";
 
 type User = {
   _id?: string;
@@ -14,8 +14,6 @@ function getUserKey(u: User): string {
   return u._id ?? u.id ?? u.email ?? Math.random().toString(36);
 }
 
-const API_URL = AUTH_API_URL;
-
 export default function Users() {
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
@@ -24,12 +22,9 @@ export default function Users() {
   useEffect(() => {
     const load = async () => {
       try {
-        const token = localStorage.getItem("admin_token");
-        const res = await fetch(`${API_URL}/api/users`, {
-          headers: token ? { Authorization: `Bearer ${token}` } : undefined,
-        });
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const data = await res.json();
+        const data = (await fetchAdmin(adminAuthProxy("/api/users"))) as
+          | User[]
+          | { users: User[] };
         setUsers(Array.isArray(data) ? data : (data.users ?? []));
       } catch (e) {
         setError(e instanceof Error ? e.message : "Xatolik yuz berdi");

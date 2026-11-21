@@ -286,7 +286,7 @@
     "maxPrice": "Max Price",
     "actions": "Actions",
     "imageOnly": "Select only image files",
-    "maxSize": "Image size must not exceed 5MB",
+    "maxSize": "Image size must not exceed 3MB",
     "submit": "Submit"
   },
   "auth": {

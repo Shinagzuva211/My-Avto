@@ -3,8 +3,7 @@ import { FaPlus, FaEdit, FaTrash, FaSave, FaTimes } from "react-icons/fa"
 import { Link } from "react-router-dom"
 import { useFavorites } from "../../context/useFavorites"
 import { useTranslation } from "react-i18next"
-import { getAuthHeader } from "../../context/useAuth"
-import { fetchWithRetry } from "../../utils/api"
+import { fetchAdmin, adminProxy } from "../../utils/api"
 
 type Car = {
   id: number
@@ -35,12 +34,9 @@ export default function Cars() {
     status: "available",
   })
 
-  const apiUrl = import.meta.env.VITE_API_URL
-  const authHeader = getAuthHeader()
-
   useEffect(() => {
-    fetchWithRetry(`${apiUrl}/cars`, { headers: getAuthHeader() })
-      .then((data: unknown) => {
+    fetchAdmin(adminProxy("/cars"))
+      .then((data) => {
         const allCars = (data as Car[]).map((item) => ({ ...item, id: item.id ?? item._id }))
         setCars(allCars.filter((car) => car.status !== "sold"))
         setLoading(false)
@@ -49,19 +45,11 @@ export default function Cars() {
         console.log(err)
         setLoading(false)
       })
-  }, [apiUrl])
+  }, [])
 
   const handleDelete = (id: number) => {
     if (!confirm(t("common.confirm"))) return
-    fetch(`${apiUrl}/cars/${id}`, { method: "DELETE", headers: authHeader })
-      .then((res) => {
-        if (!res.ok) {
-          return res.text().then(text => {
-            throw new Error(text || "Failed to delete car");
-          });
-        }
-        return res.json();
-      })
+    fetchAdmin(adminProxy(`/cars/${id}`), { method: "DELETE" })
       .then(() => {
         setCars((prev) => prev.filter((car) => car.id !== id))
         removeFromFavorites(id)
@@ -104,21 +92,13 @@ export default function Cars() {
       status: form.status,
     }
 
-    fetch(`${apiUrl}/cars/${editingCar.id}`, {
+    fetchAdmin(adminProxy(`/cars/${editingCar.id}`), {
       method: "PUT",
-      headers: { "Content-Type": "application/json", ...authHeader },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updatedCar),
     })
-      .then((res) => {
-        if (!res.ok) {
-          return res.text().then(text => {
-            throw new Error(text || "Failed to update car");
-          });
-        }
-        return res.json();
-      })
       .then((data) => {
-        setCars((prev) => prev.map((car) => (car.id === editingCar.id ? data : car)))
+        setCars((prev) => prev.map((car) => (car.id === editingCar.id ? (data as Car) : car)))
         setEditingCar(null)
       })
       .catch((err) => console.log(err))
