@@ -100,7 +100,7 @@ describe("admin API handler", () => {
     };
 
     try {
-      const unauthorized = await handleAdminRequest(request({ path: "/proxy/cars" }), env);
+      const unauthorized = await handleAdminRequest(request({ path: "/proxy", query: { path: "/cars" } }), env);
       expect(unauthorized.status).toBe(401);
       expect(called).toBe(false);
 
@@ -114,7 +114,7 @@ describe("admin API handler", () => {
       );
       const cookie = login.headers["Set-Cookie"].split(";")[0];
       const authorized = await handleAdminRequest(
-        request({ path: "/proxy/cars", headers: { cookie } }),
+        request({ path: "/proxy", query: { path: "/cars" }, headers: { cookie } }),
         env
       );
       expect(authorized.status).toBe(200);

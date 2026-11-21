@@ -15,8 +15,10 @@ export async function fetchAdmin(path: string, options: RequestInit = {}): Promi
   }
 }
 
-export const adminProxy = (path: string) => `/proxy${path}`;
-export const adminAuthProxy = (path: string) => `/auth-proxy${path}`;
+// Statik Vercel funksiyalari: /api/admin/proxy?path=/cars
+// (dynamic catch-all yo'llari SPA rewrite'ga uchib qolgani uchun query parametrdan foydalanamiz)
+export const adminProxy = (path: string) => `/proxy?path=${encodeURIComponent(path)}`;
+export const adminAuthProxy = (path: string) => `/auth-proxy?path=${encodeURIComponent(path)}`;
 
 const AUTH_API_FALLBACK = import.meta.env.DEV
   ? "http://localhost:3001"

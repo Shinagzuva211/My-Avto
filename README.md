@@ -30,7 +30,7 @@ node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 
 - `POST /api/admin/login` → parol serverda tekshiriladi, javobda **imzolangan HTTP-only Cookie** qaytariladi (token brauzerga qaytarilmaydi).
 - `GET /api/admin/me` → sessiya holati; `POST /api/admin/logout` → cookie o'chiriladi.
-- `/api/admin/proxy/*` va `/api/admin/auth-proxy/*` → barcha admin API so'rovlari shu proxy orqali boradi; backend uchun `Authorization` header **serverda** yig'iladi, parol hech qachon klientga yuborilmaydi.
+- `/api/admin/proxy?path=/cars` va `/api/admin/auth-proxy?path=/api/users` → barcha admin API so'rovlari shu proxy orqali boradi; backend uchun `Authorization` header **serverda** yig'iladi, parol hech qachon klientga yuborilmaydi. (Statik funksiya ishlatilgani sababli Vercel'ning SPA rewrite'i bu yo'llarni yutib yubormaydi.)
 - Session 8 soat yashaydi, `SameSite=Lax` + `Secure` (production) cookie ishlatiladi, login urinishlari cheklangan.
 
 > `npm run dev` da `/api/admin/*` ni Vite ichidagi middleware bajaradi. Production'da esa Vercel serverless funksiyalari (`api/admin/`) ishga tushadi.

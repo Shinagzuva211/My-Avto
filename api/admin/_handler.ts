@@ -62,6 +62,10 @@ function headerValue(value: string | string[] | undefined): string {
   return value ?? "";
 }
 
+function firstQuery(value: string | string[] | undefined): string | undefined {
+  return Array.isArray(value) ? value[0] : value;
+}
+
 /** Faqat xavfsiz yo'l segmentlarini o'tkazamiz (SSRF va path traversal oldini olish). */
 function normalizeSegments(path: string): string[] | null {
   const segments = path.split("/").filter(Boolean);
@@ -108,12 +112,8 @@ async function handleProxy(
   req: AdminRequest,
   env: ServerEnv,
   kind: "api" | "auth",
-  pathname: string
+  segments: string[] | null
 ): Promise<AdminResponse> {
-  const prefix = kind === "auth" ? "/auth-proxy/" : "/proxy/";
-  if (!pathname.startsWith(prefix)) return json(404, { error: "not_found" });
-
-  const segments = normalizeSegments(pathname.slice(prefix.length));
   const base = upstreamBase(env, kind);
   if (!segments || !base) return json(502, { error: "upstream_not_configured" });
 
@@ -188,10 +188,23 @@ export async function handleAdminRequest(req: AdminRequest, env: ServerEnv): Pro
     return json(200, { user });
   }
 
-  if (pathname.startsWith("/proxy/") || pathname.startsWith("/auth-proxy/")) {
+  if (
+    pathname === "/proxy" || pathname.startsWith("/proxy/") ||
+    pathname === "/auth-proxy" || pathname.startsWith("/auth-proxy/")
+  ) {
     const cookies = parseCookies(req.headers?.cookie);
     if (!verifySession(cookies[SESSION_COOKIE], env)) return UNAUTHORIZED;
-    return handleProxy(req, env, pathname.startsWith("/auth-proxy/") ? "auth" : "api", pathname);
+
+    const isAuth = pathname.startsWith("/auth-proxy");
+    const prefix = isAuth ? "/auth-proxy/" : "/proxy/";
+    const fromQuery = firstQuery(req.query?.path);
+    const rawPath = fromQuery !== undefined
+      ? fromQuery.replace(/^\/+/, "")
+      : pathname.startsWith(prefix)
+        ? pathname.slice(prefix.length)
+        : "";
+
+    return handleProxy(req, env, isAuth ? "auth" : "api", normalizeSegments(rawPath));
   }
 
   return json(404, { error: "not_found" });
