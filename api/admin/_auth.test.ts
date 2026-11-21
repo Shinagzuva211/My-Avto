@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import { createHmac } from "node:crypto";
 import { describe, expect, it } from "vitest";
 import {
@@ -7,8 +8,8 @@ import {
   verifyCredentials,
   verifySession,
   type ServerEnv,
-} from "./_auth";
-import { handleAdminRequest, type AdminRequest } from "./_handler";
+} from "./_auth.js";
+import { handleAdminRequest, type AdminRequest } from "./_handler.js";
 
 const env: ServerEnv = {
   ADMIN_EMAIL: "Admin@HodiyAvto.uz",

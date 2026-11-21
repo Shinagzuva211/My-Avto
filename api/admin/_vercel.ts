@@ -1,5 +1,6 @@
-import { handleAdminRequest } from "./_handler";
-import type { ServerEnv } from "./_auth";
+/// <reference types="node" />
+import { handleAdminRequest } from "./_handler.js";
+import type { ServerEnv } from "./_auth.js";
 
 type Headers = Record<string, string | string[] | undefined>;
 

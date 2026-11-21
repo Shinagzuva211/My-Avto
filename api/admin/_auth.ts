@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import { createHash, createHmac, timingSafeEqual } from "node:crypto";
 
 export const SESSION_COOKIE = "hodiy_admin_session";

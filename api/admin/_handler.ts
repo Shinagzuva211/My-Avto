@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import {
   SESSION_COOKIE,
   backendAuthorization,
@@ -10,7 +11,7 @@ import {
   verifySession,
   type AdminUser,
   type ServerEnv,
-} from "./_auth";
+} from "./_auth.js";
 
 export type AdminRequest = {
   method: string;
